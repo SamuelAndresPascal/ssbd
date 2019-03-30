@@ -147,8 +147,8 @@ Pour supprimer les données de la base SSBD, exécuter le script de suppression 
 
 [^1]: Un script contenant les relations de la base EPSG référencées par la base SSBD est disponible sur ce dépôt logiciel. Ce script est issu d'une base de données réalisée à partir d'un export du [registre EPSG](http://www.epsg-registry.org/) v9.5.5 dans un dialecte SQL adapté aux bases *PostgreSQL*.
 
-De tels exports du registre EPSG, quoique réalisés via le site officiel, ne constituent la référence officielle des données de la base EPSG. De plus, des ajustements syntaxiques, typographiques ou encore des commentaires ont pu être réalisés. Par voie de conséquence, l'extrait de ces données contenu dans le script proposé par le projet SSBD **ne constitue pas une distribution officielle des données EPSG**.
+    De tels exports du registre EPSG, quoique réalisés via le site officiel, ne constituent la référence officielle des données de la base EPSG. De plus, des ajustements syntaxiques, typographiques ou encore des commentaires ont pu être réalisés. Par voie de conséquence, l'extrait de ces données contenu dans le script proposé par le projet SSBD **ne constitue pas une distribution officielle des données EPSG**.
 
-Enfin, les données provenant du registre EPSG sont proposées à simple titre indicatif. Elles **ne constituent pas la valeur ajoutée** de la base SSBD mais offrent à l'utilisateur qui souhaite utiliser conjointement la base SSBD à la base EPSG, un jeu de données EPSG minimal potientiellement référencé par des données SSBD, ainsi que les contraintes d'intégrité associées.
+    Enfin, les données provenant du registre EPSG sont proposées à simple titre indicatif. Elles **ne constituent pas la valeur ajoutée** de la base SSBD mais offrent à l'utilisateur qui souhaite utiliser conjointement la base SSBD à la base EPSG, un jeu de données EPSG minimal potientiellement référencé par des données SSBD, ainsi que les contraintes d'intégrité associées.
 
 
