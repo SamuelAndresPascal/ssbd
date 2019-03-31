@@ -78,6 +78,34 @@ _Note 3 : si l'on considère le quintuplet (semi_major_axis, inv_flattening, sem
 | x | null | x | x | null | triaxial |
 | x | null | x | x | x | quadriaxial |
 
+### Primemeridiansystem - systèmes de méridiens premiers
+
+Sur Terre, les méridiens de référence (voir la définition contextualisée plus bas) sont repérés par des phénomènes observables sur la croûte terrestre (repères de Greenwich, de Paris etc.), bien que ces marques soient artificielles. Sur d'autres planètes telluriques, les marques servant de repère sont naturelles mais affectent également la surface solide ; il peut s'agir par exemple de cratères.
+
+En revanche, il n'existe pas de surface solide observable sur les planètes gazeuses. Les repères servant à définir les méridiens de référence sont donc observés en utilisant d'autres phénomènes physiques (couverture nuageuse, champ magnétique). Pour une même planète, plusieurs catégories de phénomènes sont susceptibles des moyens concurrents de définir des méridiens de référence. Ce sont ces catégories qui définissent les systèmes de méridiens premiers.
+
+```sql
+create table ssbd_primemeridiansystem (
+    prime_meridian_system_code                         integer not null,
+    prime_meridian_system_name                         varchar(80) not null,
+    body_code                                          integer not null,
+    remarks                                            varchar(254),
+    information_source                                 varchar(254),
+    -- data_source                                        varchar(40) not null,
+    -- revision_date                                      date not null,
+    -- change_id                                          varchar(255),
+    -- deprecated                                         smallint not null,
+    constraint pk_primemeridiansystem primary key ( prime_meridian_system_code )
+);
+```
+
+`prime_meridian_system_code`: Un code d'identification des systèmes de méridiens premiers de la base SSBD. Ces identifiants sont temporaires et susceptibles d'être remplacés par des formes d'identifants sémantiques et/ou extensibles.
+
+`body_code`: Le code d'identification du corps sur lequel est défini le système de méridien. Ce code est obligatoire et définit par extension le corps sur lequel est défini un méridien premier et par voie de conséquence les datums et les systèmes de référence qui l'utilisent.
+
+### Primemeridan - méridiens premiers, méridiens de référence, origines des longitudes
+
+
 
 TODO
 
