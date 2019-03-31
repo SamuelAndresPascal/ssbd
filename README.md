@@ -119,7 +119,7 @@ En planétologie, une marque utilisée comme repère d'une longitude particuliè
 
 Pour exprimer des longitudes d'un méridien premier dans un autre méridien premier, il suffit de définir par convention si le décalage de longitude à appliquer doit être appliqué de méridien origine à méridien origine ou bien de méridien de référence à méridien de référence.
 
-La première convention offre un confort mathématique. Il suffit alors d'une opération d'addition ou de soustraction appliquées aux longitudes. Implicitement, cette convention revient à attribuer au méridien premier la localisation de l'origine des longitudes. 
+La première convention offre un confort mathématique. Il suffit alors d'une opération d'addition ou de soustraction appliquée aux longitudes. Implicitement, cette convention revient à attribuer au méridien premier la localisation de l'origine des longitudes. 
 
 La seconde convention offre une cohérence conceptuelle. Le méridien premier est désigné par un nom qu'il peut être logique de construire à partir du lieu remarquable traversé par le méridien de référence qu'il utilise. Implicitement, cette convention revient à attribuer au méridien premier la localisation du méridien de référence.
 
