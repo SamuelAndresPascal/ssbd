@@ -1,10 +1,10 @@
 # _Solar System Body Database_ - français
 
-SSBD est un projet de base de données expérimental en cours d'élaboration qui se donne pour objectif d'utiliser à des fins de référencement en planétologie l'expérience capitalisée dans le domaine du référencement géographique. Cette expérience est principalement constituée par les standards abstraits, les formats et les réalisations techniques tenant lieu de standard de fait des organismes du domaine (OGC, ISO, IOGP, Esri etc.).
+SSBD est un projet de base de données expérimental en cours d'élaboration qui se donne pour objectif d'utiliser à des fins de référencement en planétologie l'expérience capitalisée dans le domaine du référencement géographique. Cette expérience est principalement constituée par les standards abstraits, les formats et les réalisations techniques des organismes du domaine (OGC, ISO, IOGP, Esri etc.) tenant lieu de standard de fait.
 
-Dans un premier temps SSBD s'appuie sur le schéma de base de données comme source d'inspiration de manière à proposer une extension adaptée à l'information planétologique. Ceci a deux conséquences :
+Dans un premier temps SSBD s'appuie sur le schéma de la base de données EPSG comme source d'inspiration de manière à proposer une extension adaptée à l'information planétologique. Ceci a deux conséquences :
 
-1. le référencement direct de certaines données de la base EPSG par leur code[^1];
+1. le référencement direct de certaines données de la base EPSG par leur code (voir [la section concernant les données EPSG référencées](#Base-EPSG));
 
 2. la paternité conceptuelle du schéma de la base EPSG sur celui de la base SSBD en cours d'élaboration.
 
@@ -27,7 +27,7 @@ create table ssbd_body (
 
 `body_code`: Un code d'identification des planètes et satellites s'alignant sur la proposition de [https://github.com/USGS-Astrogeology](https://github.com/USGS-Astrogeology/GDAL_scripts/tree/master/OGC_IAU2000_WKT_v2/Source_Python) d'utiliser les [codes NAIF](https://naif.jpl.nasa.gov/pub/naif/toolkit_docs/FORTRAN/req/naif_ids.html). Ce choix est susceptible d'évolution, éventuellement vers des identifiants plus académiques (nomenclature UAI) ou sémantiquement plus riches et/ou plus extensibles (URN).
 
-`rotation`: Sens de rotation du corps référencé dans l'ICRF (_International Celestial Reference Frame_)
+`rotation`: Sens de rotation du corps référencé dans l'ICRF (_International Celestial Reference Frame_).
 
 ### Ellipsoid - forme des planètes et satellites
 
@@ -52,17 +52,17 @@ create table ssbd_ellipsoid (
 
 `ellipsoid_code`: Un code d'identification des ellipsoïdes de la base SSBD. Ces identifiants sont temporaires et susceptibles d'être remplacés par des formes d'identifants sémantiques et/ou extensibles.
 
-`semi_major_axis`: Rayon équatorial subplanétaire. Rayon de la sphère dans le cas d'un ellipsoïde sphérique ; demi-grand-axe dans le cas d'un ellipsoïde biaxial ; rayon équatorial subplanétaire dans le cas d'un ellipsoïde triaxial ou quadriaxial.
+`semi_major_axis`: Rayon équatorial subplanétaire. Rayon de la sphère dans le cas d'un ellipsoïde sphérique ; demi-grand axe dans le cas d'un ellipsoïde biaxial ; rayon équatorial subplanétaire dans le cas d'un ellipsoïde triaxial ou quadriaxial.
 
-`uom_code`: Code d'unité EPSG utilisée pour la mesure des longeurs des rayons de l'ellipsoïde.
+`uom_code`: Code EPSG de l'unité utilisée pour la mesure des longueurs des rayons de l'ellipsoïde.
 
-`inv_flattening`: Applatissement. Uniquement utilisé pour les ellipsoïdes biaxiaux dont le second axe caractéristique peut être défini par sa longueur (voir `semi_minor_axis`) ou l'applatissement de l'ellipsoïde. `Null` dans le cas d'une sphère, d'un ellipsoïde triaxial ou quadriaxial et dans le cas d'un ellipsoïde biaxial dont le second axe est défini par sa longueur.
+`inv_flattening`: Applatissement. Uniquement utilisé pour les ellipsoïdes biaxiaux dont le second axe caractéristique (rayon polaire) est défini par l'applatissement de l'ellipsoïde et non directement par la valeur de sa longueur (voir `semi_minor_axis`). `Null` dans le cas d'une sphère, d'un ellipsoïde triaxial ou quadriaxial et dans le cas d'un ellipsoïde biaxial dont le second axe est défini par sa longueur.
 
-`semi_minor_axis`: Rayon polaire nord. `Null` dans le cas d'une sphère qui l'identifie par hypothèse au rayon, ainsi que dans le cas d'un ellipsoïde biaxial dont le second axe est défini par l'applatissement. Demi-petit-axe dans le cas d'un ellipsoïde biaxial défini par sa longueur. Rayon polaire dans le cas d'un ellipsoïde triaxial. Rayon polaire nord dans le cas d'un ellipsoïde quadriaxial.
+`semi_minor_axis`: Rayon polaire nord. `Null` dans le cas d'une sphère qui l'identifie par hypothèse au rayon, ainsi que dans le cas d'un ellipsoïde biaxial dont le second axe est défini par l'applatissement de l'ellipsoïde. Demi-petit axe dans le cas d'un ellipsoïde biaxial défini par la longueur de son second axe caractéristique. Rayon polaire dans le cas d'un ellipsoïde triaxial. Rayon polaire nord dans le cas d'un ellipsoïde quadriaxial.
 
 `semi_axis_b`: Rayon équatorial orbital. `Null` dans le cas d'une sphère qui l'identifie par hypothèse au rayon, ainsi que dans le cas d'un ellipsoïde biaxial qui l'identifie par hypothèse au rayon équatorial subplanétaire. Rayon équatorial orbial dans le cas des ellipsoïdes triaxiaux et quadriaxiaux.
 
-`semi_axis_s`: Rayon polaire sud. `Null` dans le cas d'une sphère qui l'identifie par hypothèse au rayon, ainsi que dans le cas des ellipsoïdes biaxiaux et triaxiaux qui l'identifient par hypothèse au rayon polaire nord. Non-null uniquement dans le cas des ellipsoïdes quadriaxiaux.
+`semi_axis_s`: Rayon polaire sud. `Null` dans le cas d'une sphère qui l'identifie par hypothèse au rayon, ainsi que dans le cas des ellipsoïdes biaxiaux et triaxiaux qui l'identifient par hypothèse au rayon polaire nord. Non `null` uniquement dans le cas des ellipsoïdes quadriaxiaux.
 
 _Note 1 : un ellipsoïde dont le rayon sud est différent du rayon nord est considéré comme quadriaxial, même en cas d'égalité parmi les trois autres rayons caractéristiques._
 
@@ -79,13 +79,15 @@ _Note 3 : si l'on considère le quintuplet (semi_major_axis, inv_flattening, sem
 | x | null | x | x | x | quadriaxial |
 
 
-
+TODO
 
 ## Présentation des données
 
+TODO
+
 ## Statut des fichiers
 
-1. `ssbd_schema.sql`: contient le schéma de la base SSBD et les contraintes d'intégrité associées à l'exclusion des relations optionnelles issues de l'extrait de données EPSG et des contraintes d'intégrité les référençant depuis les données SSBD.
+1. `ssbd_schema.sql` contient le schéma de la base SSBD et les contraintes d'intégrité associées, à l'exclusion des relations optionnelles issues de l'extrait de données EPSG et des contraintes d'intégrité les référençant depuis les données SSBD.
 
 2. `ssbd_data.sql` contient les données de la base SSBD au sens strict. Ces données peuvent référencer des données EPSG via leur code d'identification mais ne contiennent aucune autre donnée exogène en tant que telle.
 
@@ -124,7 +126,7 @@ Les manipulations suivantes supposent la création préalable d'une base de donn
     \i ssbd_epsg.sql
     ```
 
-### Nomenclature officielle de UAI des noms de planètes et satellites
+### Nomenclature officielle de l'UAI des noms de planètes et satellites
 
 Si l'on souhaite disposer de la relation des noms des corps tels que définis par la [nomenclature officielle de l'Union Astronomique Internationale](https://planetarynames.wr.usgs.gov/Page/Planets), exécuter le script de création et de remplissage de la relation implémentée pour représenter cette information, par exemple en étant connecté via un client `psql`:
 
@@ -143,12 +145,14 @@ Pour supprimer les données de la base SSBD, exécuter le script de suppression 
 
 **Attention : ce script inclut la suppression des données ET du schéma des données optionnelles issues de la base EPSG référencées par les données SSBD.** Cela est susceptible de provoquer des pertes de données EPSG si le schéma et les données SSBD ont été importées à l'intérieur d'une base EPSG complète.
 
-**Attention : ce script n'inclut pas la suppression de la relation optionnelle de la nomenclature des noms de planètes et satellites de l'UAI.**
+**Attention : ce script n'inclut pas la suppression de la relation optionnelle de la nomenclature de l'UAI des noms de planètes et satellites.**
 
-[^1]: Un script contenant les relations de la base EPSG référencées par la base SSBD est disponible sur ce dépôt logiciel. Ce script est issu d'une base de données réalisée à partir d'un export du [registre EPSG](http://www.epsg-registry.org/) v9.5.5 dans un dialecte SQL adapté aux bases *PostgreSQL*.
+### Base EPSG
 
-    De tels exports du registre EPSG, quoique réalisés via le site officiel, ne constituent la référence officielle des données de la base EPSG. De plus, des ajustements syntaxiques, typographiques ou encore des commentaires ont pu être réalisés. Par voie de conséquence, l'extrait de ces données contenu dans le script proposé par le projet SSBD **ne constitue pas une distribution officielle des données EPSG**.
+Un script contenant les relations de la base EPSG référencées par la base SSBD est disponible sur ce dépôt logiciel. Ce script est issu d'une base de données réalisée à partir d'un export du [registre EPSG](http://www.epsg-registry.org/) v9.5.5 dans un dialecte SQL adapté aux bases *PostgreSQL*.
 
-    Enfin, les données provenant du registre EPSG sont proposées à simple titre indicatif. Elles **ne constituent pas la valeur ajoutée** de la base SSBD mais offrent à l'utilisateur qui souhaite utiliser conjointement la base SSBD à la base EPSG, un jeu de données EPSG minimal potientiellement référencé par des données SSBD, ainsi que les contraintes d'intégrité associées.
+De tels exports du registre EPSG, quoique réalisés via le site officiel, ne constituent la référence officielle des données de la base EPSG. De plus, des ajustements syntaxiques, typographiques ou encore des commentaires ont pu être réalisés. Par voie de conséquence, l'extrait de ces données contenu dans le script proposé par le projet SSBD **ne constitue pas une distribution officielle des données EPSG**. Pour plus d'informations, se reporter au [site officiel de l'IOGP](http://www.epsg.org) et aux [conditions d'utilisation, de distribution et de modification de la base EPSG](http://www.epsg.org/TermsOfUse.aspx). Pour obtenir un jeu de données directement produit à partir du registre EPSG officiel, se reporter au [site du registre]([registre EPSG](http://www.epsg-registry.org/).
+
+Enfin, les données provenant du registre EPSG sont proposées à simple titre indicatif. Elles **ne constituent pas la valeur ajoutée** de la base SSBD mais offrent à l'utilisateur qui souhaite utiliser conjointement la base SSBD à la base EPSG, un jeu de données EPSG minimal potientiellement référencé par des données SSBD, ainsi que les contraintes d'intégrité associées.
 
 
