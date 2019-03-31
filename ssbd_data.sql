@@ -87,8 +87,8 @@ insert into ssbd_range values (300002, 0., 360., 'Typically used for planetary l
 insert into ssbd_datum values (42000199, 'Mercury 2000', 'geodetic', null, null, 502000199, 170160199, 'Planetology.', null, null);
 
 
-insert into ssbd_coordinatereferencesystem values (19900, 'Mercury 2000 planetocentric', 'geocentric', 6404, 42000199, null, null, null, null, null, null);
-insert into ssbd_coordinatereferencesystem values (19901, 'Mercury 2000 planetographic 3D', 'geographic 3D', 6423, 42000199, null, null, null, null, null, null);
+insert into ssbd_coordinatereferencesystem values (19900, 'Mercury 2000 planetocentric 3D', 'planetocentric 3D', 6404, 42000199, null, null, null, null, null, null);
+insert into ssbd_coordinatereferencesystem values (19901, 'Mercury 2000 planetographic 3D', 'planetographic 3D', 6423, 42000199, null, null, null, null, null, null);
 
 
 insert into ssbd_coordinatereferencesystemrange values (19900, 300002, 61, null, null);
