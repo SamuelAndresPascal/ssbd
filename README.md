@@ -4,7 +4,7 @@ SSBD est un projet de base de données expérimental en cours d'élaboration qui
 
 Dans un premier temps SSBD s'appuie sur le schéma de la base de données EPSG comme source d'inspiration de manière à proposer une extension adaptée à l'information planétologique. Ceci a deux conséquences :
 
-1. le référencement direct de certaines données de la base EPSG par leur code (voir [la section concernant les données EPSG référencées](#Base-EPSG));
+1. le référencement direct de certaines données de la base EPSG par leur code (voir [la section concernant les données EPSG référencées](#base-epsg));
 
 2. la paternité conceptuelle du schéma de la base EPSG sur celui de la base SSBD en cours d'élaboration.
 
