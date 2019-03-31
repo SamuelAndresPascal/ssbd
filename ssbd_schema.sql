@@ -140,7 +140,7 @@ comment on column ssbd_primemeridiansystem.body_code is 'This column is mandator
 -- reason for the prime meridian to be located at the same place of these two particular longitudes. Hence, we give
 -- here the possibility to give an arbitrary location to the prime meridian.
 --
--- Schema (OL: longitude origin; PM: prime meridian; RM: reference meridian):
+-- Schema (LO: longitude origin; PM: prime meridian; RM: reference meridian):
 --
 --  [==========reference meridian A==========]                          [=======reference meridian B=======]
 --  [=======(other reference meridian)=======]                          [(absolute body reference meridian)]
