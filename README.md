@@ -14,7 +14,7 @@ Dans un premier temps SSBD s'appuie sur le schéma de la base de données EPSG c
 
 `origine des longitudes` : Méridien défini comme doté d'une longitude nulle dans le contexte d'un méridien premier donné.
 
-`méridien premier` : Abstraction servant d'une part à définir les valeurs de longitude à la surface d'un corps à partir d'un méridien de référence et d'une origine des longitudes. Dans le contexte d'un méridien premier, le méridien de référence et l'origine des longitude définissent respectivement chacun la position et la valeur de la longitude de l'autre. Un méridien premier est égalemet caractérisé par une longitude le rattachant à un méridien premier absolu pour un système de méridiens premiers donné (par exemple, la longitude du Méridien de Paris par rapport au méridien de Greenwich, méridien premier absolu pour tous les méridiens premiers appuyés sur des repèrers à la surface de la croûte terrestre).
+`méridien premier` : Abstraction servant d'une part à définir les valeurs de longitude à la surface d'un corps à partir d'un méridien de référence et d'une origine des longitudes. Dans le contexte d'un méridien premier, le méridien de référence et l'origine des longitude définissent respectivement chacun la position et la valeur de la longitude de l'autre. Un méridien premier est également caractérisé par une longitude le rattachant à un méridien premier absolu pour un système de méridiens premiers donné (par exemple, la longitude du Méridien de Paris par rapport au méridien de Greenwich, méridien premier absolu pour tous les méridiens premiers appuyés sur des repères à la surface de la croûte terrestre).
 
 ## Présentation du schéma
 
