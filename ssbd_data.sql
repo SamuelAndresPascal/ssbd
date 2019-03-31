@@ -80,8 +80,8 @@ insert into ssbd_primemeridian values (170161799, 'System II Uranus Meridian', 0
 insert into ssbd_primemeridian values (170162799, 'System III Uranus Meridian', 0., 'prograde', .0, .0, 'prograde', 9102, 162799, null, null);
 insert into ssbd_primemeridian values (170161899, 'System II Neptune Meridian', 0., 'prograde', .0, .0, 'prograde', 9102, 161899, null, null);
 
-insert into ssbd_range values (300001, -180., 180., 'retrograde', 'Typically used for earth longitudes.', null);
-insert into ssbd_range values (300002, 0., 360., 'prograde', 'Typically used for planetary longitudes.', null);
+insert into ssbd_range values (300001, -180., 180., 'Typically used for earth longitudes.', null);
+insert into ssbd_range values (300002, 0., 360., 'Typically used for planetary longitudes.', null);
 
 
 insert into ssbd_datum values (42000199, 'Mercury 2000', 'geodetic', null, null, 502000199, 170160199, 'Planetology.', null, null);

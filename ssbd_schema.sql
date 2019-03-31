@@ -208,14 +208,14 @@ comment on column ssbd_primemeridiansystem.body_code is 'This column is mandator
 -- system.
 --
 -- relative_longitude_orientation: The orientation of positive longitude for the relative longitude measurement. The
--- orientation may be based on the planet rotation (prograde, retrograde, west, east) or based on the celestial
--- reference frame attached to the body of the prime meridian system.
+-- orientation may be based on the planet rotation (prograde, retrograde) or based on the celestial reference frame
+-- referenced by the body of the prime meridian system.
 --
 -- reference_meridian_longitude: Longitude of the reference meridian (from the longitude origin). It is the longitude
 -- where the physical reference passes through.
 --
--- prime_meridian longitude: Longitude of the prime meridian from the longitude origin (from the longitude origin). It
--- is the longitude which is separated of "relative_longitude" from the absolute prime meridian of the prime meridian
+-- prime_meridian longitude: Longitude of the prime meridian (from the longitude origin). It is the longitude of the
+-- meridian which is separated of a "relative_longitude" angle from the absolute prime meridian of the prime meridian
 -- system.
 --
 -- longitude_origin_orientation: The orientation of positive longitude for reference meridian and prime meridian
@@ -304,13 +304,12 @@ create table ssbd_coordinatereferencesystem (
 
 -- range
 --
--- purpose: Information on the validity range and the direction constraints on axes depending of the coordinate
--- reference system they are associated with.
+-- purpose: Information on the validity range constraints on axes depending of the coordinate reference system they are
+-- associated with.
 create table ssbd_range (
     range_code                                      integer not null,
     min_value                                       double precision not null,
     max_value                                       double precision not null,
-    orientation                                     varchar(24) not null,
     remarks                                         varchar(254),
     information_source                              varchar(254),
     constraint pk_range primary key ( range_code )
