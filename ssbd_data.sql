@@ -79,6 +79,54 @@ insert into ssbd_ellipsoid values (402, 20, 'Spherical Deimos 2000 IAU', 6200.00
  null, null, null, null, null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
 insert into ssbd_ellipsoid values (402, 21, 'Triaxial Deimos 2000 IAU', 7500.00, null, 9001, null, 5200.00, null,
  6100.00, null, null, null, null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
+insert into ssbd_ellipsoid values (516, 22, 'Spherical Metis 2000 IAU', 21500., 4000., 9001, null, null, null,
+ null, null, null, null, null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
+insert into ssbd_ellipsoid values (516, 23, 'Ellipsoidal Metis 2000 IAU', 30000., null, 9001, null, 20000., null,
+ null, null, null, null, null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
+insert into ssbd_ellipsoid values (515, 24, 'Spherical Adrastea 2000 IAU', 8200., 4000., 9001, null, null, null,
+ null, null, null, null, null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
+insert into ssbd_ellipsoid values (515, 25, 'Triaxial Adrastea 2000 IAU', 10000., null, 9001, null, 7000., null,
+ 8000., null, null, null, null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
+insert into ssbd_ellipsoid values (505, 26, 'Spherical Amalthea 2000 IAU', 83500., 3000., 9001, null, null, null,
+ null, null, null, null, null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
+insert into ssbd_ellipsoid values (505, 27, 'Triaxial Amalthea 2000 IAU', 125000., null, 9001, null, 73000., null,
+ 64000., null, null, null, null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
+insert into ssbd_ellipsoid values (514, 28, 'Spherical Thebe 2000 IAU', 49300., 4000., 9001, null, null, null,
+ null, null, null, null, null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
+insert into ssbd_ellipsoid values (514, 29, 'Triaxial Thebe 2000 IAU', 58000., null, 9001, null, 49000., null,
+ 42000., null, null, null, null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
+insert into ssbd_ellipsoid values (501, 30, 'Spherical Io 2000 IAU', 1821460., null, 9001, null, null, null,
+ null, null, null, null, null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
+insert into ssbd_ellipsoid values (501, 31, 'Triaxial Io 2000 IAU', 1829400., null, 9001, null, 1819300., null,
+ 1815700., null, null, null, null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
+insert into ssbd_ellipsoid values (502, 32, 'Spherical Europa 2000 IAU', 1562090., null, 9001, null, null, null,
+ null, null, null, null, null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
+insert into ssbd_ellipsoid values (502, 33, 'Triaxial Europa 2000 IAU', 1564130., null, 9001, null, 1561230., null,
+ 1560930., null, null, null, null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
+insert into ssbd_ellipsoid values (503, 34, 'Spherical Ganymede 2000 IAU', 2632345., null, 9001, null, null, null,
+ null, null, null, null, null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
+insert into ssbd_ellipsoid values (503, 35, 'Triaxial Ganymede 2000 IAU', 2632400., null, 9001, null, 2632290., null,
+ 2632350., null, null, null, null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
+insert into ssbd_ellipsoid values (504, 36, 'Spherical Callisto 2000 IAU', 2409300., null, 9001, null, null, null,
+ null, null, null, null, null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
+insert into ssbd_ellipsoid values (504, 37, 'Triaxial Callisto 2000 IAU', 2409400., null, 9001, null, 2409200., null,
+ 2409300., null, null, null, null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
+insert into ssbd_ellipsoid values (513, 38, 'Leda 2000 IAU', 5000., null, 9001, null, null, null,
+ null, null, null, null, null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
+insert into ssbd_ellipsoid values (506, 39, 'Himalia 2000 IAU', 85000., 10000., 9001, null, null, null,
+ null, null, null, null, null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
+insert into ssbd_ellipsoid values (510, 40, 'Lysithea 2000 IAU', 12000., null, 9001, null, null, null,
+ null, null, null, null, null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
+insert into ssbd_ellipsoid values (507, 41, 'Elara 2000 IAU', 40000., 10000., 9001, null, null, null,
+ null, null, null, null, null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
+insert into ssbd_ellipsoid values (512, 42, 'Ananke 2000 IAU', 10000., null, 9001, null, null, null,
+ null, null, null, null, null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
+insert into ssbd_ellipsoid values (511, 43, 'Carme 2000 IAU', 15000., null, 9001, null, null, null,
+ null, null, null, null, null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
+insert into ssbd_ellipsoid values (508, 44, 'Pasiphae 2000 IAU', 18000., null, 9001, null, null, null,
+ null, null, null, null, null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
+insert into ssbd_ellipsoid values (509, 45, 'Sinope 2000 IAU', 14000., null, 9001, null, null, null,
+ null, null, null, null, null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
 
 
 insert into ssbd_primemeridiansystem values (1, 'Mercury crust system', 199, null, null);
