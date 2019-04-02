@@ -330,5 +330,4 @@ Au moins à titre temporaire, la base SSBD référence par leur code les unités
 
 Le choix n'est pas encore arrêté pour l'instant de continuer à référencer par la suite les données EPSG. Le manque de systèmes de coordonnées 3D directs pose déjà des problèmes et il n'est pas dit qu'il ne soit pas à terme avantageux de définir des systèmes de coordonnées, des axes et des unités propres à la base SSBD.
 
-De même, le référencement de codes EPSG par la base SSBD incline à suivre une politique similaire de définition d'identifiants numériques transversaux aux différents concepts. Dans l'absolu, cela pourait un jour poser des problèmes de cohérence si la base EPSG venait à définir un code préalablement utilisé par une entité SSBD. 
 
