@@ -27,7 +27,7 @@ begin;
 create table ssbd_body (
     body_code                                          integer,
     body_name                                          varchar(80) not null,
-    rotation                                           varchar(24) not null,
+    rotation                                           varchar(24),
     remarks                                            varchar(254),
     information_source                                 varchar(254),
     constraint pk_body primary key ( body_code )
