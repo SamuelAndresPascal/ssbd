@@ -12,8 +12,6 @@ create table planetary_name (
     constraint pk_planetary_name primary key ( body )
 );
 
-alter table planetary_name add constraint
-
 insert into planetary_name values ('Mercury','Named Mercurius by the Romans because it appears to move so swiftly.',null,null,null);
 insert into planetary_name values ('Venus','Roman name for the goddess of love. This planet was considered to be the brightest and most beautiful planet or star in the heavens. Other civilizations have named it for their god or goddess of love/war.',null,null,null);
 insert into planetary_name values ('Earth','The name Earth comes from the Indo-European base ''er'', which produced the Germanic noun ''ertho'', and ultimately German ''erde'', Dutch ''aarde'', Scandinavian ''jord'', and English ''earth''. Related forms include Greek ''eraze'', meaning ''on the ground'', and Welsh ''erw'', meaning ''a piece of land''.',null,null,null);
