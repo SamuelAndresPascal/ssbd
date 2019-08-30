@@ -25,7 +25,7 @@ begin;
 -- see: https://planetarynames.wr.usgs.gov/Page/Planets
 -- see: "planetary_name" table from "planetary_name.sql" script for a future merge
 create table ssbd_body (
-    body_code                                          integer,
+    body_code                                          varchar(254),
     body_name                                          varchar(80) not null,
     rotation                                           varchar(24),
     remarks                                            varchar(254),
@@ -69,7 +69,7 @@ comment on table ssbd_body is 'The table of the solar system bodies.';
 -- see: https://link.springer.com/article/10.1007/s10569-011-9362-2 (erratum to 2006/2009)
 -- see: https://astropedia.astrogeology.usgs.gov/download/Docs/WGCCRE/WGCCRE2015reprint.pdf (2015)
 create table ssbd_ellipsoid (
-    body_code                                          integer,
+    body_code                                          varchar(254),
     ellipsoid_code                                     integer not null,
     ellipsoid_name                                     varchar(80) not null,
     semi_major_axis                                    double precision not null,
@@ -111,7 +111,7 @@ comment on column ssbd_ellipsoid.body_code is 'This column is optional and indic
 create table ssbd_primemeridiansystem (
     prime_meridian_system_code                         integer not null,
     prime_meridian_system_name                         varchar(80) not null,
-    body_code                                          integer not null,
+    body_code                                          varchar(254) not null,
     remarks                                            varchar(254),
     information_source                                 varchar(254),
     -- data_source                                        varchar(40) not null,
