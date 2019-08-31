@@ -1517,9 +1517,19 @@ insert into ssbd_range values (2, 0., 360., 'Typically used for planetary longit
 
 insert into ssbd_datum values (1, 'Mercury 2000', 'geodetic', null, null, 1, 1, 'Planetology.', null, null);
 
+insert into ssbd_coordinatesystem values ('spherical:3d:direct', 'Spherical 3D CS. Axes: latitude, longitude, radius. Orientations: north, sideral west, up. UoM: degrees, degrees, metres.', 'spherical', 3, null, null);
+insert into ssbd_coordinatesystem values ('ellipsoidal:3d:direct', 'Ellipsoidal 3D CS. Axes: latitude, longitude, ellipsoidal height. Orientations: north, sideral west, up. UoM: degree, degree, metre.', 'ellipsoidal', 3, null, null);
 
-insert into ssbd_coordinatereferencesystem values (1, 'Mercury 2000 planetocentric 3D', 'planetocentric 3D', 6404, 1, null, null, null, null, null, null);
-insert into ssbd_coordinatereferencesystem values (2, 'Mercury 2000 planetographic 3D', 'planetographic 3D', 6423, 1, null, null, null, null, null, null);
+insert into ssbd_coordinateaxis values (60, 'spherical:3d:direct', 9926, 'north', 'Lat', 9122, 1);
+insert into ssbd_coordinateaxis values (61, 'spherical:3d:direct', 9927, 'sideral west', 'Long', 9122, 2);
+insert into ssbd_coordinateaxis values (62, 'spherical:3d:direct', 9928, 'up', 'R', 9001, 3);
+insert into ssbd_coordinateaxis values (108, 'ellipsoidal:3d:direct', 9901, 'north', 'Lat', 9122, 1);
+insert into ssbd_coordinateaxis values (109, 'ellipsoidal:3d:direct', 9902, 'sideral west', 'Lon', 9122, 2);
+insert into ssbd_coordinateaxis values (110, 'ellipsoidal:3d:direct', 9903, 'up', 'h', 9001, 3);
+
+
+insert into ssbd_coordinatereferencesystem values (1, 'Mercury 2000 planetocentric 3D', 'planetocentric 3D', 'spherical:3d:direct', 1, null, null, null, null, null, null);
+insert into ssbd_coordinatereferencesystem values (2, 'Mercury 2000 planetographic 3D', 'planetographic 3D', 'ellipsoidal:3d:direct', 1, null, null, null, null, null, null);
 
 
 insert into ssbd_coordinatereferencesystemrange values (1, 2, 61, null, null);

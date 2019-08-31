@@ -30,7 +30,8 @@ create table ssbd_body (
     rotation                                           varchar(24),
     remarks                                            varchar(254),
     information_source                                 varchar(254),
-    constraint pk_body primary key ( body_code )
+    constraint pk_body primary key ( body_code ),
+    constraint vl_body_rotation check ( rotation in ('direct', 'indirect'))
 );
 
 comment on table ssbd_body is 'The table of the solar system bodies.';
@@ -278,6 +279,40 @@ alter table ssbd_datum add constraint fk_ellipsoid_code foreign key ( ellipsoid_
 alter table ssbd_datum add constraint fk_prime_meridian_code foreign key ( prime_meridian_code ) references ssbd_primemeridian ( prime_meridian_code ) ;
 
 
+-- coordinate system
+--
+create table ssbd_coordinatesystem (
+    coord_sys_code                                      varchar(254) not null,
+    coord_sys_name                                      varchar(254) not null,
+    coord_sys_type                                      varchar(24) not null,
+    dimension                                           smallint not null,
+    remarks                                             varchar(254),
+    information_source                                  varchar(254),
+    -- data_source character varying(50) not null,
+    -- revision_date date not null,
+    -- change_id character varying(255),
+    -- deprecated smallint not null,
+    constraint pk_coordinatesystem primary key ( coord_sys_code )
+);
+
+
+create table ssbd_coordinateaxis (
+    coord_axis_code                                     integer,
+    coord_sys_code                                      varchar(254) not null,
+    coord_axis_name_code                                integer not null,
+    coord_axis_orientation                              varchar(24) not null,
+    coord_axis_abbreviation                             varchar(24) not null,
+    uom_code                                            integer not null,
+    coord_axis_order                                    smallint not null,
+    constraint pk_coordinateaxis primary key ( coord_sys_code, coord_axis_name_code )
+);
+
+
+alter table ssbd_coordinateaxis add constraint ssbd_coordinateaxis_coord_axis_code_key unique ( coord_axis_code );
+
+alter table ssbd_coordinateaxis add constraint fk_coord_sys_code foreign key ( coord_sys_code ) references ssbd_coordinatesystem( coord_sys_code );
+
+
 -- coordinate reference system
 --
 -- see: https://planetarynames.wr.usgs.gov/TargetCoordinates
@@ -288,7 +323,7 @@ create table ssbd_coordinatereferencesystem (
     coord_ref_sys_name                                 varchar(80) not null,
     -- area_of_use_code                                   integer not null,
     coord_ref_sys_kind                                 varchar(24) not null,
-    coord_sys_code                                     integer,
+    coord_sys_code                                     varchar(254),
     datum_code                                         integer,
     source_geogcrs_code                                integer,
     projection_conv_code                               integer,
@@ -304,6 +339,9 @@ create table ssbd_coordinatereferencesystem (
     -- deprecated                                         smallint not null,
     constraint pk_coordinatereferencesystem primary key ( coord_ref_sys_code )
 );
+
+alter table ssbd_coordinatereferencesystem add constraint fk_coord_sys_code foreign key ( coord_sys_code ) references ssbd_coordinatesystem ( coord_sys_code ) ;
+alter table ssbd_coordinatereferencesystem add constraint fk_datum_code foreign key ( datum_code ) references ssbd_datum ( datum_code ) ;
 
 
 -- range
@@ -335,5 +373,6 @@ create table ssbd_coordinatereferencesystemrange (
 
 alter table ssbd_coordinatereferencesystemrange add constraint fk_coord_ref_sys_code foreign key ( coord_ref_sys_code ) references ssbd_coordinatereferencesystem ( coord_ref_sys_code ) ;
 alter table ssbd_coordinatereferencesystemrange add constraint fk_range_code foreign key ( range_code ) references ssbd_range ( range_code ) ;
+alter table ssbd_coordinatereferencesystemrange add constraint fk_coord_axis_code foreign key ( coord_axis_code ) references ssbd_coordinateaxis ( coord_axis_code ) ;
 
 commit;
