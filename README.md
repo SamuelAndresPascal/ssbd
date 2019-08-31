@@ -391,4 +391,106 @@ Au moins à titre temporaire, la base SSBD référence par leur code les unités
 
 Le choix n'est pas encore arrêté pour l'instant de continuer à référencer par la suite les données EPSG et il n'est pas dit qu'il ne soit pas à terme avantageux de définir des noms d'axes et des unités propres à la base SSBD ou de s'appuyer sur d'autres références.
 
+## Proposition de système d'identification et identification des entités et des concepts dans la base SSBD
+
+### Grammaire du schéma général d'identification
+
+```
+identifier := <authority>:<entity_code>
+
+authority := <alphanumeric>+
+```
+### Grammaire du schéma d'identification des entités de la base SSBD
+
+```
+string_character = <alphanumeric> | <hyphen> | <underscore>
+
+entity_code := <body_code> | <ellipsoid_code> | <prime_meridian_system_code> | <prime_meridian_code> | <datum_code> | <coordinate_system_code> | <coordinate_system_axis_code> | <coordinate_reference_system_code>
+
+body_code := BODY:<body_suffix>
+
+body_suffix := <alphanumeric>+(<hyphen><alphanumeric>+)*
+
+ellipsoid_code := RG:<local_id>
+
+prime_meridian_system_code := PMS:<body_suffix>:<prime_meridian_system_suffix>
+
+prime_meridian_system_suffix := <string_character>+
+
+prime_meridian_code := PM:<body_suffix>:<prime_meridian_system_suffix>:<prime_meridian_suffix>
+
+prime_meridian_suffix := <string_character>+
+
+datum_code := DATUM:<body_suffix>:<local_datum_id>
+
+local_datum_id := <local_id>
+
+coordinate_system_code := CS:<local_id>
+
+# la partie <local_id> d'un code d'axe de système de coordonnées doit correspondre au <local_id> du système de coordonnées
+# la partie <numeric> d'un code d'axe de système de coordonnées doit correspondre à l'index de cet axe dans le système
+coordinate_system_axis_code := CSA:<local_id>:<numeric>
+
+coordinate_reference_system_code := CRS:<local_id>
+
+<local_id> := <string_character>+(<colon><string_character>+)*
+```
+
+### Exemples
+
+ #### Codes de corps
+
+| corps | code | identifiant sans autorité |
+| :--- | :-- | :----------------------- |
+| Soleil | 0 | BODY:0 |
+| Mecure | 1-99 | BODY:1-99 |
+| Vénus | 2-99 | BODY:2-99 |
+| Mars | 4-99 | BODY:4-99 |
+| Phobos | 4-01 | BODY:4-01 |
+
+#### Codes de géométries de référence
+
+| géométrie de référence | code | identifiant sans autorité |
+| :--- | :-- | :----------------------- |
+| Ellipsoide définie par l'UAI en 2000 pour Mercure | 2000:1-99:default | RG:2000:1-99:default |
+
+
+#### Codes de systèmes de méridiens premiers
+
+| système de méridiens premiers | code | identifiant sans autorité |
+| :--- | :-- | :----------------------- |
+| Croûte de Mercure | 1-99:crust | PMS:1-99:crust |
+
+#### Codes de méridiens premiers
+
+| méridien premier | code | identifiant sans autorité |
+| :--- | :-- | :----------------------- |
+| Méridien Hun Kal de Mercure | 1-99:crust:hun_kal | PM:1-99:crust:hun_kal |
+
+#### Codes de datums
+
+| datum | code | identifiant sans autorité |
+| :--- | :-- | :----------------------- |
+| datum implicitement défini sur Mercure par l'UAI en 2000 | 1-99:2000 | DATUM:1-99:2000 |
+
+#### Codes de systèmes de coordonnées
+
+| système de coordonnées | code | identifiant sans autorité |
+| :--- | :-- | :----------------------- |
+| Système de coordonnées sphériques 3D direct | spherical:3d:direct | CS:spherical:3d:direct |
+| Système de coordonnées ellipsoïdal 3D direct | ellipsoidal:3d:direct | CS:ellipsoidal:3d:direct |
+
+#### Codes d'axes de systèmes de coordonnées
+
+| axe de système de coordonnées | code | identifiant sans autorité |
+| :--- | :-- | :----------------------- |
+| Axe nord du système de coordonnées sphériques 3D direct | spherical:3d:direct:1 | CSA:spherical:3d:direct:1 |
+| Axe de l'ouest sidéral du système de coordonnées ellipsoïdal 3D direct | ellipsoidal:3d:direct:2 | CSA:ellipsoidal:3d:direct:2 |
+
+#### Codes de systèmes de coordonnées de référence
+
+| système de coordonnées de coordonnées de référence | code | identifiant sans autorité |
+| :--- | :-- | :----------------------- |
+| CRS planétocentrique défini sur Mercure en 2000 par l'UAI | 2000:1-99:planetocentric | CRS:2000:1-99:planetocentric |
+| CRS planétographique défini sur Mercure en 2000 par l'UAI | 2000:1-99:planetographic | CRS:2000:1-99:planetographic |
 

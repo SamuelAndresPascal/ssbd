@@ -1533,7 +1533,7 @@ insert into ssbd_range values (1, -180., 180., 'Typically used for earth longitu
 insert into ssbd_range values (2, 0., 360., 'Typically used for planetary longitudes.', null);
 
 
-insert into ssbd_datum values ('2000:1-99', 'Mercury 2000', 'geodetic', null, null, '2000:1-99:default', '1-99', 'crust', 'hun_kal', 'Planetology.', null, null);
+insert into ssbd_datum values ('1-99:2000', 'Mercury 2000', 'geodetic', null, null, '2000:1-99:default', '1-99', 'crust', 'hun_kal', 'Planetology.', null, null);
 
 
 insert into ssbd_coordinatesystem values ('spherical:3d:direct',
@@ -1553,9 +1553,9 @@ insert into ssbd_coordinateaxis values ('ellipsoidal:3d:direct', 3, 9903, 'up', 
 
 
 insert into ssbd_coordinatereferencesystem values ('2000:1-99:planetocentric', 'Mercury 2000 planetocentric 3D',
- 'planetocentric 3D', 'spherical:3d:direct', '2000:1-99', null, null, null, null, null, null);
+ 'planetocentric 3D', 'spherical:3d:direct', '1-99:2000', null, null, null, null, null, null);
 insert into ssbd_coordinatereferencesystem values ('2000:1-99:planetographic', 'Mercury 2000 planetographic 3D',
- 'planetographic 3D', 'ellipsoidal:3d:direct', '2000:1-99', null, null, null, null, null, null);
+ 'planetographic 3D', 'ellipsoidal:3d:direct', '1-99:2000', null, null, null, null, null, null);
 
 
 insert into ssbd_coordinatereferencesystemrange values ('2000:1-99:planetocentric', 2, 'spherical:3d:direct', 2, null, null);

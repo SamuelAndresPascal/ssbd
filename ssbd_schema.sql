@@ -299,7 +299,7 @@ create table ssbd_coordinatesystem (
     constraint pk_coordinatesystem primary key ( coord_sys_code )
 );
 
--- coordinateaxis
+-- coordinateaxis (concept code : CSA)
 --
 create table ssbd_coordinateaxis (
     coord_sys_code                                      varchar(254) not null,
