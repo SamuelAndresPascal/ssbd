@@ -411,7 +411,7 @@ body_code := BODY:<body_suffix>
 
 body_suffix := <alphanumeric>+(<hyphen><alphanumeric>+)*
 
-ellipsoid_code := RG:<local_id>
+ellipsoid_code := ELLIPSOID:<local_id>
 
 prime_meridian_system_code := PMS:<body_suffix>:<prime_meridian_system_suffix>
 
@@ -448,11 +448,11 @@ coordinate_reference_system_code := CRS:<local_id>
 | Mars | 4-99 | BODY:4-99 |
 | Phobos | 4-01 | BODY:4-01 |
 
-#### Codes de géométries de référence
+#### Codes d'ellipsoïdes
 
 | géométrie de référence | code | identifiant sans autorité |
 | :--- | :-- | :----------------------- |
-| Ellipsoide définie par l'UAI en 2000 pour Mercure | 2000:1-99:default | RG:2000:1-99:default |
+| Ellipsoide défini par l'UAI en 2000 pour Mercure | 2000:1-99:default | ELLIPSOID:2000:1-99:default |
 
 
 #### Codes de systèmes de méridiens premiers

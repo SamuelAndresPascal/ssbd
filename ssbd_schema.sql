@@ -12,7 +12,8 @@ begin;
 --
 -- purpose: Information of the body on which a reference system is defined.
 --
--- body_code: For the moment, we use naif codes, but it seems they are not the official names used by IAU.
+-- body_code: For the moment, identifier derived from naif codes, but it seems they are not the official names used by
+-- the IAU.
 --
 -- body_name: Usual body name.
 --
@@ -37,7 +38,7 @@ create table ssbd_body (
 comment on table ssbd_body is 'The table of the solar system bodies.';
 
 
--- ellipsoid (concept code : RG)
+-- ellipsoid (concept code : ELLIPSOID)
 --
 -- purpose: Information on shape representation of bodies. There is no absolute link between a shape and a body, so
 -- that an ellipsoid can potentially be used to approximate the shape of distinct bodies. This is not very probable for
@@ -46,11 +47,6 @@ comment on table ssbd_body is 'The table of the solar system bodies.';
 --
 -- body_code: This column is indicative and does not focus on a body an ellipsoid would be exclusively used for, but
 -- possibly the body for which it has been defined first. It uses the naif body code for now.
---
--- ellipsoid_code: An arbitrary identifier. For now, it is built by concatenating '5' (for an ellipsoid), a number to
--- discriminate different ellipsoids for the same body, '<yyyy>' for the year of publication, '<bodycode>' to
--- distinguish between other ellipsoid built in the same year. These are temporary identifiers. May be URN identifiers
--- would be more expressive and easier to maintain.
 --
 -- semi_major_axis: (subplanetary) equatorial radius
 --
@@ -102,10 +98,6 @@ comment on column ssbd_ellipsoid.body_code is 'This column is optional and indic
 --
 -- purpose: Information on the physical phenomenon that provides the reference by which related prime meridians are
 -- defined (planet crust, atmospherical or magnetic phenomenon...).
---
--- prime_meridian_system_code: An arbitrary identifier. For now, it is built by concatenating '16' (for a prime meridian
--- system), a number to discriminate different prime meridian systems for the same body and the '<bodycode>'. These are
--- temporary identifiers. May be URN identifiers would be more expressive and easier to maintain.
 --
 -- note: It would be interesting to reference the absolute primeridian of a given system, but it would significates two
 -- opposite foreign key constraints. May be for a next update...
@@ -204,10 +196,6 @@ comment on column ssbd_primemeridiansystem.body_code is 'This column is mandator
 --
 --
 --
--- prime_meridian_code: An arbitrary identifier. For now, it is built by concatenating '17' (for a prime meridian), a
--- number to discriminate different prime meridian for the same prime meridian system and the
--- '<primemeridiansystemcode>'. These are temporary identifiers. May be URN identifiers would be more expressive and
--- easier to maintain.
 --
 -- relative_longitude: Longitude of the prime meridian relatively to the absolute prime meridian of the prime meridian
 -- system.
