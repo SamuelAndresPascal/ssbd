@@ -16,6 +16,8 @@ Dans un premier temps SSBD s'appuie sur le schéma de la base de données EPSG c
 
 `méridien premier` : Abstraction du couple constitué par un méridien de référence et une origine des longitudes servant à définir les valeurs de longitude à la surface d'un corps. Dans le contexte d'un méridien premier, le méridien de référence et l'origine des longitudes définissent respectivement chacun la position et la valeur de la longitude de l'autre. Un méridien premier est également caractérisé par une longitude le rattachant à un méridien premier absolu pour un _système de méridiens premiers_ donné (par exemple, la longitude du Méridien de Paris par rapport au méridien de Greenwich, méridien premier absolu pour tous les méridiens premiers appuyés sur des repères à la surface de la croûte terrestre).
 
+`méridien origine` : Employé comme synonyme de l'origine des longitudes.
+
 ## Présentation du schéma
 
 Commentaires sur les relations et les champs remarquables.
@@ -24,16 +26,17 @@ Commentaires sur les relations et les champs remarquables.
 
 ```sql
 create table ssbd_body (
-    body_code                                          integer,
-    body_name                                          varchar(80),
-    rotation                                           varchar(24) not null,
+    body_code                                          varchar(254),
+    body_name                                          varchar(80) not null,
+    rotation                                           varchar(24),
     remarks                                            varchar(254),
     information_source                                 varchar(254),
-    constraint pk_body primary key ( body_code )
+    constraint pk_body primary key ( body_code ),
+    constraint vl_body_rotation check ( rotation in ('direct', 'indirect'))
 );
 ```
 
-`body_code` : Un code d'identification des planètes et satellites s'alignant sur la proposition de [https://github.com/USGS-Astrogeology](https://github.com/USGS-Astrogeology/GDAL_scripts/tree/master/OGC_IAU2000_WKT_v2/Source_Python) d'utiliser les [codes NAIF](https://naif.jpl.nasa.gov/pub/naif/toolkit_docs/FORTRAN/req/naif_ids.html). Ce choix est susceptible d'évolution, éventuellement vers des identifiants plus académiques (nomenclature UAI) ou sémantiquement plus riches et/ou plus extensibles (URN).
+`body_code` : Un code d'identification des planètes et satellites construit à partir des [codes NAIF](https://naif.jpl.nasa.gov/pub/naif/toolkit_docs/FORTRAN/req/naif_ids.html) mais de manière à permettre d'associer un nombre illimité de satellites à chaque système de masses des principaux corps du système solaire. Ce choix est susceptible d'évolution.
 
 `rotation` : Sens de rotation du corps référencé dans l'ICRF (_International Celestial Reference Frame_).
 
@@ -41,8 +44,8 @@ create table ssbd_body (
 
 ```sql
 create table ssbd_ellipsoid (
-    body_code                                          integer,
-    ellipsoid_code                                     integer not null,
+    ellipsoid_code                                     varchar(254) not null,
+    body_code                                          varchar(254),
     ellipsoid_name                                     varchar(80) not null,
     semi_major_axis                                    double precision not null,
     semi_major_axis_error                              double precision,
@@ -54,15 +57,20 @@ create table ssbd_ellipsoid (
     semi_axis_b_error                                  double precision,
     semi_axis_s                                        double precision,
     semi_axis_s_error                                  double precision,
+    -- ellipsoid_shape                                    smallint not null,
     remarks                                            varchar(254),
     information_source                                 varchar(254),
+    -- data_source                                        varchar(40) not null,
+    -- revision_date                                      date not null,
+    -- change_id                                          varchar(255),
+    -- deprecated                                         smallint not null,
     constraint pk_ellipsoid primary key ( ellipsoid_code )
 );
 ```
 
-`body_code` : Référence optionnelle et indicative au corps particulier pour lequel l'ellipsoïde a été originellement défini. Cette référence n'implique pas que le datum référençant l'ellipsoïde concerne le même corps indiqué par ce dernier. On autorise ainsi qu'un ellipsoïde initialement défini pour un corps déterminé puisse être utilisé pour représenter aussi la forme d'autres corps.
+`ellipsoid_code` : Un code d'identification des ellipsoïdes de la base SSBD.
 
-`ellipsoid_code` : Un code d'identification des ellipsoïdes de la base SSBD. Ces identifiants sont temporaires et susceptibles d'être remplacés par des formes d'identifants sémantiques et/ou extensibles.
+`body_code` : Référence optionnelle et indicative au corps particulier pour lequel l'ellipsoïde a été originellement défini. Cette référence n'implique pas que le datum référençant l'ellipsoïde concerne le même corps indiqué par ce dernier. On autorise ainsi qu'un ellipsoïde initialement défini pour un corps déterminé puisse être utilisé pour représenter aussi la forme d'autres corps.
 
 `semi_major_axis` : Rayon équatorial subplanétaire. Rayon de la sphère dans le cas d'un ellipsoïde sphérique ; demi-grand axe dans le cas d'un ellipsoïde biaxial ; rayon équatorial subplanétaire dans le cas d'un ellipsoïde triaxial ou quadriaxial.
 
@@ -98,18 +106,22 @@ En revanche, il n'existe pas de surface solide observable sur les planètes gaze
 
 ```sql
 create table ssbd_primemeridiansystem (
-    prime_meridian_system_code                         integer not null,
+    body_code                                          varchar(254) not null,
+    prime_meridian_system_code                         varchar(254) not null,
     prime_meridian_system_name                         varchar(80) not null,
-    body_code                                          integer not null,
     remarks                                            varchar(254),
     information_source                                 varchar(254),
-    constraint pk_primemeridiansystem primary key ( prime_meridian_system_code )
+    -- data_source                                        varchar(40) not null,
+    -- revision_date                                      date not null,
+    -- change_id                                          varchar(255),
+    -- deprecated                                         smallint not null,
+    constraint pk_primemeridiansystem primary key ( body_code, prime_meridian_system_code )
 );
 ```
 
-`prime_meridian_system_code` : Un code d'identification des systèmes de méridiens premiers de la base SSBD. Ces identifiants sont temporaires et susceptibles d'être remplacés par des formes d'identifants sémantiques et/ou extensibles.
+`prime_meridian_system_code` : Un code d'identification des systèmes de méridiens premiers de la base SSBD pour un corps donné.
 
-`body_code` : Le code d'identification du corps sur lequel est défini le système de méridien. Ce code est obligatoire et définit par extension le corps sur lequel est défini un méridien premier et par voie de conséquence les datums et les systèmes de référence qui l'utilisent.
+`body_code` : Le code d'identification du corps sur lequel est défini le système de méridien. Ce code est obligatoire et définit par extension le corps sur lequel est défini un méridien premier ainsi que, par voie de conséquence, les datums et les systèmes de référence qui l'utilisent.
 
 ### Primemeridan - méridiens premiers, méridiens de référence, origines des longitudes
 
@@ -117,19 +129,21 @@ Sur Terre, un [méridien de référence](#definitions) sert également [d'origin
 
 En planétologie, une marque utilisée comme repère d'une longitude particulière n'est pas forcément caractérisée par une longitude nulle. Dès lors, le méridien de référence qui la traverse ne peut plus être assimilé à l'origine des longitudes. Les définitions utilisées dans le cadre de la base SSBD distinguent les deux concepts. Un troisième concept, celui de méridien premier, est utilisé pour les associer. On peut donc définir en première approximaition un _méridien premier_ comme un couple _(méridien de référence, origine des longitudes)_.
 
-Pour exprimer des longitudes d'un méridien premier dans un autre méridien premier, il suffit de définir par convention si le décalage de longitude à appliquer doit être appliqué de méridien origine à méridien origine ou bien de méridien de référence à méridien de référence.
+Pour convertir des longitudes depuis un méridien premier vers un autre méridien premier, il suffit de définir par convention si le décalage de longitude à appliquer doit être appliqué de méridien origine à méridien origine ou bien de méridien de référence à méridien de référence.
 
 La première convention offre un confort mathématique. Il suffit alors d'une opération d'addition ou de soustraction appliquée aux longitudes. Implicitement, cette convention revient à attribuer au méridien premier la localisation de l'origine des longitudes. 
 
 La seconde convention offre une cohérence conceptuelle. Le méridien premier est désigné par un nom qu'il peut être logique de construire à partir du lieu remarquable traversé par le méridien de référence qu'il utilise. Implicitement, cette convention revient à attribuer au méridien premier la localisation du méridien de référence.
 
-La base SSBD ne fait aucun choix de convention. Chaque définition de méridien premier libre de définir une localisation explicite du méridien premier à une longitude arbitraire exprimée à partir du méridien origine même qu'il définit. De manière à assurer les transformations de longitudes d'un méridien premier à un autre méridien premier, la valeur du décalage à appliquer à partir du méridien premier absolu du système de méridiens premiers, doit également être indiquée.
+La base SSBD ne fait aucun choix de convention. Chaque définition de méridien premier reste libre de définir une localisation explicite du méridien premier à une longitude arbitraire exprimée à partir du méridien origine même qu'il définit. De manière à assurer les transformations de longitudes d'un méridien premier à un autre méridien premier, la valeur du décalage à appliquer à partir du méridien premier absolu du système de méridiens premiers, doit également être indiquée.
 
 On peut donc finalement définir un méridien premier comme le triplet _(méridien de référence, origine des longitudes, longitude relative au méridien permier absolu du système)_.
 
 ```sql
 create table ssbd_primemeridian (
-    prime_meridian_code                                integer not null,
+    body_code                                          varchar(254) not null,
+    system_code                                        varchar(254) not null,
+    prime_meridian_code                                varchar(254) not null,
     prime_meridian_name                                varchar(80) not null,
     relative_longitude                                 double precision not null,
     relative_longitude_orientation                     character varying(24) not null,
@@ -137,15 +151,17 @@ create table ssbd_primemeridian (
     prime_meridian_longitude                           double precision not null,
     longitude_origin_orientation                       character varying(24) not null,
     uom_code                                           integer not null,
-    system_code                                        integer not null,
     remarks                                            varchar(254),
     information_source                                 varchar(254),
-    constraint pk_primemeridian primary key ( prime_meridian_code )
+    -- data_source                                        varchar(40) not null,
+    -- revision_date                                      date not null,
+    -- change_id                                          varchar(255),
+    -- deprecated                                         smallint not null,
+    constraint pk_primemeridian primary key ( body_code, system_code, prime_meridian_code )
 );
-
 ```
 
-`prime_meridian_code` : Un code d'identification des méridiens premiers de la base SSBD. Ces identifiants sont temporaires et susceptibles d'être remplacés par des formes d'identifants sémantiques et/ou extensibles.
+`prime_meridian_code` : Un code d'identification des méridiens premiers de la base SSBD pour un système de méridiens premiers donné identifié par le couple _(body_code, system_code)_.
 
 `relative_longitude` : Décalage de longitude entre le méridien premier courant et le méridien premier absolu du système de méridien premiers. Il s'agit de la différence de l'angle entre le méridien premier courant et le méridien premier absolu du système.
 
@@ -159,7 +175,6 @@ create table ssbd_primemeridian (
 
 `uom_code` : Code EPSG de l'unité utilisée pour les mesures des angles de définition du méridien premier.
 
-`system_code` : Code du système de méridiens premiers dans lequel est défini le méridien premier courant.
 
 ### Datum
 
@@ -167,39 +182,86 @@ Sur le plan structurel, le schéma des datums de la base SSBD se résume à une 
 
 ```sql
 create table ssbd_datum (
-    datum_code                                         integer not null,
+    datum_code                                         varchar(254) not null,
     datum_name                                         varchar(80) not null,
     datum_type                                         varchar(24) not null,
     origin_description                                 varchar(254),
     realization_epoch                                  varchar(10),
-    ellipsoid_code                                     integer,
-    prime_meridian_code                                integer,
+    ellipsoid_code                                     varchar(254),
+    body_code                                          varchar(254),
+    prime_meridian_system_code                         varchar(254),
+    prime_meridian_code                                varchar(254),
+    -- area_of_use_code                                   integer not null,
     datum_scope                                        varchar(254) not null,
     remarks                                            varchar(254),
     information_source                                 varchar(254),
+    -- data_source                                        varchar(40) not null,
+    -- revision_date                                      date not null,
+    -- change_id                                          varchar(255),
+    -- deprecated                                         smallint not null,
     constraint pk_datum primary key ( datum_code )
 );
 ```
 
+### Coordinatesystem - systèmes de coordonnées
+
+```sql
+create table ssbd_coordinatesystem (
+    coord_sys_code                                      varchar(254) not null,
+    coord_sys_name                                      varchar(254) not null,
+    coord_sys_type                                      varchar(24) not null,
+    dimension                                           smallint not null,
+    remarks                                             varchar(254),
+    information_source                                  varchar(254),
+    -- data_source                                         character varying(50) not null,
+    -- revision_date                                       date not null,
+    -- change_id                                           character varying(255),
+    -- deprecated                                          smallint not null,
+    constraint pk_coordinatesystem primary key ( coord_sys_code )
+);
+```
+
+### Coordinateaxis - axes de coordonnées
+
+```sql
+create table ssbd_coordinateaxis (
+    coord_sys_code                                      varchar(254) not null,
+    coord_axis_order                                    smallint not null,
+    coord_axis_name_code                                integer not null,
+    coord_axis_orientation                              varchar(24) not null,
+    coord_axis_abbreviation                             varchar(24) not null,
+    uom_code                                            integer not null,
+    constraint pk_coordinateaxis primary key ( coord_sys_code, coord_axis_order )
+);
+```
+
+
 ### Coordinatereferencesystem - systèmes de coordonnées de référence
 
-Sur le plan structurel, le schéma des systèmes de coordonnées de référence de la base SSBD se résume à une simplification du schéma des systèmes de coordonnées de référence de la base EPSG. La zone d'utilisation et un certain nombre de métadonnées n'en font pas partie pour le moment. Les systèmes de coordonnées et les datums, de même que les systèmes de coordonnées de référence sont eux-mêmes définis par la base SSBD et ne font pas référence à des entités définies par la base EPSG.
+Sur le plan structurel, le schéma des systèmes de coordonnées de référence de la base SSBD se résume à une simplification du schéma des systèmes de coordonnées de référence de la base EPSG. La zone d'utilisation et un certain nombre de métadonnées n'en font pas partie pour le moment.
 
 Quoique la relation fasse mention d'un champ destiné à représenter les opérations de projection, les opérations de manière générale ne sont pas représentées pour le moment dans la base SSBD.
 
 ```sql
 create table ssbd_coordinatereferencesystem (
-    coord_ref_sys_code                                 integer not null,
+    coord_ref_sys_code                                 varchar(254) not null,
     coord_ref_sys_name                                 varchar(80) not null,
+    -- area_of_use_code                                   integer not null,
     coord_ref_sys_kind                                 varchar(24) not null,
-    coord_sys_code                                     integer,
-    datum_code                                         integer,
+    coord_sys_code                                     varchar(254),
+    datum_code                                         varchar(254),
     source_geogcrs_code                                integer,
     projection_conv_code                               integer,
     cmpd_horizcrs_code                                 integer,
     cmpd_vertcrs_code                                  integer,
+    -- crs_scope                                          varchar(254) not null,
     remarks                                            varchar(254),
     information_source                                 varchar(254),
+    -- data_source                                        varchar(40) not null,
+    -- revision_date                                      date not null,
+    -- change_id                                          varchar(255),
+    -- show_crs                                           smallint not null,
+    -- deprecated                                         smallint not null,
     constraint pk_coordinatereferencesystem primary key ( coord_ref_sys_code )
 );
 ```
@@ -208,7 +270,7 @@ create table ssbd_coordinatereferencesystem (
 
 ### Range - contraintes sur les axes
 
-La base SSBD n'a pas pour objectif de se restreindre à la représentation de l'information planétologique à l'exclusion de la Terre, mais d'étendre les concepts utilisés en information géographique de manière à les préciser, les expliciter, les développer et les généraliser à l'ensemble des corps du système solaire.
+La base SSBD n'a pas pour objectif de se restreindre à la représentation de l'information planétologique à l'exclusion de la Terre, mais d'étendre les concepts utilisés en information géographique de manière à les préciser, les expliciter, les développer et les généraliser à l'ensemble des corps du système solaire, voire de servir de base à une recension plus large des phénomènes planétologiques.
 
 Il est en particulier intéressant de représenter les contraintes portant sur les axes d'un système de coordonnées, _dans le contexte_ d'un système de coordonnées de référence donné. Par exemple, les longitudes sont la plupart du temps données sur la Terre par une valeur d'angle comprise dans l'intervalle ]-180 ; 180] (en degrés décimaux) alors qu'elles utilisent pour la plupart des autres planètes l'intervalle [0 ; 360[. Il est donc nécessaire de représenter cette information afin d'appliquer les conventions en usage de manière appropriée.
 
@@ -231,12 +293,13 @@ Une seconde relation contextualise les contraintes dans le cadre des systèmes d
 
 ```sql
 create table ssbd_coordinatereferencesystemrange (
-    coord_ref_sys_code                                 integer not null,
+    coord_ref_sys_code                                 varchar(254) not null,
     range_code                                         integer not null,
-    coord_axis_code                                    integer not null,
+    coord_sys_code                                     varchar(254) not null,
+    coord_axis_order                                   smallint not null,
     remarks                                            varchar(254),
     information_source                                 varchar(254),
-    constraint pk_coordinatereferencesystemrange primary key ( coord_ref_sys_code, range_code, coord_axis_code )
+    constraint pk_coordinatereferencesystemrange primary key ( coord_ref_sys_code, range_code, coord_sys_code, coord_axis_order )
 );
 ```
 
@@ -248,9 +311,7 @@ create table ssbd_coordinatereferencesystemrange (
 
 ## Présentation des données
 
-Les données de la base EPSG sont embryonnaire et n'ont pour premier but que de vérifier la cohérence du schéma par des exemples concrets. Les seules données quelque peu étoffées sont celles concernant les ellipsoïdes, implémentées en script SQL à partir des données du dépôt [USGS-Astrogeology](https://github.com/USGS-Astrogeology/GDAL_scripts/tree/master/OGC_IAU2000_WKT_v2) revues et complétées à partir des publications de référence des groupes de travail de l'UAI de 2000, 2009 et 2015 sur les coordonnées cartographiques et les paramètres de rotation des corps du système solaire. 
-
-Le choix de réutiliser des structures et de référencer des données de la base EPSG atteint toutefois ses limites, en particulier du fait de l'orientation des axes de longitude des systèmes de coordonnées vers l'est. *Les deux exemples de systèmes de coordonnées de référence présents dans les données sont donc erronés* puisque utilisant un système de coordonnées indirect là où mercure devrait utiliser un système de coordonnées direct. On ignore pour l'instant ce détail qui imposera à terme de définir de nouveaux systèmes de coordonnées directs à ajouter aux données de la base EPSG ou à définir en propre dans la base SSBD.
+Les données de la base EPSG sont embryonnaires et n'ont pour premier but que de vérifier la cohérence du schéma par des exemples concrets. Les seules données quelque peu étoffées sont celles concernant les ellipsoïdes, implémentées en script SQL à partir des données du dépôt [USGS-Astrogeology](https://github.com/USGS-Astrogeology/GDAL_scripts/tree/master/OGC_IAU2000_WKT_v2) revues et complétées à partir des publications de référence des groupes de travail de l'UAI de 2000, 2009 et 2015 sur les coordonnées cartographiques et les paramètres de rotation des corps du système solaire.
 
 ## Statut des fichiers
 
@@ -326,8 +387,8 @@ Enfin, les données provenant du registre EPSG sont proposées à simple titre i
 
 #### Conséquences et perspectives d'évolution
 
-Au moins à titre temporaire, la base SSBD référence par leur code les unités et les systèmes de coordonnées et les axes définis par la base EPSG de manière à réutiliser au mieux les concepts définis dans le cadre de l'information géographique ne nécessitant pas de modification structurelle.
+Au moins à titre temporaire, la base SSBD référence par leur code les unités et les nomes d'axes définis par la base EPSG de manière à réutiliser au mieux les concepts définis dans le cadre de l'information géographique ne nécessitant pas de modification structurelle.
 
-Le choix n'est pas encore arrêté pour l'instant de continuer à référencer par la suite les données EPSG. Le manque de systèmes de coordonnées 3D directs pose déjà des problèmes et il n'est pas dit qu'il ne soit pas à terme avantageux de définir des systèmes de coordonnées, des axes et des unités propres à la base SSBD.
+Le choix n'est pas encore arrêté pour l'instant de continuer à référencer par la suite les données EPSG et il n'est pas dit qu'il ne soit pas à terme avantageux de définir des noms d'axes et des unités propres à la base SSBD ou de s'appuyer sur d'autres références.
 
 

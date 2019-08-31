@@ -8,7 +8,7 @@
 begin;
 
 
--- body
+-- body (concept code : BODY)
 --
 -- purpose: Information of the body on which a reference system is defined.
 --
@@ -37,7 +37,7 @@ create table ssbd_body (
 comment on table ssbd_body is 'The table of the solar system bodies.';
 
 
--- ellipsoid
+-- ellipsoid (concept code : RG)
 --
 -- purpose: Information on shape representation of bodies. There is no absolute link between a shape and a body, so
 -- that an ellipsoid can potentially be used to approximate the shape of distinct bodies. This is not very probable for
@@ -70,8 +70,8 @@ comment on table ssbd_body is 'The table of the solar system bodies.';
 -- see: https://link.springer.com/article/10.1007/s10569-011-9362-2 (erratum to 2006/2009)
 -- see: https://astropedia.astrogeology.usgs.gov/download/Docs/WGCCRE/WGCCRE2015reprint.pdf (2015)
 create table ssbd_ellipsoid (
+    ellipsoid_code                                     varchar(254) not null,
     body_code                                          varchar(254),
-    ellipsoid_code                                     integer not null,
     ellipsoid_name                                     varchar(80) not null,
     semi_major_axis                                    double precision not null,
     semi_major_axis_error                              double precision,
@@ -98,7 +98,7 @@ alter table ssbd_ellipsoid add constraint fk_body_code foreign key ( body_code )
 comment on column ssbd_ellipsoid.body_code is 'This column is optional and indicative about the body for which the ellipsoid has been defined. It may be null and even if it is not, it does not mean the ellipsoid is exclusively defined for the related body.';
 
 
--- prime meridian system
+-- prime meridian system (concept code : PMS)
 --
 -- purpose: Information on the physical phenomenon that provides the reference by which related prime meridians are
 -- defined (planet crust, atmospherical or magnetic phenomenon...).
@@ -110,16 +110,16 @@ comment on column ssbd_ellipsoid.body_code is 'This column is optional and indic
 -- note: It would be interesting to reference the absolute primeridian of a given system, but it would significates two
 -- opposite foreign key constraints. May be for a next update...
 create table ssbd_primemeridiansystem (
-    prime_meridian_system_code                         integer not null,
-    prime_meridian_system_name                         varchar(80) not null,
     body_code                                          varchar(254) not null,
+    prime_meridian_system_code                         varchar(254) not null,
+    prime_meridian_system_name                         varchar(80) not null,
     remarks                                            varchar(254),
     information_source                                 varchar(254),
     -- data_source                                        varchar(40) not null,
     -- revision_date                                      date not null,
     -- change_id                                          varchar(255),
     -- deprecated                                         smallint not null,
-    constraint pk_primemeridiansystem primary key ( prime_meridian_system_code )
+    constraint pk_primemeridiansystem primary key ( body_code, prime_meridian_system_code )
 );
 
 alter table ssbd_primemeridiansystem add constraint fk_body_code foreign key ( body_code ) references ssbd_body ( body_code ) ;
@@ -127,7 +127,7 @@ alter table ssbd_primemeridiansystem add constraint fk_body_code foreign key ( b
 comment on column ssbd_primemeridiansystem.body_code is 'This column is mandatory and defines the body on which meridians and datums are defined.';
 
 
--- prime meridian
+-- prime meridian (concept code : PM)
 --
 -- purpose: The prime meridian is an abstract concept linking the "reference meridian" (i.e. the meridian which passes
 -- through an observable reference) to the "longitude origin" (i.e. the meridian on which the longitude is abitrary
@@ -229,7 +229,9 @@ comment on column ssbd_primemeridiansystem.body_code is 'This column is mandator
 --
 -- system_code: The code of the prime meridian system.
 create table ssbd_primemeridian (
-    prime_meridian_code                                integer not null,
+    body_code                                          varchar(254) not null,
+    system_code                                        varchar(254) not null,
+    prime_meridian_code                                varchar(254) not null,
     prime_meridian_name                                varchar(80) not null,
     relative_longitude                                 double precision not null,
     relative_longitude_orientation                     character varying(24) not null,
@@ -237,33 +239,34 @@ create table ssbd_primemeridian (
     prime_meridian_longitude                           double precision not null,
     longitude_origin_orientation                       character varying(24) not null,
     uom_code                                           integer not null,
-    system_code                                        integer not null,
     remarks                                            varchar(254),
     information_source                                 varchar(254),
     -- data_source                                        varchar(40) not null,
     -- revision_date                                      date not null,
     -- change_id                                          varchar(255),
     -- deprecated                                         smallint not null,
-    constraint pk_primemeridian primary key ( prime_meridian_code )
+    constraint pk_primemeridian primary key ( body_code, system_code, prime_meridian_code )
 );
 
-alter table ssbd_primemeridian add constraint fk_system_code foreign key ( system_code ) references ssbd_primemeridiansystem ( prime_meridian_system_code ) ;
+alter table ssbd_primemeridian add constraint fk_system_code foreign key ( body_code, system_code ) references ssbd_primemeridiansystem ( body_code, prime_meridian_system_code ) ;
 
 comment on column ssbd_primemeridian.relative_longitude is 'Angle from the absolute prime meridian of the meridian system to the current prime meridian.';
 comment on column ssbd_primemeridian.reference_meridian_longitude is 'Longitude of the reference meridian from the origin of longitudes.';
 comment on column ssbd_primemeridian.prime_meridian_longitude is 'Longitude of the prime meridian from the origin of longitudes.';
 
 
--- datum
+-- datum (concept code : DATUM)
 --
 create table ssbd_datum (
-    datum_code                                         integer not null,
+    datum_code                                         varchar(254) not null,
     datum_name                                         varchar(80) not null,
     datum_type                                         varchar(24) not null,
     origin_description                                 varchar(254),
     realization_epoch                                  varchar(10),
-    ellipsoid_code                                     integer,
-    prime_meridian_code                                integer,
+    ellipsoid_code                                     varchar(254),
+    body_code                                          varchar(254),
+    prime_meridian_system_code                         varchar(254),
+    prime_meridian_code                                varchar(254),
     -- area_of_use_code                                   integer not null,
     datum_scope                                        varchar(254) not null,
     remarks                                            varchar(254),
@@ -276,10 +279,11 @@ create table ssbd_datum (
 );
 
 alter table ssbd_datum add constraint fk_ellipsoid_code foreign key ( ellipsoid_code ) references ssbd_ellipsoid ( ellipsoid_code ) ;
-alter table ssbd_datum add constraint fk_prime_meridian_code foreign key ( prime_meridian_code ) references ssbd_primemeridian ( prime_meridian_code ) ;
+alter table ssbd_datum add constraint fk_prime_meridian_code foreign key ( body_code, prime_meridian_system_code, prime_meridian_code )
+ references ssbd_primemeridian ( body_code, system_code, prime_meridian_code ) ;
 
 
--- coordinate system
+-- coordinate system (concept code : CS)
 --
 create table ssbd_coordinatesystem (
     coord_sys_code                                      varchar(254) not null,
@@ -295,36 +299,33 @@ create table ssbd_coordinatesystem (
     constraint pk_coordinatesystem primary key ( coord_sys_code )
 );
 
-
+-- coordinateaxis
+--
 create table ssbd_coordinateaxis (
-    coord_axis_code                                     integer,
     coord_sys_code                                      varchar(254) not null,
+    coord_axis_order                                    smallint not null,
     coord_axis_name_code                                integer not null,
     coord_axis_orientation                              varchar(24) not null,
     coord_axis_abbreviation                             varchar(24) not null,
     uom_code                                            integer not null,
-    coord_axis_order                                    smallint not null,
-    constraint pk_coordinateaxis primary key ( coord_sys_code, coord_axis_name_code )
+    constraint pk_coordinateaxis primary key ( coord_sys_code, coord_axis_order )
 );
-
-
-alter table ssbd_coordinateaxis add constraint ssbd_coordinateaxis_coord_axis_code_key unique ( coord_axis_code );
 
 alter table ssbd_coordinateaxis add constraint fk_coord_sys_code foreign key ( coord_sys_code ) references ssbd_coordinatesystem( coord_sys_code );
 
 
--- coordinate reference system
+-- coordinate reference system (concept code : CRS)
 --
 -- see: https://planetarynames.wr.usgs.gov/TargetCoordinates
 -- see: https://planetarynames.wr.usgs.gov/GIS_Downloads
 -- see: https://planetarynames.wr.usgs.gov/Page/Website
 create table ssbd_coordinatereferencesystem (
-    coord_ref_sys_code                                 integer not null,
+    coord_ref_sys_code                                 varchar(254) not null,
     coord_ref_sys_name                                 varchar(80) not null,
     -- area_of_use_code                                   integer not null,
     coord_ref_sys_kind                                 varchar(24) not null,
     coord_sys_code                                     varchar(254),
-    datum_code                                         integer,
+    datum_code                                         varchar(254),
     source_geogcrs_code                                integer,
     projection_conv_code                               integer,
     cmpd_horizcrs_code                                 integer,
@@ -363,16 +364,17 @@ create table ssbd_range (
 -- purpose: Constraints on some coordinate reference system axes.
 --
 create table ssbd_coordinatereferencesystemrange (
-    coord_ref_sys_code                                 integer not null,
+    coord_ref_sys_code                                 varchar(254) not null,
     range_code                                         integer not null,
-    coord_axis_code                                    integer not null,
+    coord_sys_code                                     varchar(254) not null,
+    coord_axis_order                                   smallint not null,
     remarks                                            varchar(254),
     information_source                                 varchar(254),
-    constraint pk_coordinatereferencesystemrange primary key ( coord_ref_sys_code, range_code, coord_axis_code )
+    constraint pk_coordinatereferencesystemrange primary key ( coord_ref_sys_code, range_code, coord_sys_code, coord_axis_order )
 );
 
 alter table ssbd_coordinatereferencesystemrange add constraint fk_coord_ref_sys_code foreign key ( coord_ref_sys_code ) references ssbd_coordinatereferencesystem ( coord_ref_sys_code ) ;
 alter table ssbd_coordinatereferencesystemrange add constraint fk_range_code foreign key ( range_code ) references ssbd_range ( range_code ) ;
-alter table ssbd_coordinatereferencesystemrange add constraint fk_coord_axis_code foreign key ( coord_axis_code ) references ssbd_coordinateaxis ( coord_axis_code ) ;
+alter table ssbd_coordinatereferencesystemrange add constraint fk_coord_axis_code foreign key ( coord_sys_code, coord_axis_order ) references ssbd_coordinateaxis ( coord_sys_code, coord_axis_order ) ;
 
 commit;
