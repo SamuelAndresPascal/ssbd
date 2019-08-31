@@ -25,18 +25,18 @@ Commentaires sur les relations et les champs remarquables.
 ### Body - planètes et satellites du système solaire
 
 ```sql
-create table ssbd_body (
-    body_code                                          varchar(254),
-    body_name                                          varchar(80) not null,
+create table ssbd_phenomenon (
+    phenomenon_code                                    varchar(254),
+    phenomenon_name                                    varchar(80) not null,
     rotation                                           varchar(24),
     remarks                                            varchar(254),
     information_source                                 varchar(254),
-    constraint pk_body primary key ( body_code ),
-    constraint vl_body_rotation check ( rotation in ('direct', 'indirect'))
+    constraint pk_body primary key ( phenomenon_code ),
+    constraint vl_phenomenon_rotation check ( rotation in ('direct', 'indirect'))
 );
 ```
 
-`body_code` : Un code d'identification des planètes et satellites construit à partir des [codes NAIF](https://naif.jpl.nasa.gov/pub/naif/toolkit_docs/FORTRAN/req/naif_ids.html) mais de manière à permettre d'associer un nombre illimité de satellites à chaque système de masses des principaux corps du système solaire. Ce choix est susceptible d'évolution.
+`phenomenon_code` : Un code d'identification des planètes et satellites construit à partir des [codes NAIF](https://naif.jpl.nasa.gov/pub/naif/toolkit_docs/FORTRAN/req/naif_ids.html) mais de manière à permettre d'associer un nombre illimité de satellites à chaque système de masses des principaux corps du système solaire. Ce choix est susceptible d'évolution.
 
 `rotation` : Sens de rotation du corps référencé dans l'ICRF (_International Celestial Reference Frame_).
 
@@ -45,7 +45,7 @@ create table ssbd_body (
 ```sql
 create table ssbd_ellipsoid (
     ellipsoid_code                                     varchar(254) not null,
-    body_code                                          varchar(254),
+    phenomenon_code                                    varchar(254),
     ellipsoid_name                                     varchar(80) not null,
     semi_major_axis                                    double precision not null,
     semi_major_axis_error                              double precision,
@@ -70,7 +70,7 @@ create table ssbd_ellipsoid (
 
 `ellipsoid_code` : Un code d'identification des ellipsoïdes de la base SSBD.
 
-`body_code` : Référence optionnelle et indicative au corps particulier pour lequel l'ellipsoïde a été originellement défini. Cette référence n'implique pas que le datum référençant l'ellipsoïde concerne le même corps indiqué par ce dernier. On autorise ainsi qu'un ellipsoïde initialement défini pour un corps déterminé puisse être utilisé pour représenter aussi la forme d'autres corps.
+`phenomenon_code` : Référence optionnelle et indicative au corps particulier pour lequel l'ellipsoïde a été originellement défini. Cette référence n'implique pas que le datum référençant l'ellipsoïde concerne le même corps indiqué par ce dernier. On autorise ainsi qu'un ellipsoïde initialement défini pour un corps déterminé puisse être utilisé pour représenter aussi la forme d'autres corps.
 
 `semi_major_axis` : Rayon équatorial subplanétaire. Rayon de la sphère dans le cas d'un ellipsoïde sphérique ; demi-grand axe dans le cas d'un ellipsoïde biaxial ; rayon équatorial subplanétaire dans le cas d'un ellipsoïde triaxial ou quadriaxial.
 
@@ -106,7 +106,7 @@ En revanche, il n'existe pas de surface solide observable sur les planètes gaze
 
 ```sql
 create table ssbd_primemeridiansystem (
-    body_code                                          varchar(254) not null,
+    phenomenon_code                                          varchar(254) not null,
     prime_meridian_system_code                         varchar(254) not null,
     prime_meridian_system_name                         varchar(80) not null,
     remarks                                            varchar(254),
@@ -115,13 +115,13 @@ create table ssbd_primemeridiansystem (
     -- revision_date                                      date not null,
     -- change_id                                          varchar(255),
     -- deprecated                                         smallint not null,
-    constraint pk_primemeridiansystem primary key ( body_code, prime_meridian_system_code )
+    constraint pk_primemeridiansystem primary key ( phenomenon_code, prime_meridian_system_code )
 );
 ```
 
 `prime_meridian_system_code` : Un code d'identification des systèmes de méridiens premiers de la base SSBD pour un corps donné.
 
-`body_code` : Le code d'identification du corps sur lequel est défini le système de méridien. Ce code est obligatoire et définit par extension le corps sur lequel est défini un méridien premier ainsi que, par voie de conséquence, les datums et les systèmes de référence qui l'utilisent.
+`phenomenon_code` : Le code d'identification du corps sur lequel est défini le système de méridien. Ce code est obligatoire et définit par extension le corps sur lequel est défini un méridien premier ainsi que, par voie de conséquence, les datums et les systèmes de référence qui l'utilisent.
 
 ### Primemeridan - méridiens premiers, méridiens de référence, origines des longitudes
 
@@ -141,7 +141,7 @@ On peut donc finalement définir un méridien premier comme le triplet _(méridi
 
 ```sql
 create table ssbd_primemeridian (
-    body_code                                          varchar(254) not null,
+    phenomenon_code                                          varchar(254) not null,
     system_code                                        varchar(254) not null,
     prime_meridian_code                                varchar(254) not null,
     prime_meridian_name                                varchar(80) not null,
@@ -157,11 +157,11 @@ create table ssbd_primemeridian (
     -- revision_date                                      date not null,
     -- change_id                                          varchar(255),
     -- deprecated                                         smallint not null,
-    constraint pk_primemeridian primary key ( body_code, system_code, prime_meridian_code )
+    constraint pk_primemeridian primary key ( phenomenon_code, system_code, prime_meridian_code )
 );
 ```
 
-`prime_meridian_code` : Un code d'identification des méridiens premiers de la base SSBD pour un système de méridiens premiers donné identifié par le couple _(body_code, system_code)_.
+`prime_meridian_code` : Un code d'identification des méridiens premiers de la base SSBD pour un système de méridiens premiers donné identifié par le couple _(phenomenon_code, system_code)_.
 
 `relative_longitude` : Décalage de longitude entre le méridien premier courant et le méridien premier absolu du système de méridien premiers. Il s'agit de la différence de l'angle entre le méridien premier courant et le méridien premier absolu du système.
 
@@ -188,7 +188,7 @@ create table ssbd_datum (
     origin_description                                 varchar(254),
     realization_epoch                                  varchar(10),
     ellipsoid_code                                     varchar(254),
-    body_code                                          varchar(254),
+    phenomenon_code                                          varchar(254),
     prime_meridian_system_code                         varchar(254),
     prime_meridian_code                                varchar(254),
     -- area_of_use_code                                   integer not null,
@@ -405,23 +405,23 @@ authority := <alphanumeric>+
 ```
 string_character = <alphanumeric> | <hyphen> | <underscore>
 
-entity_code := <body_code> | <ellipsoid_code> | <prime_meridian_system_code> | <prime_meridian_code> | <datum_code> | <coordinate_system_code> | <coordinate_system_axis_code> | <coordinate_reference_system_code>
+entity_code := <phenomenon_code> | <ellipsoid_code> | <prime_meridian_system_code> | <prime_meridian_code> | <datum_code> | <coordinate_system_code> | <coordinate_system_axis_code> | <coordinate_reference_system_code>
 
-body_code := BODY:<body_suffix>
+phenomenon_code := PHENOMENON:<phenomenon_suffix>
 
-body_suffix := <alphanumeric>+(<hyphen><alphanumeric>+)*
+phenomenon_suffix := <alphanumeric>+(<hyphen><alphanumeric>+)*
 
 ellipsoid_code := ELLIPSOID:<local_id>
 
-prime_meridian_system_code := PMS:<body_suffix>:<prime_meridian_system_suffix>
+prime_meridian_system_code := PMS:<phenomenon_suffix>:<prime_meridian_system_suffix>
 
 prime_meridian_system_suffix := <string_character>+
 
-prime_meridian_code := PM:<body_suffix>:<prime_meridian_system_suffix>:<prime_meridian_suffix>
+prime_meridian_code := PM:<phenomenon_suffix>:<prime_meridian_system_suffix>:<prime_meridian_suffix>
 
 prime_meridian_suffix := <string_character>+
 
-datum_code := DATUM:<body_suffix>:<local_datum_id>
+datum_code := DATUM:<phenomenon_suffix>:<local_datum_id>
 
 local_datum_id := <local_id>
 
@@ -442,11 +442,12 @@ coordinate_reference_system_code := CRS:<local_id>
 
 | corps | code | identifiant sans autorité |
 | :--- | :-- | :----------------------- |
-| Soleil | 0 | BODY:0 |
-| Mecure | 1-99 | BODY:1-99 |
-| Vénus | 2-99 | BODY:2-99 |
-| Mars | 4-99 | BODY:4-99 |
-| Phobos | 4-01 | BODY:4-01 |
+| Barycentre du système solaire | 0 | PHENOMENON:0 |
+| Soleil | 99 | PHENOMENON:99 |
+| Mecure | 1-99 | PHENOMENON:1-99 |
+| Vénus | 2-99 | PHENOMENON:2-99 |
+| Mars | 4-99 | PHENOMENON:4-99 |
+| Phobos | 4-1 | PHENOMENON:4-1 |
 
 #### Codes d'ellipsoïdes
 
@@ -471,7 +472,7 @@ coordinate_reference_system_code := CRS:<local_id>
 
 | datum | code | identifiant sans autorité |
 | :--- | :-- | :----------------------- |
-| datum implicitement défini sur Mercure par l'UAI en 2000 | 1-99:2000 | DATUM:1-99:2000 |
+| Datum implicitement défini sur Mercure par l'UAI en 2000 | 1-99:2000 | DATUM:1-99:2000 |
 
 #### Codes de systèmes de coordonnées
 

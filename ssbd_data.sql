@@ -11,191 +11,207 @@ begin;
 --
 -- ainsi, le code NAIF 299 devient 2-99
 --
+-- de manière à conserver pour le moment la convention des codes NAIF, le 99 symbolise le corps le plus massif d'un
+-- d'un système de masses
+--
+-- les identifiants des phénomènes sont construits par concaténation d'un suffixe numérique à l'identifiant du
+-- barycentre de son système de masses, séparé par un trait d'union
+--
+-- le 0 est l'identifiant réservé au barycentre du système constitué par l'ensemble des masses ; dans le cas du système
+-- solaire il s'agit du barycentre du système solaire il est omis de la construction des identifiants des autres
+-- phénomènes
+--
+-- exemples :
+-- - le code de la Terre est 3-99 et non 0-3-99
+-- - le code du barycentre du système martien est 4 et non 0-4
+--
+-- à la différence de son code NAIF, le code du soleil est 99 (et non pas 10)
+--
 -- les codes des autes corps sont empruntés au répertoire NAIF
 -- les codes négatifs sont ceux qui n'ont pas été trouvés dans le répertoire NAIF
-insert into ssbd_body values ('0', 'Sun', 'direct', null, null);
-insert into ssbd_body values ('1-99', 'Mercury', 'direct', null, null);
-insert into ssbd_body values ('2-99', 'Venus', 'indirect', null, null);
-insert into ssbd_body values ('3-99', 'Earth', 'direct', null, null);
-insert into ssbd_body values ('3-01', 'Moon', 'direct', null, null);
-insert into ssbd_body values ('4-99', 'Mars', 'direct', null, null);
-insert into ssbd_body values ('4-01', 'Phobos', 'direct', null, null);
-insert into ssbd_body values ('4-02', 'Deimos', 'direct', null, null);
-insert into ssbd_body values ('5-99', 'Jupiter', 'direct', null, null);
-insert into ssbd_body values ('5-01', 'Io', 'direct', null, null);
-insert into ssbd_body values ('5-02', 'Europa', 'direct', null, null);
-insert into ssbd_body values ('5-03', 'Ganymede', 'direct', null, null);
-insert into ssbd_body values ('5-04', 'Callisto', 'direct', null, null);
-insert into ssbd_body values ('5-05', 'Amalthea', 'direct', null, null);
-insert into ssbd_body values ('5-06', 'Himalia', 'direct', null, null);
-insert into ssbd_body values ('5-07', 'Elara', 'direct', null, null);
-insert into ssbd_body values ('5-08', 'Pasiphae', 'direct', null, null);
-insert into ssbd_body values ('5-09', 'Sinope', 'direct', null, null);
-insert into ssbd_body values ('5-10', 'Lysithea', 'direct', null, null);
-insert into ssbd_body values ('5-11', 'Carme', 'direct', null, null);
-insert into ssbd_body values ('5-12', 'Ananke', 'direct', null, null);
-insert into ssbd_body values ('5-13', 'Leda', 'direct', null, null);
-insert into ssbd_body values ('5-14', 'Thebe', 'direct', null, null);
-insert into ssbd_body values ('5-15', 'Adrastea', 'direct', null, null);
-insert into ssbd_body values ('5-16', 'Metis', 'direct', null, null);
-insert into ssbd_body values ('5-17', 'Callirrhoe', 'direct', null, null);
-insert into ssbd_body values ('5-18', 'Themisto', 'direct', null, null);
-insert into ssbd_body values ('5-19', 'Magaclite', 'direct', null, null);
-insert into ssbd_body values ('5-20', 'Taygete', 'direct', null, null);
-insert into ssbd_body values ('5-21', 'Chaldene', 'direct', null, null);
-insert into ssbd_body values ('5-22', 'Harpalyke', 'direct', null, null);
-insert into ssbd_body values ('5-23', 'Kalyke', 'direct', null, null);
-insert into ssbd_body values ('5-24', 'Iocaste', 'direct', null, null);
-insert into ssbd_body values ('5-25', 'Erinome', 'direct', null, null);
-insert into ssbd_body values ('5-26', 'Isonoe', 'direct', null, null);
-insert into ssbd_body values ('5-27', 'Praxidike', 'direct', null, null);
-insert into ssbd_body values ('5-28', 'Autonoe', 'direct', null, null);
-insert into ssbd_body values ('5-29', 'Thyone', 'direct', null, null);
-insert into ssbd_body values ('5-30', 'Hermippe', 'direct', null, null);
-insert into ssbd_body values ('5-31', 'Aitne', 'direct', null, null);
-insert into ssbd_body values ('5-32', 'Eurydome', 'direct', null, null);
-insert into ssbd_body values ('5-33', 'Euanthe', 'direct', null, null);
-insert into ssbd_body values ('5-34', 'Euporie', 'direct', null, null);
-insert into ssbd_body values ('5-35', 'Orthosie', 'direct', null, null);
-insert into ssbd_body values ('5-36', 'Sponde', 'direct', null, null);
-insert into ssbd_body values ('5-37', 'Kale', 'direct', null, null);
-insert into ssbd_body values ('5-38', 'Pasithee', 'direct', null, null);
-insert into ssbd_body values ('5-39', 'Hegemone', 'direct', null, null);
-insert into ssbd_body values ('5-40', 'Mneme', 'direct', null, null);
-insert into ssbd_body values ('5-41', 'Aoede', 'direct', null, null);
-insert into ssbd_body values ('5-42', 'Thelxinoe', 'direct', null, null);
-insert into ssbd_body values ('5-43', 'Arche', 'direct', null, null);
-insert into ssbd_body values ('5-44', 'Kallichore', 'direct', null, null);
-insert into ssbd_body values ('5-45', 'Helike', 'direct', null, null);
-insert into ssbd_body values ('5-46', 'Carpo', 'direct', null, null);
-insert into ssbd_body values ('5-47', 'Eukelade', 'direct', null, null);
-insert into ssbd_body values ('5-48', 'Cyllene', 'direct', null, null);
-insert into ssbd_body values ('5-49', 'Kore', 'direct', null, null);
-insert into ssbd_body values ('5-50', 'Herse', 'direct', null, null);
-insert into ssbd_body values ('6-99', 'Saturn', 'direct', null, null);
-insert into ssbd_body values ('6-01', 'Mimas', 'direct', null, null);
-insert into ssbd_body values ('6-02', 'Enceladus', 'direct', null, null);
-insert into ssbd_body values ('6-03', 'Tethys', 'direct', null, null);
-insert into ssbd_body values ('6-04', 'Dione', 'direct', null, null);
-insert into ssbd_body values ('6-05', 'Rhea', 'direct', null, null);
-insert into ssbd_body values ('6-06', 'Titan', 'direct', null, null);
-insert into ssbd_body values ('6-07', 'Hyperion', 'direct', null, null);
-insert into ssbd_body values ('6-08', 'Iapetus', 'direct', null, null);
-insert into ssbd_body values ('6-09', 'Phoebe', 'direct', null, null);
-insert into ssbd_body values ('6-10', 'Janus', 'direct', null, null);
-insert into ssbd_body values ('6-11', 'Epimetheus', 'direct', null, null);
-insert into ssbd_body values ('6-12', 'Helene', 'direct', null, null);
-insert into ssbd_body values ('6-13', 'Telesto', 'direct', null, null);
-insert into ssbd_body values ('6-14', 'Calypso', 'direct', null, null);
-insert into ssbd_body values ('6-15', 'Atlas', 'direct', null, null);
-insert into ssbd_body values ('6-16', 'Prometheus', 'direct', null, null);
-insert into ssbd_body values ('6-17', 'Pandora', 'direct', null, null);
-insert into ssbd_body values ('6-18', 'Pan', 'direct', null, null);
-insert into ssbd_body values ('6-19', 'Ymir', null, null, null);
-insert into ssbd_body values ('6-20', 'Paaliaq', null, null, null);
-insert into ssbd_body values ('6-21', 'Tarvos', null, null, null);
-insert into ssbd_body values ('6-22', 'Ijiraq', null, null, null);
-insert into ssbd_body values ('6-23', 'Suttungr', null, null, null);
-insert into ssbd_body values ('6-24', 'Kiviuq', null, null, null);
-insert into ssbd_body values ('6-25', 'Mundilfari', null, null, null);
-insert into ssbd_body values ('6-26', 'Albiorix', null, null, null);
-insert into ssbd_body values ('6-27', 'Skathi', null, null, null);
-insert into ssbd_body values ('6-28', 'Erriapo', null, null, null);
-insert into ssbd_body values ('6-29', 'Siarnaq', null, null, null);
-insert into ssbd_body values ('6-30', 'Thrymr', null, null, null);
-insert into ssbd_body values ('6-31', 'Narvi', null, null, null);
-insert into ssbd_body values ('6-32', 'Methone', null, null, null);
-insert into ssbd_body values ('6-33', 'Pallene', null, null, null);
-insert into ssbd_body values ('6-34', 'Polydeuces', null, null, null);
-insert into ssbd_body values ('6-35', 'Daphnis', null, null, null);
-insert into ssbd_body values ('6-36', 'Aegir', null, null, null);
-insert into ssbd_body values ('6-37', 'Bebhionn', null, null, null);
-insert into ssbd_body values ('6-38', 'Bergelmir', null, null, null);
-insert into ssbd_body values ('6-39', 'Bestla', null, null, null);
-insert into ssbd_body values ('6-40', 'Farbauti', null, null, null);
-insert into ssbd_body values ('6-41', 'Fenrir', null, null, null);
-insert into ssbd_body values ('6-42', 'Fornjot', null, null, null);
-insert into ssbd_body values ('6-43', 'Hati', null, null, null);
-insert into ssbd_body values ('6-44', 'Hyrrokkin', null, null, null);
-insert into ssbd_body values ('6-45', 'Kari', null, null, null);
-insert into ssbd_body values ('6-46', 'Loge', null, null, null);
-insert into ssbd_body values ('6-47', 'Skoll', null, null, null);
-insert into ssbd_body values ('6-48', 'Sutur', null, null, null);
-insert into ssbd_body values ('6-49', 'Anthe', null, null, null);
-insert into ssbd_body values ('6-50', 'Jarnsaxa', null, null, null);
-insert into ssbd_body values ('6-51', 'Greip', null, null, null);
-insert into ssbd_body values ('6-52', 'Tarqeq', null, null, null);
-insert into ssbd_body values ('6-53', 'Aegaeon', null, null, null);
-insert into ssbd_body values ('7-99', 'Uranus', 'indirect', null, null);
-insert into ssbd_body values ('7-01', 'Ariel', 'indirect', null, null);
-insert into ssbd_body values ('7-02', 'Umbriel', 'indirect', null, null);
-insert into ssbd_body values ('7-03', 'Titania', 'indirect', null, null);
-insert into ssbd_body values ('7-04', 'Oberon', 'indirect', null, null);
-insert into ssbd_body values ('7-05', 'Miranda', 'indirect', null, null);
-insert into ssbd_body values ('7-06', 'Cordelia', 'indirect', null, null);
-insert into ssbd_body values ('7-07', 'Ophelia', 'indirect', null, null);
-insert into ssbd_body values ('7-08', 'Bianca', 'indirect', null, null);
-insert into ssbd_body values ('7-09', 'Cressida', 'indirect', null, null);
-insert into ssbd_body values ('7-10', 'Desdemona', 'indirect', null, null);
-insert into ssbd_body values ('7-11', 'Juliet', 'indirect', null, null);
-insert into ssbd_body values ('7-12', 'Portia', 'indirect', null, null);
-insert into ssbd_body values ('7-13', 'Rosalind', 'indirect', null, null);
-insert into ssbd_body values ('7-14', 'Belinda', 'indirect', null, null);
-insert into ssbd_body values ('7-15', 'Puck', 'indirect', null, null);
-insert into ssbd_body values ('7-16', 'Caliban', 'direct', null, null);
-insert into ssbd_body values ('7-17', 'Sycorax', 'direct', null, null);
-insert into ssbd_body values ('7-18', 'Prospero', 'direct', null, null);
-insert into ssbd_body values ('7-19', 'Setebos', 'direct', null, null);
-insert into ssbd_body values ('7-20', 'Stephano', 'direct', null, null);
-insert into ssbd_body values ('7-21', 'Trinculo', 'direct', null, null);
-insert into ssbd_body values ('7-22', 'Francisco', 'direct', null, null);
-insert into ssbd_body values ('7-23', 'Margaret', 'direct', null, null);
-insert into ssbd_body values ('7-24', 'Ferdinand', 'direct', null, null);
-insert into ssbd_body values ('7-25', 'Perdita', 'direct', null, null);
-insert into ssbd_body values ('7-26', 'Mab', 'direct', null, null);
-insert into ssbd_body values ('7-27', 'Cupid', 'direct', null, null);
-insert into ssbd_body values ('8-99', 'Neptune', 'direct', null, null);
-insert into ssbd_body values ('8-01', 'Triton', 'indirect', null, null);
-insert into ssbd_body values ('8-02', 'Nereid', 'direct', null, null);
-insert into ssbd_body values ('8-03', 'Naiad', 'direct', null, null);
-insert into ssbd_body values ('8-04', 'Thalassa', 'direct', null, null);
-insert into ssbd_body values ('8-05', 'Despina', 'direct', null, null);
-insert into ssbd_body values ('8-06', 'Galatea', 'direct', null, null);
-insert into ssbd_body values ('8-07', 'Larissa', 'direct', null, null);
-insert into ssbd_body values ('8-08', 'Proteus', 'direct', null, null);
-insert into ssbd_body values ('8-09', 'Halimede', 'direct', null, null);
-insert into ssbd_body values ('8-10', 'Psamathe', 'direct', null, null);
-insert into ssbd_body values ('8-11', 'Sao', 'direct', null, null);
-insert into ssbd_body values ('8-12', 'Laomedeia', 'direct', null, null);
-insert into ssbd_body values ('8-13', 'Neso', 'direct', null, null);
-insert into ssbd_body values ('9-99', 'Pluto', 'indirect', null, null);
-insert into ssbd_body values ('9-01', 'Charon', 'direct', null, null);
-insert into ssbd_body values ('1000005', 'Borrelly', 'direct', null, null);
-insert into ssbd_body values ('1000012', 'Churyumov-Gerasimenko', null, null, null);
-insert into ssbd_body values ('1000036', 'Halley', 'direct', null, null);
-insert into ssbd_body values ('1000041', 'Hartley 2', null, null, null);
-insert into ssbd_body values ('1000093', 'Tempel 1', 'direct', null, null);
-insert into ssbd_body values ('1000107', 'Wild 2', 'direct', null, null);
-insert into ssbd_body values ('9511010', 'Gaspra', 'direct', null, null);
-insert into ssbd_body values ('2431010', 'Ida', 'direct', null, null);
-insert into ssbd_body values ('2431011', 'Dactyl', 'direct', null, null);
-insert into ssbd_body values ('2000001', 'Ceres', 'direct', null, null);
-insert into ssbd_body values ('2000002', 'Pallas', 'direct', null, null);
-insert into ssbd_body values ('2000004', 'Vesta', 'direct', null, null);
-insert into ssbd_body values ('2000016', 'Psyche', null, null, null);
-insert into ssbd_body values ('2000021', 'Lutetia', 'direct', null, null);
-insert into ssbd_body values ('2000216', 'Kleopatra', 'direct', null, null);
-insert into ssbd_body values ('2000433', 'Eros', 'direct', null, null);
-insert into ssbd_body values ('2000511', 'Davida', 'direct', null, null);
-insert into ssbd_body values ('2000253', 'Mathilde', 'direct', null, null);
-insert into ssbd_body values ('2002867', 'Steins', 'direct', null, null);
--- codes en doublons : lequel est le bon ?
--- insert into ssbd_body values (2009969, '1992KD', 'direct', null, null);
--- insert into ssbd_body values (2009969, 'Braille', 'direct', null, null);
-insert into ssbd_body values ('2004015', 'Wilson-Harrington', 'direct', null, null);
-insert into ssbd_body values ('2004179', 'Toutatis', 'direct', null, null);
-insert into ssbd_body values ('2025143', 'Itokawa', 'direct', null, null);
-insert into ssbd_body values ('-2000052', '52 Europa', null, null, null);
+insert into ssbd_phenomenon values ('0', 'Solar System Barycenter', null, null, null);
+insert into ssbd_phenomenon values ('99', 'Sun', 'direct', null, null);
+insert into ssbd_phenomenon values ('1-99', 'Mercury', 'direct', null, null);
+insert into ssbd_phenomenon values ('2-99', 'Venus', 'indirect', null, null);
+insert into ssbd_phenomenon values ('3', 'Earth-Moon barycenter', null, null, null);
+insert into ssbd_phenomenon values ('3-99', 'Earth', 'direct', null, null);
+insert into ssbd_phenomenon values ('3-1', 'Moon', 'direct', null, null);
+insert into ssbd_phenomenon values ('4-99', 'Mars', 'direct', null, null);
+insert into ssbd_phenomenon values ('4-1', 'Phobos', 'direct', null, null);
+insert into ssbd_phenomenon values ('4-2', 'Deimos', 'direct', null, null);
+insert into ssbd_phenomenon values ('5-99', 'Jupiter', 'direct', null, null);
+insert into ssbd_phenomenon values ('5-1', 'Io', 'direct', null, null);
+insert into ssbd_phenomenon values ('5-2', 'Europa', 'direct', null, null);
+insert into ssbd_phenomenon values ('5-3', 'Ganymede', 'direct', null, null);
+insert into ssbd_phenomenon values ('5-4', 'Callisto', 'direct', null, null);
+insert into ssbd_phenomenon values ('5-5', 'Amalthea', 'direct', null, null);
+insert into ssbd_phenomenon values ('5-6', 'Himalia', 'direct', null, null);
+insert into ssbd_phenomenon values ('5-7', 'Elara', 'direct', null, null);
+insert into ssbd_phenomenon values ('5-8', 'Pasiphae', 'direct', null, null);
+insert into ssbd_phenomenon values ('5-9', 'Sinope', 'direct', null, null);
+insert into ssbd_phenomenon values ('5-10', 'Lysithea', 'direct', null, null);
+insert into ssbd_phenomenon values ('5-11', 'Carme', 'direct', null, null);
+insert into ssbd_phenomenon values ('5-12', 'Ananke', 'direct', null, null);
+insert into ssbd_phenomenon values ('5-13', 'Leda', 'direct', null, null);
+insert into ssbd_phenomenon values ('5-14', 'Thebe', 'direct', null, null);
+insert into ssbd_phenomenon values ('5-15', 'Adrastea', 'direct', null, null);
+insert into ssbd_phenomenon values ('5-16', 'Metis', 'direct', null, null);
+insert into ssbd_phenomenon values ('5-17', 'Callirrhoe', 'direct', null, null);
+insert into ssbd_phenomenon values ('5-18', 'Themisto', 'direct', null, null);
+insert into ssbd_phenomenon values ('5-19', 'Magaclite', 'direct', null, null);
+insert into ssbd_phenomenon values ('5-20', 'Taygete', 'direct', null, null);
+insert into ssbd_phenomenon values ('5-21', 'Chaldene', 'direct', null, null);
+insert into ssbd_phenomenon values ('5-22', 'Harpalyke', 'direct', null, null);
+insert into ssbd_phenomenon values ('5-23', 'Kalyke', 'direct', null, null);
+insert into ssbd_phenomenon values ('5-24', 'Iocaste', 'direct', null, null);
+insert into ssbd_phenomenon values ('5-25', 'Erinome', 'direct', null, null);
+insert into ssbd_phenomenon values ('5-26', 'Isonoe', 'direct', null, null);
+insert into ssbd_phenomenon values ('5-27', 'Praxidike', 'direct', null, null);
+insert into ssbd_phenomenon values ('5-28', 'Autonoe', 'direct', null, null);
+insert into ssbd_phenomenon values ('5-29', 'Thyone', 'direct', null, null);
+insert into ssbd_phenomenon values ('5-30', 'Hermippe', 'direct', null, null);
+insert into ssbd_phenomenon values ('5-31', 'Aitne', 'direct', null, null);
+insert into ssbd_phenomenon values ('5-32', 'Eurydome', 'direct', null, null);
+insert into ssbd_phenomenon values ('5-33', 'Euanthe', 'direct', null, null);
+insert into ssbd_phenomenon values ('5-34', 'Euporie', 'direct', null, null);
+insert into ssbd_phenomenon values ('5-35', 'Orthosie', 'direct', null, null);
+insert into ssbd_phenomenon values ('5-36', 'Sponde', 'direct', null, null);
+insert into ssbd_phenomenon values ('5-37', 'Kale', 'direct', null, null);
+insert into ssbd_phenomenon values ('5-38', 'Pasithee', 'direct', null, null);
+insert into ssbd_phenomenon values ('5-39', 'Hegemone', 'direct', null, null);
+insert into ssbd_phenomenon values ('5-40', 'Mneme', 'direct', null, null);
+insert into ssbd_phenomenon values ('5-41', 'Aoede', 'direct', null, null);
+insert into ssbd_phenomenon values ('5-42', 'Thelxinoe', 'direct', null, null);
+insert into ssbd_phenomenon values ('5-43', 'Arche', 'direct', null, null);
+insert into ssbd_phenomenon values ('5-44', 'Kallichore', 'direct', null, null);
+insert into ssbd_phenomenon values ('5-45', 'Helike', 'direct', null, null);
+insert into ssbd_phenomenon values ('5-46', 'Carpo', 'direct', null, null);
+insert into ssbd_phenomenon values ('5-47', 'Eukelade', 'direct', null, null);
+insert into ssbd_phenomenon values ('5-48', 'Cyllene', 'direct', null, null);
+insert into ssbd_phenomenon values ('5-49', 'Kore', 'direct', null, null);
+insert into ssbd_phenomenon values ('5-50', 'Herse', 'direct', null, null);
+insert into ssbd_phenomenon values ('6-99', 'Saturn', 'direct', null, null);
+insert into ssbd_phenomenon values ('6-1', 'Mimas', 'direct', null, null);
+insert into ssbd_phenomenon values ('6-2', 'Enceladus', 'direct', null, null);
+insert into ssbd_phenomenon values ('6-3', 'Tethys', 'direct', null, null);
+insert into ssbd_phenomenon values ('6-4', 'Dione', 'direct', null, null);
+insert into ssbd_phenomenon values ('6-5', 'Rhea', 'direct', null, null);
+insert into ssbd_phenomenon values ('6-6', 'Titan', 'direct', null, null);
+insert into ssbd_phenomenon values ('6-7', 'Hyperion', 'direct', null, null);
+insert into ssbd_phenomenon values ('6-8', 'Iapetus', 'direct', null, null);
+insert into ssbd_phenomenon values ('6-9', 'Phoebe', 'direct', null, null);
+insert into ssbd_phenomenon values ('6-10', 'Janus', 'direct', null, null);
+insert into ssbd_phenomenon values ('6-11', 'Epimetheus', 'direct', null, null);
+insert into ssbd_phenomenon values ('6-12', 'Helene', 'direct', null, null);
+insert into ssbd_phenomenon values ('6-13', 'Telesto', 'direct', null, null);
+insert into ssbd_phenomenon values ('6-14', 'Calypso', 'direct', null, null);
+insert into ssbd_phenomenon values ('6-15', 'Atlas', 'direct', null, null);
+insert into ssbd_phenomenon values ('6-16', 'Prometheus', 'direct', null, null);
+insert into ssbd_phenomenon values ('6-17', 'Pandora', 'direct', null, null);
+insert into ssbd_phenomenon values ('6-18', 'Pan', 'direct', null, null);
+insert into ssbd_phenomenon values ('6-19', 'Ymir', null, null, null);
+insert into ssbd_phenomenon values ('6-20', 'Paaliaq', null, null, null);
+insert into ssbd_phenomenon values ('6-21', 'Tarvos', null, null, null);
+insert into ssbd_phenomenon values ('6-22', 'Ijiraq', null, null, null);
+insert into ssbd_phenomenon values ('6-23', 'Suttungr', null, null, null);
+insert into ssbd_phenomenon values ('6-24', 'Kiviuq', null, null, null);
+insert into ssbd_phenomenon values ('6-25', 'Mundilfari', null, null, null);
+insert into ssbd_phenomenon values ('6-26', 'Albiorix', null, null, null);
+insert into ssbd_phenomenon values ('6-27', 'Skathi', null, null, null);
+insert into ssbd_phenomenon values ('6-28', 'Erriapo', null, null, null);
+insert into ssbd_phenomenon values ('6-29', 'Siarnaq', null, null, null);
+insert into ssbd_phenomenon values ('6-30', 'Thrymr', null, null, null);
+insert into ssbd_phenomenon values ('6-31', 'Narvi', null, null, null);
+insert into ssbd_phenomenon values ('6-32', 'Methone', null, null, null);
+insert into ssbd_phenomenon values ('6-33', 'Pallene', null, null, null);
+insert into ssbd_phenomenon values ('6-34', 'Polydeuces', null, null, null);
+insert into ssbd_phenomenon values ('6-35', 'Daphnis', null, null, null);
+insert into ssbd_phenomenon values ('6-36', 'Aegir', null, null, null);
+insert into ssbd_phenomenon values ('6-37', 'Bebhionn', null, null, null);
+insert into ssbd_phenomenon values ('6-38', 'Bergelmir', null, null, null);
+insert into ssbd_phenomenon values ('6-39', 'Bestla', null, null, null);
+insert into ssbd_phenomenon values ('6-40', 'Farbauti', null, null, null);
+insert into ssbd_phenomenon values ('6-41', 'Fenrir', null, null, null);
+insert into ssbd_phenomenon values ('6-42', 'Fornjot', null, null, null);
+insert into ssbd_phenomenon values ('6-43', 'Hati', null, null, null);
+insert into ssbd_phenomenon values ('6-44', 'Hyrrokkin', null, null, null);
+insert into ssbd_phenomenon values ('6-45', 'Kari', null, null, null);
+insert into ssbd_phenomenon values ('6-46', 'Loge', null, null, null);
+insert into ssbd_phenomenon values ('6-47', 'Skoll', null, null, null);
+insert into ssbd_phenomenon values ('6-48', 'Sutur', null, null, null);
+insert into ssbd_phenomenon values ('6-49', 'Anthe', null, null, null);
+insert into ssbd_phenomenon values ('6-50', 'Jarnsaxa', null, null, null);
+insert into ssbd_phenomenon values ('6-51', 'Greip', null, null, null);
+insert into ssbd_phenomenon values ('6-52', 'Tarqeq', null, null, null);
+insert into ssbd_phenomenon values ('6-53', 'Aegaeon', null, null, null);
+insert into ssbd_phenomenon values ('7-99', 'Uranus', 'indirect', null, null);
+insert into ssbd_phenomenon values ('7-1', 'Ariel', 'indirect', null, null);
+insert into ssbd_phenomenon values ('7-2', 'Umbriel', 'indirect', null, null);
+insert into ssbd_phenomenon values ('7-3', 'Titania', 'indirect', null, null);
+insert into ssbd_phenomenon values ('7-4', 'Oberon', 'indirect', null, null);
+insert into ssbd_phenomenon values ('7-5', 'Miranda', 'indirect', null, null);
+insert into ssbd_phenomenon values ('7-6', 'Cordelia', 'indirect', null, null);
+insert into ssbd_phenomenon values ('7-7', 'Ophelia', 'indirect', null, null);
+insert into ssbd_phenomenon values ('7-8', 'Bianca', 'indirect', null, null);
+insert into ssbd_phenomenon values ('7-9', 'Cressida', 'indirect', null, null);
+insert into ssbd_phenomenon values ('7-10', 'Desdemona', 'indirect', null, null);
+insert into ssbd_phenomenon values ('7-11', 'Juliet', 'indirect', null, null);
+insert into ssbd_phenomenon values ('7-12', 'Portia', 'indirect', null, null);
+insert into ssbd_phenomenon values ('7-13', 'Rosalind', 'indirect', null, null);
+insert into ssbd_phenomenon values ('7-14', 'Belinda', 'indirect', null, null);
+insert into ssbd_phenomenon values ('7-15', 'Puck', 'indirect', null, null);
+insert into ssbd_phenomenon values ('7-16', 'Caliban', 'direct', null, null);
+insert into ssbd_phenomenon values ('7-17', 'Sycorax', 'direct', null, null);
+insert into ssbd_phenomenon values ('7-18', 'Prospero', 'direct', null, null);
+insert into ssbd_phenomenon values ('7-19', 'Setebos', 'direct', null, null);
+insert into ssbd_phenomenon values ('7-20', 'Stephano', 'direct', null, null);
+insert into ssbd_phenomenon values ('7-21', 'Trinculo', 'direct', null, null);
+insert into ssbd_phenomenon values ('7-22', 'Francisco', 'direct', null, null);
+insert into ssbd_phenomenon values ('7-23', 'Margaret', 'direct', null, null);
+insert into ssbd_phenomenon values ('7-24', 'Ferdinand', 'direct', null, null);
+insert into ssbd_phenomenon values ('7-25', 'Perdita', 'direct', null, null);
+insert into ssbd_phenomenon values ('7-26', 'Mab', 'direct', null, null);
+insert into ssbd_phenomenon values ('7-27', 'Cupid', 'direct', null, null);
+insert into ssbd_phenomenon values ('8-99', 'Neptune', 'direct', null, null);
+insert into ssbd_phenomenon values ('8-1', 'Triton', 'indirect', null, null);
+insert into ssbd_phenomenon values ('8-2', 'Nereid', 'direct', null, null);
+insert into ssbd_phenomenon values ('8-3', 'Naiad', 'direct', null, null);
+insert into ssbd_phenomenon values ('8-4', 'Thalassa', 'direct', null, null);
+insert into ssbd_phenomenon values ('8-5', 'Despina', 'direct', null, null);
+insert into ssbd_phenomenon values ('8-6', 'Galatea', 'direct', null, null);
+insert into ssbd_phenomenon values ('8-7', 'Larissa', 'direct', null, null);
+insert into ssbd_phenomenon values ('8-8', 'Proteus', 'direct', null, null);
+insert into ssbd_phenomenon values ('8-9', 'Halimede', 'direct', null, null);
+insert into ssbd_phenomenon values ('8-10', 'Psamathe', 'direct', null, null);
+insert into ssbd_phenomenon values ('8-11', 'Sao', 'direct', null, null);
+insert into ssbd_phenomenon values ('8-12', 'Laomedeia', 'direct', null, null);
+insert into ssbd_phenomenon values ('8-13', 'Neso', 'direct', null, null);
+insert into ssbd_phenomenon values ('9-99', 'Pluto', 'indirect', null, null);
+insert into ssbd_phenomenon values ('9-1', 'Charon', 'direct', null, null);
+insert into ssbd_phenomenon values ('1000005', 'Borrelly', 'direct', null, null);
+insert into ssbd_phenomenon values ('1000012', 'Churyumov-Gerasimenko', null, null, null);
+insert into ssbd_phenomenon values ('1000036', 'Halley', 'direct', null, null);
+insert into ssbd_phenomenon values ('1000041', 'Hartley 2', null, null, null);
+insert into ssbd_phenomenon values ('1000093', 'Tempel 1', 'direct', null, null);
+insert into ssbd_phenomenon values ('1000107', 'Wild 2', 'direct', null, null);
+insert into ssbd_phenomenon values ('9511010', 'Gaspra', 'direct', null, null);
+insert into ssbd_phenomenon values ('2431010', 'Ida', 'direct', null, null);
+insert into ssbd_phenomenon values ('2431011', 'Dactyl', 'direct', null, null);
+insert into ssbd_phenomenon values ('2000001', 'Ceres', 'direct', null, null);
+insert into ssbd_phenomenon values ('2000002', 'Pallas', 'direct', null, null);
+insert into ssbd_phenomenon values ('2000004', 'Vesta', 'direct', null, null);
+insert into ssbd_phenomenon values ('2000016', 'Psyche', null, null, null);
+insert into ssbd_phenomenon values ('2000021', 'Lutetia', 'direct', null, null);
+insert into ssbd_phenomenon values ('2000216', 'Kleopatra', 'direct', null, null);
+insert into ssbd_phenomenon values ('2000433', 'Eros', 'direct', null, null);
+insert into ssbd_phenomenon values ('2000511', 'Davida', 'direct', null, null);
+insert into ssbd_phenomenon values ('2000253', 'Mathilde', 'direct', null, null);
+insert into ssbd_phenomenon values ('2002867', 'Steins', 'direct', null, null);
+insert into ssbd_phenomenon values ('2009969', 'Braille', 'direct', null, null); -- synonyme 1992KD
+insert into ssbd_phenomenon values ('2004015', 'Wilson-Harrington', 'direct', null, null);
+insert into ssbd_phenomenon values ('2004179', 'Toutatis', 'direct', null, null);
+insert into ssbd_phenomenon values ('2025143', 'Itokawa', 'direct', null, null);
+insert into ssbd_phenomenon values ('?2000052', '52 Europa', null, null, null);
 
 -- les codes des ellipsoides sont ainsi construits :
 -- <version de publication>:(<code du corps>:)<mot-clef caractéristique>
@@ -252,19 +268,19 @@ insert into ssbd_ellipsoid values ('2000:9-99:spherical', '9-99', 'Spherical Plu
  null, null, null, null,
  null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
 
-insert into ssbd_ellipsoid values ('2000:3-01:spherical', '3-01', 'Spherical Moon 2000 IAU', 1737400.00, 1000., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2000:3-1:spherical', '3-1', 'Spherical Moon 2000 IAU', 1737400.00, 1000., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
-insert into ssbd_ellipsoid values ('2000:4-01:spherical', '4-01', 'Spherical Phobos 2000 IAU', 11100.00, 150., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2000:4-1:spherical', '4-1', 'Spherical Phobos 2000 IAU', 11100.00, 150., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
-insert into ssbd_ellipsoid values ('2000:4-01:triaxial', '4-01', 'Triaxial Phobos 2000 IAU', 13400.00, null, 9001, null, 9200.00, null,
+insert into ssbd_ellipsoid values ('2000:4-1:triaxial', '4-1', 'Triaxial Phobos 2000 IAU', 13400.00, null, 9001, null, 9200.00, null,
  11200.00, null, null, null,
  null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
-insert into ssbd_ellipsoid values ('2000:4-02:spherical', '4-02', 'Spherical Deimos 2000 IAU', 6200.00, 180., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2000:4-2:spherical', '4-2', 'Spherical Deimos 2000 IAU', 6200.00, 180., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
-insert into ssbd_ellipsoid values ('2000:4-02:triaxial', '4-02', 'Triaxial Deimos 2000 IAU', 7500.00, null, 9001, null, 5200.00, null,
+insert into ssbd_ellipsoid values ('2000:4-2:triaxial', '4-2', 'Triaxial Deimos 2000 IAU', 7500.00, null, 9001, null, 5200.00, null,
  6100.00, null, null, null,
  null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
 insert into ssbd_ellipsoid values ('2000:5-16:spherical', '5-16', 'Spherical Metis 2000 IAU', 21500., 4000., 9001, null, null, null,
@@ -279,10 +295,10 @@ insert into ssbd_ellipsoid values ('2000:5-15:spherical', '5-15', 'Spherical Adr
 insert into ssbd_ellipsoid values ('2000:5-15:triaxial', '5-15', 'Triaxial Adrastea 2000 IAU', 10000., null, 9001, null, 7000., null,
  8000., null, null, null,
  null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
-insert into ssbd_ellipsoid values ('2000:5-05:spherical', '5-05', 'Spherical Amalthea 2000 IAU', 83500., 3000., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2000:5-5:spherical', '5-5', 'Spherical Amalthea 2000 IAU', 83500., 3000., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
-insert into ssbd_ellipsoid values ('2000:5-05:triaxial', '5-05', 'Triaxial Amalthea 2000 IAU', 125000., null, 9001, null, 73000., null,
+insert into ssbd_ellipsoid values ('2000:5-5:triaxial', '5-5', 'Triaxial Amalthea 2000 IAU', 125000., null, 9001, null, 73000., null,
  64000., null, null, null,
  null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
 insert into ssbd_ellipsoid values ('2000:5-14:spherical', '5-14', 'Spherical Thebe 2000 IAU', 49300., 4000., 9001, null, null, null,
@@ -291,40 +307,40 @@ insert into ssbd_ellipsoid values ('2000:5-14:spherical', '5-14', 'Spherical The
 insert into ssbd_ellipsoid values ('2000:5-14:triaxial', '5-14', 'Triaxial Thebe 2000 IAU', 58000., null, 9001, null, 49000., null,
  42000., null, null, null,
  null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
-insert into ssbd_ellipsoid values ('2000:5-01:spherical', '5-01', 'Spherical Io 2000 IAU', 1821460., null, 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2000:5-1:spherical', '5-1', 'Spherical Io 2000 IAU', 1821460., null, 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
-insert into ssbd_ellipsoid values ('2000:5-01:triaxial', '5-01', 'Triaxial Io 2000 IAU', 1829400., null, 9001, null, 1819300., null,
+insert into ssbd_ellipsoid values ('2000:5-1:triaxial', '5-1', 'Triaxial Io 2000 IAU', 1829400., null, 9001, null, 1819300., null,
  1815700., null, null, null,
  null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
-insert into ssbd_ellipsoid values ('2000:5-02:spherical', '5-02', 'Spherical Europa 2000 IAU', 1562090., null, 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2000:5-2:spherical', '5-2', 'Spherical Europa 2000 IAU', 1562090., null, 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
-insert into ssbd_ellipsoid values ('2000:5-02:triaxial', '5-02', 'Triaxial Europa 2000 IAU', 1564130., null, 9001, null, 1561230., null,
+insert into ssbd_ellipsoid values ('2000:5-2:triaxial', '5-2', 'Triaxial Europa 2000 IAU', 1564130., null, 9001, null, 1561230., null,
  1560930., null, null, null,
  null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
-insert into ssbd_ellipsoid values ('2000:5-03:spherical', '5-03', 'Spherical Ganymede 2000 IAU', 2632345., null, 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2000:5-3:spherical', '5-3', 'Spherical Ganymede 2000 IAU', 2632345., null, 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
-insert into ssbd_ellipsoid values ('2000:5-03:triaxial', '5-03', 'Triaxial Ganymede 2000 IAU', 2632400., null, 9001, null, 2632290., null,
+insert into ssbd_ellipsoid values ('2000:5-3:triaxial', '5-3', 'Triaxial Ganymede 2000 IAU', 2632400., null, 9001, null, 2632290., null,
  2632350., null, null, null,
  null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
-insert into ssbd_ellipsoid values ('2000:5-04:spherical', '5-04', 'Spherical Callisto 2000 IAU', 2409300., null, 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2000:5-4:spherical', '5-4', 'Spherical Callisto 2000 IAU', 2409300., null, 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
-insert into ssbd_ellipsoid values ('2000:5-04:triaxial', '5-04', 'Triaxial Callisto 2000 IAU', 2409400., null, 9001, null, 2409200., null,
+insert into ssbd_ellipsoid values ('2000:5-4:triaxial', '5-4', 'Triaxial Callisto 2000 IAU', 2409400., null, 9001, null, 2409200., null,
  2409300., null, null, null,
  null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
 insert into ssbd_ellipsoid values ('2000:5-13:default', '5-13', 'Leda 2000 IAU', 5000., null, 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
-insert into ssbd_ellipsoid values ('2000:5-06:default', '5-06', 'Himalia 2000 IAU', 85000., 10000., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2000:5-6:default', '5-6', 'Himalia 2000 IAU', 85000., 10000., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
 insert into ssbd_ellipsoid values ('2000:5-10:default', '5-10', 'Lysithea 2000 IAU', 12000., null, 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
-insert into ssbd_ellipsoid values ('2000:5-07:default', '5-07', 'Elara 2000 IAU', 40000., 10000., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2000:5-7:default', '5-7', 'Elara 2000 IAU', 40000., 10000., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
 insert into ssbd_ellipsoid values ('2000:5-12:default', '5-12', 'Ananke 2000 IAU', 10000., null, 9001, null, null, null,
@@ -333,53 +349,53 @@ insert into ssbd_ellipsoid values ('2000:5-12:default', '5-12', 'Ananke 2000 IAU
 insert into ssbd_ellipsoid values ('2000:5-11:default', '5-11', 'Carme 2000 IAU', 15000., null, 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
-insert into ssbd_ellipsoid values ('2000:5-08:default', '5-08', 'Pasiphae 2000 IAU', 18000., null, 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2000:5-8:default', '5-8', 'Pasiphae 2000 IAU', 18000., null, 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
-insert into ssbd_ellipsoid values ('2000:5-09:default', '5-09', 'Sinope 2000 IAU', 14000., null, 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2000:5-9:default', '5-9', 'Sinope 2000 IAU', 14000., null, 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
 
-insert into ssbd_ellipsoid values ('2000:6-01:spherical', '6-01', 'Spherical Mimas 2000 IAU', 198600.00, 600., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2000:6-1:spherical', '6-1', 'Spherical Mimas 2000 IAU', 198600.00, 600., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
-insert into ssbd_ellipsoid values ('2000:6-01:triaxial', '6-01', 'Triaxial Mimas 2000 IAU', 209100.00, 500., 9001, null, 191400.00, 500.,
+insert into ssbd_ellipsoid values ('2000:6-1:triaxial', '6-1', 'Triaxial Mimas 2000 IAU', 209100.00, 500., 9001, null, 191400.00, 500.,
  196200.00, 500., null, null,
  null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
-insert into ssbd_ellipsoid values ('2000:6-02:spherical', '6-02', 'Spherical Enceladus 2000 IAU', 249400.00, 300., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2000:6-2:spherical', '6-2', 'Spherical Enceladus 2000 IAU', 249400.00, 300., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
-insert into ssbd_ellipsoid values ('2000:6-02:triaxial', '6-02', 'Triaxial Enceladus 2000 IAU', 256300.00, 300., 9001, null, 244600.00, 500.,
+insert into ssbd_ellipsoid values ('2000:6-2:triaxial', '6-2', 'Triaxial Enceladus 2000 IAU', 256300.00, 300., 9001, null, 244600.00, 500.,
  247300.00, 300., null, null,
  null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
-insert into ssbd_ellipsoid values ('2000:6-03:spherical', '6-03', 'Spherical Tethys 2000 IAU', 529800.00, 1500., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2000:6-3:spherical', '6-3', 'Spherical Tethys 2000 IAU', 529800.00, 1500., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
-insert into ssbd_ellipsoid values ('2000:6-03:triaxial', '6-03', 'Triaxial Tethys 2000 IAU', 535600.00, 1200., 9001, null, 525800.00, 1200.,
+insert into ssbd_ellipsoid values ('2000:6-3:triaxial', '6-3', 'Triaxial Tethys 2000 IAU', 535600.00, 1200., 9001, null, 525800.00, 1200.,
  528200.00, 1200., null, null,
  null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
-insert into ssbd_ellipsoid values ('2000:6-04:default', '6-04', 'Dione 2000 IAU', 560000.00, 5000., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2000:6-4:default', '6-4', 'Dione 2000 IAU', 560000.00, 5000., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
-insert into ssbd_ellipsoid values ('2000:6-05:default', '6-05', 'Rhea 2000 IAU', 764000.00, 4000., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2000:6-5:default', '6-5', 'Rhea 2000 IAU', 764000.00, 4000., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
-insert into ssbd_ellipsoid values ('2000:6-06:default', '6-06', 'Titan 2000 IAU', 2575000.00, 2000., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2000:6-6:default', '6-6', 'Titan 2000 IAU', 2575000.00, 2000., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
-insert into ssbd_ellipsoid values ('2000:6-07:spherical', '6-07', 'Spherical Hyperion 2000 IAU', 133000.00, 8000., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2000:6-7:spherical', '6-7', 'Spherical Hyperion 2000 IAU', 133000.00, 8000., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
-insert into ssbd_ellipsoid values ('2000:6-07:triaxial', '6-07', 'Triaxial Hyperion 2000 IAU', 164000.00, 8000., 9001, null, 107000.00, 8000.,
+insert into ssbd_ellipsoid values ('2000:6-7:triaxial', '6-7', 'Triaxial Hyperion 2000 IAU', 164000.00, 8000., 9001, null, 107000.00, 8000.,
  130000.00, 8000., null, null,
  null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
-insert into ssbd_ellipsoid values ('2000:6-08:default', '6-08', 'Iapetus 2000 IAU', 718000.00, 8000., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2000:6-8:default', '6-8', 'Iapetus 2000 IAU', 718000.00, 8000., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
-insert into ssbd_ellipsoid values ('2000:6-09:spherical', '6-09', 'Spherical Phoebe 2000 IAU', 110000.00, 10000., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2000:6-9:spherical', '6-9', 'Spherical Phoebe 2000 IAU', 110000.00, 10000., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
-insert into ssbd_ellipsoid values ('2000:6-09:triaxial', '6-09', 'Triaxial Phoebe 2000 IAU', 115000.00, 10000., 9001, null, 105000.00, 10000.,
+insert into ssbd_ellipsoid values ('2000:6-9:triaxial', '6-9', 'Triaxial Phoebe 2000 IAU', 115000.00, 10000., 9001, null, 105000.00, 10000.,
  110000.00, 10000., null, null,
  null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
 insert into ssbd_ellipsoid values ('2000:6-10:spherical', '6-10', 'Spherical Janus 2000 IAU', 88800.00, 4000., 9001, null, null, null,
@@ -445,37 +461,37 @@ insert into ssbd_ellipsoid values ('2000:6-34:default', '6-34', 'Polydeuces 2000
  null, null, null, null,
  null, null);
 
-insert into ssbd_ellipsoid values ('2000:7-01:spherical', '7-01', 'Spherical Ariel 2000 IAU', 578900.00, 600., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2000:7-1:spherical', '7-1', 'Spherical Ariel 2000 IAU', 578900.00, 600., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
-insert into ssbd_ellipsoid values ('2000:7-01:triaxial', '7-01', 'Triaxial Ariel 2000 IAU', 581100.00, 900., 9001, null, 577700.00, 1000.,
+insert into ssbd_ellipsoid values ('2000:7-1:triaxial', '7-1', 'Triaxial Ariel 2000 IAU', 581100.00, 900., 9001, null, 577700.00, 1000.,
  577900.00, 600., null, null,
  null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
-insert into ssbd_ellipsoid values ('2000:7-02:default', '7-02', 'Umbriel 2000 IAU', 584700.00, null, 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2000:7-2:default', '7-2', 'Umbriel 2000 IAU', 584700.00, null, 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
-insert into ssbd_ellipsoid values ('2000:7-03:default', '7-03', 'Titania 2000 IAU', 788900.00, 1800., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2000:7-3:default', '7-3', 'Titania 2000 IAU', 788900.00, 1800., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
-insert into ssbd_ellipsoid values ('2000:7-04:default', '7-04', 'Oberon 2000 IAU', 761400.00, 2600., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2000:7-4:default', '7-4', 'Oberon 2000 IAU', 761400.00, 2600., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
-insert into ssbd_ellipsoid values ('2000:7-05:spherical', '7-05', 'Spherical Miranda 2000 IAU', 235800.00, 700., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2000:7-5:spherical', '7-5', 'Spherical Miranda 2000 IAU', 235800.00, 700., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
-insert into ssbd_ellipsoid values ('2000:7-05:triaxial', '7-05', 'Triaxial Miranda 2000 IAU', 240400.00, 600., 9001, null, 232900.00, 1200.,
+insert into ssbd_ellipsoid values ('2000:7-5:triaxial', '7-5', 'Triaxial Miranda 2000 IAU', 240400.00, 600., 9001, null, 232900.00, 1200.,
  234200.00, 900., null, null,
  null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
-insert into ssbd_ellipsoid values ('2000:7-06:default', '7-06', 'Cordelia 2000 IAU', 13000.00, 2000., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2000:7-6:default', '7-6', 'Cordelia 2000 IAU', 13000.00, 2000., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
-insert into ssbd_ellipsoid values ('2000:7-07:default', '7-07', 'Ophelia 2000 IAU', 15000.00, 2000., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2000:7-7:default', '7-7', 'Ophelia 2000 IAU', 15000.00, 2000., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
-insert into ssbd_ellipsoid values ('2000:7-08:default', '7-08', 'Bianca 2000 IAU', 21000.00, 3000., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2000:7-8:default', '7-8', 'Bianca 2000 IAU', 21000.00, 3000., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
-insert into ssbd_ellipsoid values ('2000:7-09:default', '7-09', 'Cressida 2000 IAU', 31000.00, 4000., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2000:7-9:default', '7-9', 'Cressida 2000 IAU', 31000.00, 4000., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
 insert into ssbd_ellipsoid values ('2000:7-10:default', '7-10', 'Desdemona 2000 IAU', 27000.00, 3000., 9001, null, null, null,
@@ -498,39 +514,39 @@ insert into ssbd_ellipsoid values ('2000:7-15:default', '7-15', 'Puck 2000 IAU',
  null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
 
 
-insert into ssbd_ellipsoid values ('2000:8-01:default', '8-01', 'Triton 2000 IAU', 1352600.00, 2400., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2000:8-1:default', '8-1', 'Triton 2000 IAU', 1352600.00, 2400., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
-insert into ssbd_ellipsoid values ('2000:8-02:default', '8-02', 'Nereid 2000 IAU', 170000.00, 25000., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2000:8-2:default', '8-2', 'Nereid 2000 IAU', 170000.00, 25000., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
-insert into ssbd_ellipsoid values ('2000:8-03:default', '8-03', 'Naiad 2000 IAU', 29000.00, 6000., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2000:8-3:default', '8-3', 'Naiad 2000 IAU', 29000.00, 6000., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
-insert into ssbd_ellipsoid values ('2000:8-04:default', '8-04', 'Thalassa 2000 IAU', 40000.00, 8000., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2000:8-4:default', '8-4', 'Thalassa 2000 IAU', 40000.00, 8000., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
-insert into ssbd_ellipsoid values ('2000:8-05:default', '8-05', 'Despina 2000 IAU', 74000.00, 1000., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2000:8-5:default', '8-5', 'Despina 2000 IAU', 74000.00, 1000., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
-insert into ssbd_ellipsoid values ('2000:8-06:default', '8-06', 'Galatea 2000 IAU', 79000.00, 12000., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2000:8-6:default', '8-6', 'Galatea 2000 IAU', 79000.00, 12000., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
-insert into ssbd_ellipsoid values ('2000:8-07:spherical', '8-07', 'Spherical Larissa 2000 IAU', 96000.00, 7000., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2000:8-7:spherical', '8-7', 'Spherical Larissa 2000 IAU', 96000.00, 7000., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
-insert into ssbd_ellipsoid values ('2000:8-07:ellipsoidal', '8-07', 'Ellipsoidal Larissa 2000 IAU', 104000.00, null, 9001, null, 89000.00, null,
+insert into ssbd_ellipsoid values ('2000:8-7:ellipsoidal', '8-7', 'Ellipsoidal Larissa 2000 IAU', 104000.00, null, 9001, null, 89000.00, null,
  null, null, null, null,
  null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
-insert into ssbd_ellipsoid values ('2000:8-08:spherical', '8-08', 'Spherical Proteus 2000 IAU', 208000.00, 8000., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2000:8-8:spherical', '8-8', 'Spherical Proteus 2000 IAU', 208000.00, 8000., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
-insert into ssbd_ellipsoid values ('2000:8-08:triaxial', '8-08', 'Triaxial Proteus 2000 IAU', 218000.00, null, 9001, null, 201000.00, null,
+insert into ssbd_ellipsoid values ('2000:8-8:triaxial', '8-8', 'Triaxial Proteus 2000 IAU', 218000.00, null, 9001, null, 201000.00, null,
  208000.00, null, null, null,
  null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
 
 
-insert into ssbd_ellipsoid values ('2000:9-01:default', '9-01', 'Charon 2000 IAU', 593000.00, 13000., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2000:9-1:default', '9-1', 'Charon 2000 IAU', 593000.00, 13000., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
 
@@ -575,7 +591,7 @@ insert into ssbd_ellipsoid values ('2000:2000433:bestfit', '2000433', 'Best-fit 
  null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
 
 
-insert into ssbd_ellipsoid values ('2009:0:default', '0', 'Sun 2009 IAU', 696000000.00, null, 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2009:0:default', '99', 'Sun 2009 IAU', 696000000.00, null, 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009');
 insert into ssbd_ellipsoid values ('2009:1-99:default', '1-99', 'Mercury 2009 IAU', 2439700.00, 1000., 9001, null, null, null,
@@ -590,7 +606,7 @@ insert into ssbd_ellipsoid values ('2009:3-99:spherical', '3-99', 'Spherical Ear
 insert into ssbd_ellipsoid values ('2009:3-99:default', '3-99', 'Ellipsoidial Earth 2009 IAU', 6378136.60, .1, 9001, null, 6356751.90, .1,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009');
-insert into ssbd_ellipsoid values ('2009:3-01:default', '3-01', 'Moon 2009 IAU', 1737400.00, 1000., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2009:3-1:default', '3-1', 'Moon 2009 IAU', 1737400.00, 1000., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009');
 insert into ssbd_ellipsoid values ('2009:4-99:spherical', '4-99', 'Spherical Mars 2009 IAU', 3389500.00, 200., 9001, null, null, null,
@@ -602,16 +618,16 @@ null, null, null, null,
 insert into ssbd_ellipsoid values ('2009:4-99:default', '4-99', 'Quadriaxial Mars 2009 IAU', 3396190.00, 100., 9001, null, 3373190.00, 100.,
  3379210.00, 100., null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009');
-insert into ssbd_ellipsoid values ('2009:4-01:spherical', '4-01', 'Spherical Phobos 2009 IAU', 11080.00, 40., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2009:4-1:spherical', '4-1', 'Spherical Phobos 2009 IAU', 11080.00, 40., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009');
-insert into ssbd_ellipsoid values ('2009:4-01:triaxial', '4-01', 'Triaxial Phobos 2009 IAU', 13000.00, null, 9001, null, 9100.00, null,
+insert into ssbd_ellipsoid values ('2009:4-1:triaxial', '4-1', 'Triaxial Phobos 2009 IAU', 13000.00, null, 9001, null, 9100.00, null,
  11400.00, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009');
-insert into ssbd_ellipsoid values ('2009:4-02:spherical', '4-02', 'Spherical Deimos 2009 IAU', 6200.00, 250., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2009:4-2:spherical', '4-2', 'Spherical Deimos 2009 IAU', 6200.00, 250., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009');
-insert into ssbd_ellipsoid values ('2009:4-02:triaxial', '4-02', 'Triaxial Deimos 2009 IAU', 7800.00, null, 9001, null, 5100.00, null,
+insert into ssbd_ellipsoid values ('2009:4-2:triaxial', '4-2', 'Triaxial Deimos 2009 IAU', 7800.00, null, 9001, null, 5100.00, null,
  6000.00, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009');
 insert into ssbd_ellipsoid values ('2009:5-99:spherical', '5-99', 'Spherical Jupiter 2009 IAU', 69911000.00, 6000., 9001, null, null, null,
@@ -620,40 +636,40 @@ insert into ssbd_ellipsoid values ('2009:5-99:spherical', '5-99', 'Spherical Jup
 insert into ssbd_ellipsoid values ('2009:5-99:ellipsoidal', '5-99', 'Ellipsoidal Jupiter 2009 IAU', 71492000.00, 4000., 9001, null, 66854000.00, 10000.,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009');
-insert into ssbd_ellipsoid values ('2009:5-01:spherical', '5-01', 'Spherical Io 2009 IAU', 1821490.00, null, 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2009:5-1:spherical', '5-1', 'Spherical Io 2009 IAU', 1821490.00, null, 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009');
-insert into ssbd_ellipsoid values ('2009:5-01:triaxial', '5-01', 'Triaxial Io 2009 IAU', 1829400.00, null, 9001, null, 1815700.00, null,
+insert into ssbd_ellipsoid values ('2009:5-1:triaxial', '5-1', 'Triaxial Io 2009 IAU', 1829400.00, null, 9001, null, 1815700.00, null,
  1819400.00, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009');
-insert into ssbd_ellipsoid values ('2009:5-02:spherical', '5-02', 'Spherical Europa 2009 IAU', 1560800.00, 300., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2009:5-2:spherical', '5-2', 'Spherical Europa 2009 IAU', 1560800.00, 300., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009');
-insert into ssbd_ellipsoid values ('2009:5-02:triaxial', '5-02', 'Triaxial Europa 2009 IAU', 1562600.00, null, 9001, null, 1560950.00, null,
+insert into ssbd_ellipsoid values ('2009:5-2:triaxial', '5-2', 'Triaxial Europa 2009 IAU', 1562600.00, null, 9001, null, 1560950.00, null,
  1560300.00, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009');
-insert into ssbd_ellipsoid values ('2009:5-03:default', '5-03', 'Ganymede 2009 IAU', 2631200.00, 1700., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2009:5-3:default', '5-3', 'Ganymede 2009 IAU', 2631200.00, 1700., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009');
-insert into ssbd_ellipsoid values ('2009:5-04:default', '5-04', 'Callisto 2009 IAU', 2410300.00, 1500., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2009:5-4:default', '5-4', 'Callisto 2009 IAU', 2410300.00, 1500., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009');
-insert into ssbd_ellipsoid values ('2009:5-05:spherical', '5-05', 'Spherical Amalthea 2009 IAU', 83500.00, 3000., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2009:5-5:spherical', '5-5', 'Spherical Amalthea 2009 IAU', 83500.00, 3000., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009');
-insert into ssbd_ellipsoid values ('2009:5-05:ellipsoidal', '5-05', 'Ellipsoidal Amalthea 2009 IAU', 125000.00, null, 9001, null, 64000.00, null,
+insert into ssbd_ellipsoid values ('2009:5-5:ellipsoidal', '5-5', 'Ellipsoidal Amalthea 2009 IAU', 125000.00, null, 9001, null, 64000.00, null,
  73000.00, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009');
-insert into ssbd_ellipsoid values ('2009:5-06:default', '5-06', 'Himalia 2009 IAU', 85000.00, 10000., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2009:5-6:default', '5-6', 'Himalia 2009 IAU', 85000.00, 10000., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009');
-insert into ssbd_ellipsoid values ('2009:5-07:default', '5-07', 'Elara 2009 IAU', 40000.00, 10000., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2009:5-7:default', '5-7', 'Elara 2009 IAU', 40000.00, 10000., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009');
-insert into ssbd_ellipsoid values ('2009:5-08:default', '5-08', 'Pasiphae 2009 IAU', 18000.00, null, 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2009:5-8:default', '5-8', 'Pasiphae 2009 IAU', 18000.00, null, 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009');
-insert into ssbd_ellipsoid values ('2009:5-09:default', '5-09', 'Sinope 2009 IAU', 14000.00, null, 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2009:5-9:default', '5-9', 'Sinope 2009 IAU', 14000.00, null, 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009');
 insert into ssbd_ellipsoid values ('2009:5-10:default', '5-10', 'Lysithea 2009 IAU', 12000.00, null, 9001, null, null, null,
@@ -692,58 +708,58 @@ insert into ssbd_ellipsoid values ('2009:6-99:spherical', '6-99', 'Spherical Sat
 insert into ssbd_ellipsoid values ('2009:6-99:ellipsoidal', '6-99', 'Ellipsoidal Saturn 2009 IAU', 60268000.00, 4000., 9001, null, 54364000.00, 10000.,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009');
-insert into ssbd_ellipsoid values ('2009:6-01:spherical', '6-01', 'Spherical Mimas 2009 IAU', 198200.00, 400., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2009:6-1:spherical', '6-1', 'Spherical Mimas 2009 IAU', 198200.00, 400., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009');
-insert into ssbd_ellipsoid values ('2009:6-01:triaxial', '6-01', 'Triaxial Mimas 2009 IAU', 207800.00, 500., 9001, null, 190600.00, 300.,
+insert into ssbd_ellipsoid values ('2009:6-1:triaxial', '6-1', 'Triaxial Mimas 2009 IAU', 207800.00, 500., 9001, null, 190600.00, 300.,
  196700.00, 500., null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009');
-insert into ssbd_ellipsoid values ('2009:6-02:spherical', '6-02', 'Spherical Enceladus 2009 IAU', 252100.00, 200., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2009:6-2:spherical', '6-2', 'Spherical Enceladus 2009 IAU', 252100.00, 200., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009');
-insert into ssbd_ellipsoid values ('2009:6-02:triaxial', '6-02', 'Triaxial Enceladus 2009 IAU', 256600.00, 600., 9001, null, 248300.00, 200.,
+insert into ssbd_ellipsoid values ('2009:6-2:triaxial', '6-2', 'Triaxial Enceladus 2009 IAU', 256600.00, 600., 9001, null, 248300.00, 200.,
  251400.00, 200., null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009');
-insert into ssbd_ellipsoid values ('2009:6-03:spherical', '6-03', 'Spherical Tethys 2009 IAU', 531000.00, 600., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2009:6-3:spherical', '6-3', 'Spherical Tethys 2009 IAU', 531000.00, 600., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009');
-insert into ssbd_ellipsoid values ('2009:6-03:triaxial', '6-03', 'Triaxial Tethys 2009 IAU', 538400.00, 300., 9001, null, 526300.00, 600.,
+insert into ssbd_ellipsoid values ('2009:6-3:triaxial', '6-3', 'Triaxial Tethys 2009 IAU', 538400.00, 300., 9001, null, 526300.00, 600.,
  528300.00, 1100., null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009');
-insert into ssbd_ellipsoid values ('2009:6-04:spherical', '6-04', 'Spherical Dione 2009 IAU', 561400.00, 400., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2009:6-4:spherical', '6-4', 'Spherical Dione 2009 IAU', 561400.00, 400., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009');
-insert into ssbd_ellipsoid values ('2009:6-04:triaxial', '6-04', 'Triaxial Dione 2009 IAU', 563400.00, 600., 9001, null, 559600.00, 400.,
+insert into ssbd_ellipsoid values ('2009:6-4:triaxial', '6-4', 'Triaxial Dione 2009 IAU', 563400.00, 600., 9001, null, 559600.00, 400.,
  561300.00, 500., null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009');
-insert into ssbd_ellipsoid values ('2009:6-05:spherical', '6-05', 'Spherical Rhea 2009 IAU', 763500.00, 600., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2009:6-5:spherical', '6-5', 'Spherical Rhea 2009 IAU', 763500.00, 600., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009');
-insert into ssbd_ellipsoid values ('2009:6-05:triaxial', '6-05', 'Triaxial Rhea 2009 IAU', 765000.00, 700., 9001, null, 762400.00, 600.,
+insert into ssbd_ellipsoid values ('2009:6-5:triaxial', '6-5', 'Triaxial Rhea 2009 IAU', 765000.00, 700., 9001, null, 762400.00, 600.,
  763100.00, 600., null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009');
-insert into ssbd_ellipsoid values ('2009:6-06:spherical', '6-06', 'Spherical Titan 2009 IAU', 2574730.00, 90., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2009:6-6:spherical', '6-6', 'Spherical Titan 2009 IAU', 2574730.00, 90., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009');
-insert into ssbd_ellipsoid values ('2009:6-06:triaxial', '6-06', 'Triaxial Titan 2009 IAU', 2575150.00, 20., 9001, null, 2574470.00, 60.,
+insert into ssbd_ellipsoid values ('2009:6-6:triaxial', '6-6', 'Triaxial Titan 2009 IAU', 2575150.00, 20., 9001, null, 2574470.00, 60.,
  2574780.00, 60., null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009');
-insert into ssbd_ellipsoid values ('2009:6-07:default', '6-07', 'Shperical Hyperion 2009 IAU', 135000.00, 4000., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2009:6-7:default', '6-7', 'Shperical Hyperion 2009 IAU', 135000.00, 4000., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009');
-insert into ssbd_ellipsoid values ('2009:6-07:triaxial', '6-07', 'Triaxial Hyperion 2009 IAU', 180100.00, 2000., 9001, null, 102700.00, 4500.,
+insert into ssbd_ellipsoid values ('2009:6-7:triaxial', '6-7', 'Triaxial Hyperion 2009 IAU', 180100.00, 2000., 9001, null, 102700.00, 4500.,
  133000.00, 4500., null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009');
-insert into ssbd_ellipsoid values ('2009:6-08:spherical', '6-08', 'Spherical Iapetus 2009 IAU', 734300.00, 2800., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2009:6-8:spherical', '6-8', 'Spherical Iapetus 2009 IAU', 734300.00, 2800., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009');
-insert into ssbd_ellipsoid values ('2009:6-08:ellipsoidal', '6-08', 'Ellipsoidal Iapetus 2009 IAU', 745700.00, 2900., 9001, null, 712100.00, 1600.,
+insert into ssbd_ellipsoid values ('2009:6-8:ellipsoidal', '6-8', 'Ellipsoidal Iapetus 2009 IAU', 745700.00, 2900., 9001, null, 712100.00, 1600.,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009');
-insert into ssbd_ellipsoid values ('2009:6-09:spherical', '6-09', 'Spherical Phoebe 2009 IAU', 106500.00, 700., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2009:6-9:spherical', '6-9', 'Spherical Phoebe 2009 IAU', 106500.00, 700., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009');
-insert into ssbd_ellipsoid values ('2009:6-09:triaxial', '6-09', 'Triaxial Phoebe 2009 IAU', 109400.00, 1400., 9001, null, 101800.00, 300.,
+insert into ssbd_ellipsoid values ('2009:6-9:triaxial', '6-9', 'Triaxial Phoebe 2009 IAU', 109400.00, 1400., 9001, null, 101800.00, 300.,
  108500.00, 600., null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009');
 insert into ssbd_ellipsoid values ('2009:6-10:spherical', '6-10', 'Spherical Janus 2009 IAU', 89500.00, 1400., 9001, null, null, null,
@@ -830,37 +846,37 @@ insert into ssbd_ellipsoid values ('2009:7-99:spherical', '7-99', 'Spherical Ura
 insert into ssbd_ellipsoid values ('2009:7-99:ellipsoidal', '7-99', 'Ellipsoidal Uranus 2009 IAU', 25559000.00, 4000., 9001, null, 24973000.00, 20000.,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009');
-insert into ssbd_ellipsoid values ('2009:7-01:spherical', '7-01', 'Spherical Ariel 2009 IAU', 578900.00, 600., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2009:7-1:spherical', '7-1', 'Spherical Ariel 2009 IAU', 578900.00, 600., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009');
-insert into ssbd_ellipsoid values ('2009:7-01:triaxial', '7-01', 'Triaxial Ariel 2009 IAU', 581100.00, 900., 9001, null, 577700.00, 1000.,
+insert into ssbd_ellipsoid values ('2009:7-1:triaxial', '7-1', 'Triaxial Ariel 2009 IAU', 581100.00, 900., 9001, null, 577700.00, 1000.,
  577900.00, 600., null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009');
-insert into ssbd_ellipsoid values ('2009:7-02:default', '7-02', 'Umbriel 2009 IAU', 584700.00, 2800., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2009:7-2:default', '7-2', 'Umbriel 2009 IAU', 584700.00, 2800., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009');
-insert into ssbd_ellipsoid values ('2009:7-03:default', '7-03', 'Titania 2009 IAU', 788900.00, 1800., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2009:7-3:default', '7-3', 'Titania 2009 IAU', 788900.00, 1800., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009');
-insert into ssbd_ellipsoid values ('2009:7-04:default', '7-04', 'Oberon 2009 IAU', 761400.00, 2600., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2009:7-4:default', '7-4', 'Oberon 2009 IAU', 761400.00, 2600., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009');
-insert into ssbd_ellipsoid values ('2009:7-05:spherical', '7-05', 'Spherical Miranda 2009 IAU', 235800.00, 700., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2009:7-5:spherical', '7-5', 'Spherical Miranda 2009 IAU', 235800.00, 700., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009');
-insert into ssbd_ellipsoid values ('2009:7-05:triaxial', '7-05', 'Triaxial Miranda 2009 IAU', 240400.00, 600., 9001, null, 232900.00, 1200.,
+insert into ssbd_ellipsoid values ('2009:7-5:triaxial', '7-5', 'Triaxial Miranda 2009 IAU', 240400.00, 600., 9001, null, 232900.00, 1200.,
  234200.00, 900., null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009');
-insert into ssbd_ellipsoid values ('2009:7-06:default', '7-06', 'Cordelia 2009 IAU', 13000.00, 2000., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2009:7-6:default', '7-6', 'Cordelia 2009 IAU', 13000.00, 2000., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009');
-insert into ssbd_ellipsoid values ('2009:7-07:default', '7-07', 'Ophelia 2009 IAU', 15000.00, 2000., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2009:7-7:default', '7-7', 'Ophelia 2009 IAU', 15000.00, 2000., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009');
-insert into ssbd_ellipsoid values ('2009:7-08:default', '7-08', 'Bianca 2009 IAU', 21000.00, 3000., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2009:7-8:default', '7-8', 'Bianca 2009 IAU', 21000.00, 3000., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009');
-insert into ssbd_ellipsoid values ('2009:7-09:default', '7-09', 'Cressida 2009 IAU', 31000.00, 4000., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2009:7-9:default', '7-9', 'Cressida 2009 IAU', 31000.00, 4000., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009');
 insert into ssbd_ellipsoid values ('2009:7-10:default', '7-10', 'Desdemona 2009 IAU', 27000.00, 3000., 9001, null, null, null,
@@ -887,40 +903,40 @@ insert into ssbd_ellipsoid values ('2009:8-99:spherical', '8-99', 'Spherical Nep
 insert into ssbd_ellipsoid values ('2009:8-99:ellipsoidal', '8-99', 'Ellipsoidal Neptune 2009 IAU', 24764000.00, 15000., 9001, null, 24341000.00, 30000.,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009');
-insert into ssbd_ellipsoid values ('2009:8-01:default', '8-01', 'Triton 2009 IAU', 1352600.00, 2400., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2009:8-1:default', '8-1', 'Triton 2009 IAU', 1352600.00, 2400., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009');
-insert into ssbd_ellipsoid values ('2009:8-02:default', '8-02', 'Nereid 2009 IAU', 170000.00, 25000., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2009:8-2:default', '8-2', 'Nereid 2009 IAU', 170000.00, 25000., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009');
-insert into ssbd_ellipsoid values ('2009:8-03:default', '8-03', 'Naiad 2009 IAU', 29000.00, 6000., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2009:8-3:default', '8-3', 'Naiad 2009 IAU', 29000.00, 6000., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009');
-insert into ssbd_ellipsoid values ('2009:8-04:default', '8-04', 'Thalassa 2009 IAU', 40000.00, 8000., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2009:8-4:default', '8-4', 'Thalassa 2009 IAU', 40000.00, 8000., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009');
-insert into ssbd_ellipsoid values ('2009:8-05:default', '8-05', 'Despina 2009 IAU', 74000.00, 10000., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2009:8-5:default', '8-5', 'Despina 2009 IAU', 74000.00, 10000., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009');
-insert into ssbd_ellipsoid values ('2009:8-06:default', '8-06', 'Galatea 2009 IAU', 79000.00, 12000., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2009:8-6:default', '8-6', 'Galatea 2009 IAU', 79000.00, 12000., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009');
-insert into ssbd_ellipsoid values ('2009:8-07:spherical', '8-07', 'Spherical Larissa 2009 IAU', 96000.00, 7000., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2009:8-7:spherical', '8-7', 'Spherical Larissa 2009 IAU', 96000.00, 7000., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009');
-insert into ssbd_ellipsoid values ('2009:8-07:ellipsoidal', '8-07', 'Ellipsoidal Larissa 2009 IAU', 104000.00, null, 9001, null, 89000.00, null,
+insert into ssbd_ellipsoid values ('2009:8-7:ellipsoidal', '8-7', 'Ellipsoidal Larissa 2009 IAU', 104000.00, null, 9001, null, 89000.00, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009');
-insert into ssbd_ellipsoid values ('2009:8-08:spherical', '8-08', 'Spherical Proteus 2009 IAU', 208000.00, 8000., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2009:8-8:spherical', '8-8', 'Spherical Proteus 2009 IAU', 208000.00, 8000., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009');
-insert into ssbd_ellipsoid values ('2009:8-08:triaxial', '8-08', 'Triaxial Proteus 2009 IAU', 218000.00, null, 9001, null, 201000.00, null,
+insert into ssbd_ellipsoid values ('2009:8-8:triaxial', '8-8', 'Triaxial Proteus 2009 IAU', 218000.00, null, 9001, null, 201000.00, null,
  208000.00, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009');
 insert into ssbd_ellipsoid values ('2009:9-99:default', '9-99', 'Pluto 2009 IAU', 1195000.00, 5000., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009');
-insert into ssbd_ellipsoid values ('2009:9-01:default', '9-01', 'Charon 2009 IAU', 605000.00, 8000., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2009:9-1:default', '9-1', 'Charon 2009 IAU', 605000.00, 8000., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009');
 insert into ssbd_ellipsoid values ('2009:1000005:default', '1000005', 'Effective Borrelly 2009 IAU', 4220.00, 50., 9001, null, null, null,
@@ -1010,7 +1026,7 @@ insert into ssbd_ellipsoid values ('2009:2025143:default', '2025143', 'Itokawa 2
 
 
 
-insert into ssbd_ellipsoid values ('2015:0:default', '0', 'Sun 2015 IAU', 695700000.00, null, 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2015:0:default', '99', 'Sun 2015 IAU', 695700000.00, null, 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015');
 insert into ssbd_ellipsoid values ('2015:1-99:spherical', '1-99', 'Spherical Mercury 2015 IAU', 2439400.00, 100., 9001, null, null, null,
@@ -1034,7 +1050,7 @@ insert into ssbd_ellipsoid values ('2015:3-99:ellipsoidal', '3-99', 'Ellipsoidal
 insert into ssbd_ellipsoid values ('2015:3-99:ellipsoidal-iau', '3-99', 'Ellipsoidal Earth 2015 IAU Resolution', 6378100., null, 9001, null, 6356800., null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015');
-insert into ssbd_ellipsoid values ('2015:3-01:default', '3-01', 'Moon 2015 IAU', 1737400.00, null, 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2015:3-1:default', '3-1', 'Moon 2015 IAU', 1737400.00, null, 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015');
 
@@ -1047,16 +1063,16 @@ insert into ssbd_ellipsoid values ('2015:4-99:ellipsoidal', '4-99', 'Ellipsoidal
 insert into ssbd_ellipsoid values ('2015:4-99:default', '4-99', 'Quadriaxial Mars 2015 IAU', 3396190.00, null, 9001, null, 3373190.00, 10.,
  null, null, 3379210., 10.,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015');
-insert into ssbd_ellipsoid values ('2015:4-01:spherical', '4-01', 'Spherical Phobos 2015 IAU', 11080.00, 40., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2015:4-1:spherical', '4-1', 'Spherical Phobos 2015 IAU', 11080.00, 40., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015');
-insert into ssbd_ellipsoid values ('2015:4-01:triaxial', '4-01', 'Triaxial Phobos 2015 IAU', 13000.00, null, 9001, null, 9100.00, null,
+insert into ssbd_ellipsoid values ('2015:4-1:triaxial', '4-1', 'Triaxial Phobos 2015 IAU', 13000.00, null, 9001, null, 9100.00, null,
  11400.00, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015');
-insert into ssbd_ellipsoid values ('2015:4-02:spherical', '4-02', 'Spherical Deimos 2015 IAU', 6200.00, 250., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2015:4-2:spherical', '4-2', 'Spherical Deimos 2015 IAU', 6200.00, 250., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015');
-insert into ssbd_ellipsoid values ('2015:4-02:triaxial', '4-02', 'Triaxial Deimos 2015 IAU', 7800.00, null, 9001, null, 5100.00, null,
+insert into ssbd_ellipsoid values ('2015:4-2:triaxial', '4-2', 'Triaxial Deimos 2015 IAU', 7800.00, null, 9001, null, 5100.00, null,
  6000.00, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015');
 
@@ -1066,40 +1082,40 @@ insert into ssbd_ellipsoid values ('2015:5-99:spherical', '5-99', 'Spherical Jup
 insert into ssbd_ellipsoid values ('2015:5-99:ellipsoidal', '5-99', 'Ellipsoidal Jupiter 2015 IAU', 71492000.00, 4000., 9001, null, 66854000.00, 10000.,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015');
-insert into ssbd_ellipsoid values ('2015:5-01:spherical', '5-01', 'Spherical Io 2015 IAU', 1821490.00, null, 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2015:5-1:spherical', '5-1', 'Spherical Io 2015 IAU', 1821490.00, null, 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015');
-insert into ssbd_ellipsoid values ('2015:5-01:triaxial', '5-01', 'Triaxial Io 2015 IAU', 1829400.00, null, 9001, null, 1815700.00, null,
+insert into ssbd_ellipsoid values ('2015:5-1:triaxial', '5-1', 'Triaxial Io 2015 IAU', 1829400.00, null, 9001, null, 1815700.00, null,
  1819400.00, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015');
-insert into ssbd_ellipsoid values ('2015:5-02:spherical', '5-02', 'Spherical Europa 2015 IAU', 1560800.00, 300., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2015:5-2:spherical', '5-2', 'Spherical Europa 2015 IAU', 1560800.00, 300., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015');
-insert into ssbd_ellipsoid values ('2015:5-02:triaxial', '5-02', 'Triaxial Europa 2015 IAU', 1562600.00, null, 9001, null, 1559500.00, null,
+insert into ssbd_ellipsoid values ('2015:5-2:triaxial', '5-2', 'Triaxial Europa 2015 IAU', 1562600.00, null, 9001, null, 1559500.00, null,
  1560300.00, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015');
-insert into ssbd_ellipsoid values ('2015:5-03:default', '5-03', 'Ganymede 2015 IAU', 2631200.00, 1700., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2015:5-3:default', '5-3', 'Ganymede 2015 IAU', 2631200.00, 1700., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015');
-insert into ssbd_ellipsoid values ('2015:5-04:default', '5-04', 'Callisto 2015 IAU', 2410300.00, 1500., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2015:5-4:default', '5-4', 'Callisto 2015 IAU', 2410300.00, 1500., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015');
-insert into ssbd_ellipsoid values ('2015:5-05:spherical', '5-05', 'Spherical Amalthea 2015 IAU', 83500.00, 3000., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2015:5-5:spherical', '5-5', 'Spherical Amalthea 2015 IAU', 83500.00, 3000., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015');
-insert into ssbd_ellipsoid values ('2015:5-05:triaxial', '5-05', 'Triaxial Amalthea 2015 IAU', 125000.00, null, 9001, null, 64000.00, null,
+insert into ssbd_ellipsoid values ('2015:5-5:triaxial', '5-5', 'Triaxial Amalthea 2015 IAU', 125000.00, null, 9001, null, 64000.00, null,
  73000.00, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015');
-insert into ssbd_ellipsoid values ('2015:5-06:default', '5-06', 'Himalia 2015 IAU', 85000.00, 10000., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2015:5-6:default', '5-6', 'Himalia 2015 IAU', 85000.00, 10000., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015');
-insert into ssbd_ellipsoid values ('2015:5-07:default', '5-07', 'Elara 2015 IAU', 40000.00, 10000., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2015:5-7:default', '5-7', 'Elara 2015 IAU', 40000.00, 10000., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015');
-insert into ssbd_ellipsoid values ('2015:5-08:default', '5-08', 'Pasiphae 2015 IAU', 18000.00, null, 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2015:5-8:default', '5-8', 'Pasiphae 2015 IAU', 18000.00, null, 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015');
-insert into ssbd_ellipsoid values ('2015:5-09:default', '5-09', 'Sinope 2015 IAU', 14000.00, null, 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2015:5-9:default', '5-9', 'Sinope 2015 IAU', 14000.00, null, 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015');
 insert into ssbd_ellipsoid values ('2015:5-10:default', '5-10', 'Lysithea 2015 IAU', 12000.00, null, 9001, null, null, null,
@@ -1139,61 +1155,61 @@ insert into ssbd_ellipsoid values ('2015:6-99:spherical', '6-99', 'Spherical Sat
 insert into ssbd_ellipsoid values ('2015:6-99:ellipsoidal', '6-99', 'Ellipsoidal Saturn 2015 IAU', 60268000.00, 4000., 9001, null, 54364000.00, 10000.,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015');
-insert into ssbd_ellipsoid values ('2015:6-01:spherical', '6-01', 'Spherical Mimas 2015 IAU', 198200.00, 400., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2015:6-1:spherical', '6-1', 'Spherical Mimas 2015 IAU', 198200.00, 400., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015');
-insert into ssbd_ellipsoid values ('2015:6-01:triaxial', '6-01', 'Triaxial Mimas 2015 IAU', 207800.00, 500., 9001, null, 190600.00, 300.,
+insert into ssbd_ellipsoid values ('2015:6-1:triaxial', '6-1', 'Triaxial Mimas 2015 IAU', 207800.00, 500., 9001, null, 190600.00, 300.,
  196700.00, 500., null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015');
-insert into ssbd_ellipsoid values ('2015:6-02:spherical', '6-02', 'Spherical Enceladus 2015 IAU', 252100.00, 200., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2015:6-2:spherical', '6-2', 'Spherical Enceladus 2015 IAU', 252100.00, 200., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015');
-insert into ssbd_ellipsoid values ('2015:6-02:triaxial', '6-02', 'Triaxial Enceladus 2015 IAU', 256600.00, 600., 9001, null, 248300.00, 200.,
+insert into ssbd_ellipsoid values ('2015:6-2:triaxial', '6-2', 'Triaxial Enceladus 2015 IAU', 256600.00, 600., 9001, null, 248300.00, 200.,
  251400.00, 200., null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015');
-insert into ssbd_ellipsoid values ('2015:6-03:spherical', '6-03', 'Spherical Tethys 2015 IAU', 531000.00, 600., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2015:6-3:spherical', '6-3', 'Spherical Tethys 2015 IAU', 531000.00, 600., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015');
-insert into ssbd_ellipsoid values ('2015:6-03:triaxial', '6-03', 'Triaxial Tethys 2015 IAU', 538400.00, 300., 9001, null, 526300.00, 600.,
+insert into ssbd_ellipsoid values ('2015:6-3:triaxial', '6-3', 'Triaxial Tethys 2015 IAU', 538400.00, 300., 9001, null, 526300.00, 600.,
  528300.00, 1100., null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015');
-insert into ssbd_ellipsoid values ('2015:6-04:spherical', '6-04', 'Spherical Dione 2015 IAU', 561400.00, 400., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2015:6-4:spherical', '6-4', 'Spherical Dione 2015 IAU', 561400.00, 400., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015');
-insert into ssbd_ellipsoid values ('2015:6-04:triaxial', '6-04', 'Triaxial Dione 2015 IAU', 563400.00, 600., 9001, null, 559600.00, 400.,
+insert into ssbd_ellipsoid values ('2015:6-4:triaxial', '6-4', 'Triaxial Dione 2015 IAU', 563400.00, 600., 9001, null, 559600.00, 400.,
  561300.00, 500., null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015');
-insert into ssbd_ellipsoid values ('2015:6-05:spherical', '6-05', 'Spherical Rhea 2015 IAU', 763500.00, 600., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2015:6-5:spherical', '6-5', 'Spherical Rhea 2015 IAU', 763500.00, 600., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015');
-insert into ssbd_ellipsoid values ('2015:6-05:triaxial', '6-05', 'Triaxial Rhea 2015 IAU', 765000.00, 700., 9001, null, 762400.00, 600.,
+insert into ssbd_ellipsoid values ('2015:6-5:triaxial', '6-5', 'Triaxial Rhea 2015 IAU', 765000.00, 700., 9001, null, 762400.00, 600.,
  763100.00, 600., null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015');
-insert into ssbd_ellipsoid values ('2015:6-06:spherical', '6-06', 'Spherical Titan 2015 IAU', 2575000.00, null, 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2015:6-6:spherical', '6-6', 'Spherical Titan 2015 IAU', 2575000.00, null, 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015');
-insert into ssbd_ellipsoid values ('2015:6-06:bestfit', '6-06', 'Best-fit Spherical Titan 2015 IAU', 2574730.00, 90., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2015:6-6:bestfit', '6-6', 'Best-fit Spherical Titan 2015 IAU', 2574730.00, 90., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015');
-insert into ssbd_ellipsoid values ('2015:6-06:triaxial', '6-06', 'Triaxial Titan 2015 IAU', 2575150.00, 20., 9001, null, 2574470.00, 60.,
+insert into ssbd_ellipsoid values ('2015:6-6:triaxial', '6-6', 'Triaxial Titan 2015 IAU', 2575150.00, 20., 9001, null, 2574470.00, 60.,
  2574780.00, 60., null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015');
-insert into ssbd_ellipsoid values ('2015:6-07:spherical', '6-07', 'Spherical Hyperion 2015 IAU', 135000.00, 4000., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2015:6-7:spherical', '6-7', 'Spherical Hyperion 2015 IAU', 135000.00, 4000., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015');
-insert into ssbd_ellipsoid values ('2015:6-07:triaxial', '6-07', 'Triaxial Hyperion 2015 IAU', 180100.00, 2000., 9001, null, 102700.00, 4500.,
+insert into ssbd_ellipsoid values ('2015:6-7:triaxial', '6-7', 'Triaxial Hyperion 2015 IAU', 180100.00, 2000., 9001, null, 102700.00, 4500.,
  133000.00, 4500., null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015');
-insert into ssbd_ellipsoid values ('2015:6-08:spherical', '6-08', 'Spherical Iapetus 2015 IAU', 734300.00, 2800., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2015:6-8:spherical', '6-8', 'Spherical Iapetus 2015 IAU', 734300.00, 2800., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015');
-insert into ssbd_ellipsoid values ('2015:6-08:triaxial', '6-08', 'Triaxial Iapetus 2015 IAU', 745700.00, 2900., 9001, null, 712100.00, 1600.,
+insert into ssbd_ellipsoid values ('2015:6-8:triaxial', '6-8', 'Triaxial Iapetus 2015 IAU', 745700.00, 2900., 9001, null, 712100.00, 1600.,
  745700.00, 2900., null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015');
-insert into ssbd_ellipsoid values ('2015:6-09:spherical', '6-09', 'Spherical Phoebe 2015 IAU', 106500.00, 700., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2015:6-9:spherical', '6-9', 'Spherical Phoebe 2015 IAU', 106500.00, 700., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015');
-insert into ssbd_ellipsoid values ('2015:6-09:triaxial', '6-09', 'Triaxial Phoebe 2015 IAU', 109400.00, 1400., 9001, null, 101800.00, 300.,
+insert into ssbd_ellipsoid values ('2015:6-9:triaxial', '6-9', 'Triaxial Phoebe 2015 IAU', 109400.00, 1400., 9001, null, 101800.00, 300.,
  108500.00, 600., null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015');
 insert into ssbd_ellipsoid values ('2015:6-10:spherical', '6-10', 'Spherical Janus 2015 IAU', 89200.00, 800., 9001, null, null, null,
@@ -1290,37 +1306,37 @@ insert into ssbd_ellipsoid values ('2015:7-99:spherical', '7-99', 'Spherical Ura
 insert into ssbd_ellipsoid values ('2015:7-99:ellipsoidal', '7-99', 'Ellipsoidal Uranus 2015 IAU', 25559000.00, 4000., 9001, null, 24973000.00, 20000.,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015');
-insert into ssbd_ellipsoid values ('2015:7-01:spherical', '7-01', 'Spherical Ariel 2015 IAU', 578900.00, 600., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2015:7-1:spherical', '7-1', 'Spherical Ariel 2015 IAU', 578900.00, 600., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015');
-insert into ssbd_ellipsoid values ('2015:7-01:triaxial', '7-01', 'Triaxial Ariel 2015 IAU', 581100.00, 900., 9001, null, 577700.00, 100.,
+insert into ssbd_ellipsoid values ('2015:7-1:triaxial', '7-1', 'Triaxial Ariel 2015 IAU', 581100.00, 900., 9001, null, 577700.00, 100.,
  577900.00, 600., null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015');
-insert into ssbd_ellipsoid values ('2015:7-02:default', '7-02', 'Umbriel 2015 IAU', 584700.00, 2800., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2015:7-2:default', '7-2', 'Umbriel 2015 IAU', 584700.00, 2800., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015');
-insert into ssbd_ellipsoid values ('2015:7-03:default', '7-03', 'Titania 2015 IAU', 788900.00, 1800., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2015:7-3:default', '7-3', 'Titania 2015 IAU', 788900.00, 1800., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015');
-insert into ssbd_ellipsoid values ('2015:7-04:default', '7-04', 'Oberon 2015 IAU', 761400.00, 2600., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2015:7-4:default', '7-4', 'Oberon 2015 IAU', 761400.00, 2600., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015');
-insert into ssbd_ellipsoid values ('2015:7-05:spherical', '7-05', 'Spherical Miranda 2015 IAU', 235800.00, 700., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2015:7-5:spherical', '7-5', 'Spherical Miranda 2015 IAU', 235800.00, 700., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015');
-insert into ssbd_ellipsoid values ('2015:7-05:triaxial', '7-05', 'Triaxial Miranda 2015 IAU', 240400.00, 600., 9001, null, 232900.00, 1200.,
+insert into ssbd_ellipsoid values ('2015:7-5:triaxial', '7-5', 'Triaxial Miranda 2015 IAU', 240400.00, 600., 9001, null, 232900.00, 1200.,
  234200.00, 900., null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015');
-insert into ssbd_ellipsoid values ('2015:7-06:default', '7-06', 'Cordelia 2015 IAU', 13000.00, 2000., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2015:7-6:default', '7-6', 'Cordelia 2015 IAU', 13000.00, 2000., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015');
-insert into ssbd_ellipsoid values ('2015:7-07:default', '7-07', 'Ophelia 2015 IAU', 15000.00, 2000., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2015:7-7:default', '7-7', 'Ophelia 2015 IAU', 15000.00, 2000., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015');
-insert into ssbd_ellipsoid values ('2015:7-08:default', '7-08', 'Bianca 2015 IAU', 21000.00, 3000., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2015:7-8:default', '7-8', 'Bianca 2015 IAU', 21000.00, 3000., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015');
-insert into ssbd_ellipsoid values ('2015:7-09:default', '7-09', 'Cressida 2015 IAU', 31000.00, 4000., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2015:7-9:default', '7-9', 'Cressida 2015 IAU', 31000.00, 4000., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015');
 insert into ssbd_ellipsoid values ('2015:7-10:default', '7-10', 'Desdemona 2015 IAU', 27000.00, 3000., 9001, null, null, null,
@@ -1348,41 +1364,41 @@ insert into ssbd_ellipsoid values ('2015:8-99:spherical', '8-99', 'Spherical Nep
 insert into ssbd_ellipsoid values ('2015:8-99:ellipsoidal', '8-99', 'Ellipsoidal Neptune 2015 IAU', 24764000.00, 15000., 9001, null, 24341000.00, 30000.,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015');
-insert into ssbd_ellipsoid values ('2015:8-01:default', '8-01', 'Triton 2015 IAU', 1352600.00, 2400., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2015:8-1:default', '8-1', 'Triton 2015 IAU', 1352600.00, 2400., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015');
-insert into ssbd_ellipsoid values ('2015:8-02:default', '8-02', 'Nereid 2015 IAU', 170000.00, 25000., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2015:8-2:default', '8-2', 'Nereid 2015 IAU', 170000.00, 25000., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015');
-insert into ssbd_ellipsoid values ('2015:8-03:default', '8-03', 'Naiad 2015 IAU', 29000.00, 6000., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2015:8-3:default', '8-3', 'Naiad 2015 IAU', 29000.00, 6000., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015');
-insert into ssbd_ellipsoid values ('2015:8-04:default', '8-04', 'Thalassa 2015 IAU', 40000.00, 8000., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2015:8-4:default', '8-4', 'Thalassa 2015 IAU', 40000.00, 8000., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015');
-insert into ssbd_ellipsoid values ('2015:8-05:default', '8-05', 'Despina 2015 IAU', 74000.00, 10000., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2015:8-5:default', '8-5', 'Despina 2015 IAU', 74000.00, 10000., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015');
-insert into ssbd_ellipsoid values ('2015:8-06:default', '8-06', 'Galatea 2015 IAU', 79000.00, 12000., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2015:8-6:default', '8-6', 'Galatea 2015 IAU', 79000.00, 12000., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015');
-insert into ssbd_ellipsoid values ('2015:8-07:spherical', '8-07', 'Spherical Larissa 2015 IAU', 96000.00, 7000., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2015:8-7:spherical', '8-7', 'Spherical Larissa 2015 IAU', 96000.00, 7000., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015');
-insert into ssbd_ellipsoid values ('2015:8-07:ellipsoidal', '8-07', 'Ellipsoidal Larissa 2015 IAU', 104000.00, null, 9001, null, 89000.00, null,
+insert into ssbd_ellipsoid values ('2015:8-7:ellipsoidal', '8-7', 'Ellipsoidal Larissa 2015 IAU', 104000.00, null, 9001, null, 89000.00, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015');
-insert into ssbd_ellipsoid values ('2015:8-08:spherical', '8-08', 'Spherical Proteus 2015 IAU', 208000.00, 8000., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2015:8-8:spherical', '8-8', 'Spherical Proteus 2015 IAU', 208000.00, 8000., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015');
-insert into ssbd_ellipsoid values ('2015:8-08:triaxial', '8-08', 'Triaxial Proteus 2015 IAU', 218000.00, null, 9001, null, 201000.00, null,
+insert into ssbd_ellipsoid values ('2015:8-8:triaxial', '8-8', 'Triaxial Proteus 2015 IAU', 218000.00, null, 9001, null, 201000.00, null,
  208000.00, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015');
 
 insert into ssbd_ellipsoid values ('2015:9-99:default', '9-99', 'Pluto 2015 IAU', 1188300.00, 1600., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015');
-insert into ssbd_ellipsoid values ('2015:9-01:default', '9-01', 'Charon 2015 IAU', 606000.00, 1000., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2015:9-1:default', '9-1', 'Charon 2015 IAU', 606000.00, 1000., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015');
 insert into ssbd_ellipsoid values ('2015:1000005:spherical', '1000005', 'Spherical Borrelly 2015 IAU', 4220.00, 50., 9001, null, null, null,
@@ -1451,10 +1467,10 @@ insert into ssbd_ellipsoid values ('2015:2000021:spherical', '2000021', 'Spheric
 insert into ssbd_ellipsoid values ('2015:2000021:triaxial', '2000021', 'Triaxial Lutetia 2015 IAU', 62000.00, 2500., 9001, null, 46500.00, 6500.,
  50500.00, 2000., null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015');
-insert into ssbd_ellipsoid values ('2015:-2000052:spherical', '-2000052', 'Spherical 52 Europa 2015 IAU', 157500.00, 7000., 9001, null, null, null,
+insert into ssbd_ellipsoid values ('2015:?2000052:spherical', '?2000052', 'Spherical 52 Europa 2015 IAU', 157500.00, 7000., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015');
-insert into ssbd_ellipsoid values ('2015:-2000052:triaxial', '-2000052', 'Triaxial 52 Europa 2015 IAU', 189500.00, 16000., 9001, null, 124500.00, 10000.,
+insert into ssbd_ellipsoid values ('2015:?2000052:triaxial', '?2000052', 'Triaxial 52 Europa 2015 IAU', 189500.00, 16000., 9001, null, 124500.00, 10000.,
  165000.00, 8000., null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015');
 insert into ssbd_ellipsoid values ('2015:2000216:default', '2000216', 'Kleopatra 2015 IAU', 108500.00, null, 9001, null, 40500.00, null,

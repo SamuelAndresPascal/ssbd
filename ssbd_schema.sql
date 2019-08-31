@@ -8,14 +8,14 @@
 begin;
 
 
--- body (concept code : BODY)
+-- phenomenon (concept code : BODY)
 --
--- purpose: Information of the body on which a reference system is defined.
+-- purpose: Information of the phenomenon on which a reference system is defined.
 --
--- body_code: For the moment, identifier derived from naif codes, but it seems they are not the official names used by
+-- phenomenon_code: For the moment, identifier derived from naif codes, but it seems they are not the official names used by
 -- the IAU.
 --
--- body_name: Usual body name.
+-- phenomenon_name: Usual body name.
 --
 -- rotation: From rotational elements given in https://astropedia.astrogeology.usgs.gov/download/Docs/WGCCRE/WGCCRE2015reprint.pdf
 -- althrough rotation is not intrinsic to the body but relative to a celestial frame, the information is based on ICRF
@@ -25,17 +25,17 @@ begin;
 -- see: https://naif.jpl.nasa.gov/pub/naif/toolkit_docs/FORTRAN/req/naif_ids.html
 -- see: https://planetarynames.wr.usgs.gov/Page/Planets
 -- see: "planetary_name" table from "planetary_name.sql" script for a future merge
-create table ssbd_body (
-    body_code                                          varchar(254),
-    body_name                                          varchar(80) not null,
+create table ssbd_phenomenon (
+    phenomenon_code                                    varchar(254),
+    phenomenon_name                                    varchar(80) not null,
     rotation                                           varchar(24),
     remarks                                            varchar(254),
     information_source                                 varchar(254),
-    constraint pk_body primary key ( body_code ),
-    constraint vl_body_rotation check ( rotation in ('direct', 'indirect'))
+    constraint pk_body primary key ( phenomenon_code ),
+    constraint vl_phenomenon_rotation check ( rotation in ('direct', 'indirect'))
 );
 
-comment on table ssbd_body is 'The table of the solar system bodies.';
+comment on table ssbd_phenomenon is 'The table of the solar system bodies.';
 
 
 -- ellipsoid (concept code : ELLIPSOID)
@@ -45,7 +45,7 @@ comment on table ssbd_body is 'The table of the solar system bodies.';
 -- the main solar system bodies like planets or satellites, but may be usefull for other bodies classified by shape and
 -- size.
 --
--- body_code: This column is indicative and does not focus on a body an ellipsoid would be exclusively used for, but
+-- phenomenon_code: This column is indicative and does not focus on a body an ellipsoid would be exclusively used for, but
 -- possibly the body for which it has been defined first. It uses the naif body code for now.
 --
 -- semi_major_axis: (subplanetary) equatorial radius
@@ -67,7 +67,7 @@ comment on table ssbd_body is 'The table of the solar system bodies.';
 -- see: https://astropedia.astrogeology.usgs.gov/download/Docs/WGCCRE/WGCCRE2015reprint.pdf (2015)
 create table ssbd_ellipsoid (
     ellipsoid_code                                     varchar(254) not null,
-    body_code                                          varchar(254),
+    phenomenon_code                                    varchar(254),
     ellipsoid_name                                     varchar(80) not null,
     semi_major_axis                                    double precision not null,
     semi_major_axis_error                              double precision,
@@ -89,9 +89,9 @@ create table ssbd_ellipsoid (
     constraint pk_ellipsoid primary key ( ellipsoid_code )
 );
 
-alter table ssbd_ellipsoid add constraint fk_body_code foreign key ( body_code ) references ssbd_body ( body_code ) ;
+alter table ssbd_ellipsoid add constraint fk_phenomenon_code foreign key ( phenomenon_code ) references ssbd_phenomenon ( phenomenon_code ) ;
 
-comment on column ssbd_ellipsoid.body_code is 'This column is optional and indicative about the body for which the ellipsoid has been defined. It may be null and even if it is not, it does not mean the ellipsoid is exclusively defined for the related body.';
+comment on column ssbd_ellipsoid.phenomenon_code is 'This column is optional and indicative about the body for which the ellipsoid has been defined. It may be null and even if it is not, it does not mean the ellipsoid is exclusively defined for the related body.';
 
 
 -- prime meridian system (concept code : PMS)
@@ -102,7 +102,7 @@ comment on column ssbd_ellipsoid.body_code is 'This column is optional and indic
 -- note: It would be interesting to reference the absolute primeridian of a given system, but it would significates two
 -- opposite foreign key constraints. May be for a next update...
 create table ssbd_primemeridiansystem (
-    body_code                                          varchar(254) not null,
+    phenomenon_code                                          varchar(254) not null,
     prime_meridian_system_code                         varchar(254) not null,
     prime_meridian_system_name                         varchar(80) not null,
     remarks                                            varchar(254),
@@ -111,12 +111,12 @@ create table ssbd_primemeridiansystem (
     -- revision_date                                      date not null,
     -- change_id                                          varchar(255),
     -- deprecated                                         smallint not null,
-    constraint pk_primemeridiansystem primary key ( body_code, prime_meridian_system_code )
+    constraint pk_primemeridiansystem primary key ( phenomenon_code, prime_meridian_system_code )
 );
 
-alter table ssbd_primemeridiansystem add constraint fk_body_code foreign key ( body_code ) references ssbd_body ( body_code ) ;
+alter table ssbd_primemeridiansystem add constraint fk_phenomenon_code foreign key ( phenomenon_code ) references ssbd_phenomenon ( phenomenon_code ) ;
 
-comment on column ssbd_primemeridiansystem.body_code is 'This column is mandatory and defines the body on which meridians and datums are defined.';
+comment on column ssbd_primemeridiansystem.phenomenon_code is 'This column is mandatory and defines the body on which meridians and datums are defined.';
 
 
 -- prime meridian (concept code : PM)
@@ -217,7 +217,7 @@ comment on column ssbd_primemeridiansystem.body_code is 'This column is mandator
 --
 -- system_code: The code of the prime meridian system.
 create table ssbd_primemeridian (
-    body_code                                          varchar(254) not null,
+    phenomenon_code                                          varchar(254) not null,
     system_code                                        varchar(254) not null,
     prime_meridian_code                                varchar(254) not null,
     prime_meridian_name                                varchar(80) not null,
@@ -233,10 +233,10 @@ create table ssbd_primemeridian (
     -- revision_date                                      date not null,
     -- change_id                                          varchar(255),
     -- deprecated                                         smallint not null,
-    constraint pk_primemeridian primary key ( body_code, system_code, prime_meridian_code )
+    constraint pk_primemeridian primary key ( phenomenon_code, system_code, prime_meridian_code )
 );
 
-alter table ssbd_primemeridian add constraint fk_system_code foreign key ( body_code, system_code ) references ssbd_primemeridiansystem ( body_code, prime_meridian_system_code ) ;
+alter table ssbd_primemeridian add constraint fk_system_code foreign key ( phenomenon_code, system_code ) references ssbd_primemeridiansystem ( phenomenon_code, prime_meridian_system_code ) ;
 
 comment on column ssbd_primemeridian.relative_longitude is 'Angle from the absolute prime meridian of the meridian system to the current prime meridian.';
 comment on column ssbd_primemeridian.reference_meridian_longitude is 'Longitude of the reference meridian from the origin of longitudes.';
@@ -252,7 +252,7 @@ create table ssbd_datum (
     origin_description                                 varchar(254),
     realization_epoch                                  varchar(10),
     ellipsoid_code                                     varchar(254),
-    body_code                                          varchar(254),
+    phenomenon_code                                          varchar(254),
     prime_meridian_system_code                         varchar(254),
     prime_meridian_code                                varchar(254),
     -- area_of_use_code                                   integer not null,
@@ -267,8 +267,8 @@ create table ssbd_datum (
 );
 
 alter table ssbd_datum add constraint fk_ellipsoid_code foreign key ( ellipsoid_code ) references ssbd_ellipsoid ( ellipsoid_code ) ;
-alter table ssbd_datum add constraint fk_prime_meridian_code foreign key ( body_code, prime_meridian_system_code, prime_meridian_code )
- references ssbd_primemeridian ( body_code, system_code, prime_meridian_code ) ;
+alter table ssbd_datum add constraint fk_prime_meridian_code foreign key ( phenomenon_code, prime_meridian_system_code, prime_meridian_code )
+ references ssbd_primemeridian ( phenomenon_code, system_code, prime_meridian_code ) ;
 
 
 -- coordinate system (concept code : CS)
