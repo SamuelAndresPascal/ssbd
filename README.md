@@ -531,6 +531,6 @@ Enfin, le code d'un phénomène étant relatif au système racine considéré, i
 
 | système de coordonnées de coordonnées de référence | code | identifiant sans autorité |
 | :--- | :-- | :----------------------- |
-| CRS planétocentrique défini sur Mercure en 2000 par l'UAI | 2000:sun-1-99:planetocentric | CRS:2000:1-99:planetocentric |
-| CRS planétographique défini sur Mercure en 2000 par l'UAI | 2000:sun-1-99:planetographic | CRS:2000:1-99:planetographic |
+| CRS planétocentrique défini sur Mercure en 2000 par l'UAI | 2000:sun-1-99:planetocentric | CRS:2000:sun-1-99:planetocentric |
+| CRS planétographique défini sur Mercure en 2000 par l'UAI | 2000:sun-1-99:planetographic | CRS:2000:sun-1-99:planetographic |
 
