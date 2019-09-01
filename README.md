@@ -405,11 +405,15 @@ authority := <alphanumeric>+
 ```
 string_character = <alphanumeric> | <hyphen> | <underscore>
 
-entity_code := <phenomenon_code> | <ellipsoid_code> | <prime_meridian_system_code> | <prime_meridian_code> | <datum_code> | <coordinate_system_code> | <coordinate_system_axis_code> | <coordinate_reference_system_code>
+entity_code := <phenomenon_code> | <ellipsoid_code> | <prime_meridian_system_code>
+ | <prime_meridian_code> | <datum_code> | <coordinate_system_code>
+ | <coordinate_system_axis_code> | <coordinate_reference_system_code>
 
 phenomenon_code := PHENOMENON:<phenomenon_suffix>
 
-phenomenon_suffix := <alphanumeric>+(<hyphen><alphanumeric>+)*
+phenomenon_suffix := <system_code><hyphen><alphanumeric>+(<hyphen><alphanumeric>+)*
+
+system_code := (<alphenumeric> | <underscore>)+
 
 ellipsoid_code := ELLIPSOID:<local_id>
 
@@ -438,41 +442,76 @@ coordinate_reference_system_code := CRS:<local_id>
 
 ### Exemples
 
- #### Codes de corps
+ #### Codes de corps et autres phénomènes
 
-| corps | code | identifiant sans autorité |
+Les codes des planètes et de leurs satellites naturels sont construits à partir du répertoire NAIF, mais en séparant par des traits d'union les phénomènes associés par un lien remarquable.
+
+Par exemple, l'interaction gravitationnelle de Mars et de ses satellites est représentée comme un lien entre le barycentre du système martien et chacun de ses corps. En affectant le numéro 4 au barycentre du système martien à l'intérieur du système solaire et les numéros 99, 1 et 2 respectivement à Mars, Phobos et Deimos à l'intérieur du système martien, les codes de ces phénomènes sont les suivants :
+
+| phénomène | code | rappel du code NAIF |
+| :--------------- | :----- | :--------------------------- |
+| Barycentre du système martien | 4 | 4 |
+| Mars | 4-99 | 4 x 100 + 99 = 499 |
+| Phobos | 4-1 | 4 x 100 + 1 = 401 |
+| Deimos | 4-2 | 4 x 100 + 2 = 402 |
+
+Tout en réutilisant les composant numériques des codes NAIF pour faciliter la mise en correspondance, cette convention permet de ne pas limiter a priori le nombre de phénomènes affectés à un système gravitationnel. Ainsi, le code NAIF 299 (Vénus) devient 2-99 pour la base SSBD.
+
+Le 0 est l'identifiant réservé au barycentre du système constitué par l'ensemble des masses. Dans le cas du système solaire il s'agit du barycentre du système solaire. il est omis de la construction des identifiants des autres phénomènes. Par exemples :
+
+- le code de la Terre est 3-99 (et non 0-3-99)
+- le code du barycentre du système martien est 4 (et non 0-4)
+
+À la différence de son code NAIF, le code du soleil est 99 (c'est à dire implicitement 0-99) et non pas 10.
+
+Les codes des autes corps sont empruntés au répertoire NAIF.
+
+Enfin, le code d'un phénomène étant relatif au système racine considéré, il doit être préfixé par le code de ce système en prévision d'étendre l'utilisation de cette convention d'identifiants à d'autres systèmes. Dans le cas du système solaire, ce préfixe est `sun`. Le préfixe du système racine est séparé du restant du code par un trait d'union. On obtient donc, par exemple :
+
+| phénomène | code |
+| :--------------- | :----- |
+| Barycentre du système solaire | sun-0 |
+| Soleil | sun-99 |
+| Mecure | sun-1-99 |
+| Vénus | sun-2-99 |
+| Barycentre du système martien | sun-4 |
+| Mars | sun-4-99 |
+| Phobos | sun-4-1 |
+| Deimos | sun-4-2 | 
+
+| phénomène | code | identifiant sans autorité |
 | :--- | :-- | :----------------------- |
-| Barycentre du système solaire | 0 | PHENOMENON:0 |
-| Soleil | 99 | PHENOMENON:99 |
-| Mecure | 1-99 | PHENOMENON:1-99 |
-| Vénus | 2-99 | PHENOMENON:2-99 |
-| Mars | 4-99 | PHENOMENON:4-99 |
-| Phobos | 4-1 | PHENOMENON:4-1 |
+| Barycentre du système solaire | sun-0 | PHENOMENON:sun-0 |
+| Soleil | sun-99 | PHENOMENON:sun-99 |
+| Mecure | sun-1-99 | PHENOMENON:sun-1-99 |
+| Vénus | sun-2-99 | PHENOMENON:sun-2-99 |
+| Mars | sun-4-99 | PHENOMENON:sun-4-99 |
+| Phobos | sun-4-1 | PHENOMENON:sun-4-1 |
 
 #### Codes d'ellipsoïdes
 
 | géométrie de référence | code | identifiant sans autorité |
 | :--- | :-- | :----------------------- |
-| Ellipsoide défini par l'UAI en 2000 pour Mercure | 2000:1-99:default | ELLIPSOID:2000:1-99:default |
+| Ellipsoide défini par l'UAI en 2000 pour Mercure | 2000:sun-1-99:default | ELLIPSOID:2000:sun-1-99:default |
 
 
 #### Codes de systèmes de méridiens premiers
 
 | système de méridiens premiers | code | identifiant sans autorité |
 | :--- | :-- | :----------------------- |
-| Croûte de Mercure | 1-99:crust | PMS:1-99:crust |
+| Croûte de Mercure | sun-1-99:crust | PMS:sun-1-99:crust |
 
 #### Codes de méridiens premiers
 
 | méridien premier | code | identifiant sans autorité |
 | :--- | :-- | :----------------------- |
-| Méridien Hun Kal de Mercure | 1-99:crust:hun_kal | PM:1-99:crust:hun_kal |
+| Méridien Hun Kal de Mercure | sun-1-99:crust:hun_kal | PM:sun-1-99:crust:hun_kal |
 
 #### Codes de datums
 
 | datum | code | identifiant sans autorité |
 | :--- | :-- | :----------------------- |
-| Datum implicitement défini sur Mercure par l'UAI en 2000 | 1-99:2000 | DATUM:1-99:2000 |
+| Datum implicitement défini sur Mercure par l'UAI en 2000 | sun-1-99:2000 | DATUM:sun-1-99:2000 |
 
 #### Codes de systèmes de coordonnées
 
@@ -492,6 +531,6 @@ coordinate_reference_system_code := CRS:<local_id>
 
 | système de coordonnées de coordonnées de référence | code | identifiant sans autorité |
 | :--- | :-- | :----------------------- |
-| CRS planétocentrique défini sur Mercure en 2000 par l'UAI | 2000:1-99:planetocentric | CRS:2000:1-99:planetocentric |
-| CRS planétographique défini sur Mercure en 2000 par l'UAI | 2000:1-99:planetographic | CRS:2000:1-99:planetographic |
+| CRS planétocentrique défini sur Mercure en 2000 par l'UAI | 2000:sun-1-99:planetocentric | CRS:2000:1-99:planetocentric |
+| CRS planétographique défini sur Mercure en 2000 par l'UAI | 2000:sun-1-99:planetographic | CRS:2000:1-99:planetographic |
 

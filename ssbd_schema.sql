@@ -8,14 +8,14 @@
 begin;
 
 
--- phenomenon (concept code : BODY)
+-- phenomenon (concept code : PHENOMENON)
 --
 -- purpose: Information of the phenomenon on which a reference system is defined.
 --
--- phenomenon_code: For the moment, identifier derived from naif codes, but it seems they are not the official names used by
--- the IAU.
+-- phenomenon_code: For the moment, identifier derived from naif codes, but it seems they are not the official names
+-- used by the IAU.
 --
--- phenomenon_name: Usual body name.
+-- phenomenon_name: Usual phenomenon name.
 --
 -- rotation: From rotational elements given in https://astropedia.astrogeology.usgs.gov/download/Docs/WGCCRE/WGCCRE2015reprint.pdf
 -- althrough rotation is not intrinsic to the body but relative to a celestial frame, the information is based on ICRF
@@ -45,8 +45,8 @@ comment on table ssbd_phenomenon is 'The table of the solar system bodies.';
 -- the main solar system bodies like planets or satellites, but may be usefull for other bodies classified by shape and
 -- size.
 --
--- phenomenon_code: This column is indicative and does not focus on a body an ellipsoid would be exclusively used for, but
--- possibly the body for which it has been defined first. It uses the naif body code for now.
+-- phenomenon_code: This column is indicative and does not focus on a body an ellipsoid would be exclusively used for,
+-- but possibly the body for which it has been defined first.
 --
 -- semi_major_axis: (subplanetary) equatorial radius
 --
@@ -102,7 +102,7 @@ comment on column ssbd_ellipsoid.phenomenon_code is 'This column is optional and
 -- note: It would be interesting to reference the absolute primeridian of a given system, but it would significates two
 -- opposite foreign key constraints. May be for a next update...
 create table ssbd_primemeridiansystem (
-    phenomenon_code                                          varchar(254) not null,
+    phenomenon_code                                    varchar(254) not null,
     prime_meridian_system_code                         varchar(254) not null,
     prime_meridian_system_name                         varchar(80) not null,
     remarks                                            varchar(254),
@@ -217,15 +217,15 @@ comment on column ssbd_primemeridiansystem.phenomenon_code is 'This column is ma
 --
 -- system_code: The code of the prime meridian system.
 create table ssbd_primemeridian (
-    phenomenon_code                                          varchar(254) not null,
+    phenomenon_code                                    varchar(254) not null,
     system_code                                        varchar(254) not null,
     prime_meridian_code                                varchar(254) not null,
     prime_meridian_name                                varchar(80) not null,
     relative_longitude                                 double precision not null,
-    relative_longitude_orientation                     character varying(24) not null,
+    relative_longitude_orientation                     varchar(24) not null,
     reference_meridian_longitude                       double precision not null,
     prime_meridian_longitude                           double precision not null,
-    longitude_origin_orientation                       character varying(24) not null,
+    longitude_origin_orientation                       varchar(24) not null,
     uom_code                                           integer not null,
     remarks                                            varchar(254),
     information_source                                 varchar(254),
@@ -252,7 +252,7 @@ create table ssbd_datum (
     origin_description                                 varchar(254),
     realization_epoch                                  varchar(10),
     ellipsoid_code                                     varchar(254),
-    phenomenon_code                                          varchar(254),
+    phenomenon_code                                    varchar(254),
     prime_meridian_system_code                         varchar(254),
     prime_meridian_code                                varchar(254),
     -- area_of_use_code                                   integer not null,
@@ -280,9 +280,9 @@ create table ssbd_coordinatesystem (
     dimension                                           smallint not null,
     remarks                                             varchar(254),
     information_source                                  varchar(254),
-    -- data_source character varying(50) not null,
+    -- data_source varchar(50) not null,
     -- revision_date date not null,
-    -- change_id character varying(255),
+    -- change_id varchar(255),
     -- deprecated smallint not null,
     constraint pk_coordinatesystem primary key ( coord_sys_code )
 );
