@@ -403,7 +403,7 @@ authority := <alphanumeric>+
 ### Grammaire du schéma d'identification des entités de la base SSBD
 
 ```
-string_character = <alphanumeric> | <hyphen> | <underscore>
+string_character := <alphanumeric> | <hyphen> | <underscore>
 
 entity_code := <phenomenon_code> | <ellipsoid_code> | <prime_meridian_system_code>
  | <prime_meridian_code> | <datum_code> | <coordinate_system_code>
