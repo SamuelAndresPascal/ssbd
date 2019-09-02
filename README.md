@@ -106,7 +106,7 @@ En revanche, il n'existe pas de surface solide observable sur les planètes gaze
 
 ```sql
 create table ssbd_primemeridiansystem (
-    phenomenon_code                                          varchar(254) not null,
+    phenomenon_code                                    varchar(254) not null,
     prime_meridian_system_code                         varchar(254) not null,
     prime_meridian_system_name                         varchar(80) not null,
     remarks                                            varchar(254),
@@ -141,7 +141,7 @@ On peut donc finalement définir un méridien premier comme le triplet _(méridi
 
 ```sql
 create table ssbd_primemeridian (
-    phenomenon_code                                          varchar(254) not null,
+    phenomenon_code                                    varchar(254) not null,
     system_code                                        varchar(254) not null,
     prime_meridian_code                                varchar(254) not null,
     prime_meridian_name                                varchar(80) not null,
@@ -188,7 +188,7 @@ create table ssbd_datum (
     origin_description                                 varchar(254),
     realization_epoch                                  varchar(10),
     ellipsoid_code                                     varchar(254),
-    phenomenon_code                                          varchar(254),
+    phenomenon_code                                    varchar(254),
     prime_meridian_system_code                         varchar(254),
     prime_meridian_code                                varchar(254),
     -- area_of_use_code                                   integer not null,
