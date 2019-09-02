@@ -18,9 +18,9 @@ begin;
 -- phenomenon_name: Usual phenomenon name.
 --
 -- rotation: From rotational elements given in https://astropedia.astrogeology.usgs.gov/download/Docs/WGCCRE/WGCCRE2015reprint.pdf
--- althrough rotation is not intrinsic to the body but relative to a celestial frame, the information is based on ICRF
--- and is included into the body table for now. Values must be "direct" or "indirect", relatively to a direct coordinate
--- system.
+-- althrough rotation is not intrinsic to the phenomenon but relative to a celestial frame, the information is based on
+-- the ICRF and is included into the phenomenon table for now. Values must be "direct" or "indirect", relatively to a
+-- direct coordinate system.
 --
 -- see: https://naif.jpl.nasa.gov/pub/naif/toolkit_docs/FORTRAN/req/naif_ids.html
 -- see: https://planetarynames.wr.usgs.gov/Page/Planets
@@ -31,7 +31,7 @@ create table ssbd_phenomenon (
     rotation                                           varchar(24),
     remarks                                            varchar(254),
     information_source                                 varchar(254),
-    constraint pk_body primary key ( phenomenon_code ),
+    constraint pk_phenomenon primary key ( phenomenon_code ),
     constraint vl_phenomenon_rotation check ( rotation in ('direct', 'indirect'))
 );
 
@@ -45,8 +45,8 @@ comment on table ssbd_phenomenon is 'The table of the solar system bodies.';
 -- the main solar system bodies like planets or satellites, but may be usefull for other bodies classified by shape and
 -- size.
 --
--- phenomenon_code: This column is indicative and does not focus on a body an ellipsoid would be exclusively used for,
--- but possibly the body for which it has been defined first.
+-- phenomenon_code: This column is indicative and does not focus on a phenomenon an ellipsoid would be exclusively used
+-- for, but possibly the phenomenon for which it has been defined first.
 --
 -- semi_major_axis: (subplanetary) equatorial radius
 --
@@ -91,7 +91,7 @@ create table ssbd_ellipsoid (
 
 alter table ssbd_ellipsoid add constraint fk_phenomenon_code foreign key ( phenomenon_code ) references ssbd_phenomenon ( phenomenon_code ) ;
 
-comment on column ssbd_ellipsoid.phenomenon_code is 'This column is optional and indicative about the body for which the ellipsoid has been defined. It may be null and even if it is not, it does not mean the ellipsoid is exclusively defined for the related body.';
+comment on column ssbd_ellipsoid.phenomenon_code is 'This column is optional and indicative about the phenomenon for which the ellipsoid has been defined. It may be null and even if it is not, it does not mean the ellipsoid is exclusively defined for the related phenomenon.';
 
 
 -- prime meridian system (concept code : PMS)
@@ -116,7 +116,7 @@ create table ssbd_primemeridiansystem (
 
 alter table ssbd_primemeridiansystem add constraint fk_phenomenon_code foreign key ( phenomenon_code ) references ssbd_phenomenon ( phenomenon_code ) ;
 
-comment on column ssbd_primemeridiansystem.phenomenon_code is 'This column is mandatory and defines the body on which meridians and datums are defined.';
+comment on column ssbd_primemeridiansystem.phenomenon_code is 'This column is mandatory and defines the phenomenon on which meridians and datums are defined.';
 
 
 -- prime meridian (concept code : PM)
@@ -128,7 +128,7 @@ comment on column ssbd_primemeridiansystem.phenomenon_code is 'This column is ma
 --
 -- Following this acceptation, "prime meridian" is no longer a synonym of "reference meridian" or "longitude origin"
 -- but only the link, between different couples (longitude origin, reference meridian) of a given prime meridian system
--- on a body (i.e. Greenwich longitudes on earth crust).
+-- on a phenomenon (i.e. Greenwich longitudes on earth crust).
 --
 -- Earth usage is to give a single significance to "reference meridian" and "origin of longitudes". So, there is no
 -- need to distinguish both concepts. Since it is necessary to split longitude origin considerations from reference

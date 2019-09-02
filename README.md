@@ -22,7 +22,7 @@ Dans un premier temps SSBD s'appuie sur le schéma de la base de données EPSG c
 
 Commentaires sur les relations et les champs remarquables.
 
-### Body - planètes et satellites du système solaire
+### Phenomenon - phénomènes remarquables, planètes et satellites du système solaire
 
 ```sql
 create table ssbd_phenomenon (
@@ -31,7 +31,7 @@ create table ssbd_phenomenon (
     rotation                                           varchar(24),
     remarks                                            varchar(254),
     information_source                                 varchar(254),
-    constraint pk_body primary key ( phenomenon_code ),
+    constraint pk_phenomenon primary key ( phenomenon_code ),
     constraint vl_phenomenon_rotation check ( rotation in ('direct', 'indirect'))
 );
 ```
