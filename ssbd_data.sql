@@ -613,11 +613,12 @@ insert into ssbd_ellipsoid values ('2009:sun-4-99:spherical', 'sun-4-99', 'Spher
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009');
 insert into ssbd_ellipsoid values ('2009:sun-4-99:ellipsoidal', 'sun-4-99', 'Ellipsoidal Mars 2009 IAU', 3396190.00, 100., 9001, null, 3376200.00, 100.,
-null, null, null, null,
+ null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009');
 insert into ssbd_ellipsoid values ('2009:sun-4-99:default', 'sun-4-99', 'Quadriaxial Mars 2009 IAU', 3396190.00, 100., 9001, null, 3373190.00, 100.,
- 3379210.00, 100., null, null,
- null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009');
+ null, null, 3379210.00, 100.,
+ 'This ellipsoid is considered quadriaxial even if subplanetary and along orbit equatorial axes are equal.',
+ 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009');
 insert into ssbd_ellipsoid values ('2009:sun-4-1:spherical', 'sun-4-1', 'Spherical Phobos 2009 IAU', 11080.00, 40., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009');
@@ -1062,7 +1063,8 @@ insert into ssbd_ellipsoid values ('2015:sun-4-99:ellipsoidal', 'sun-4-99', 'Ell
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015');
 insert into ssbd_ellipsoid values ('2015:sun-4-99:default', 'sun-4-99', 'Quadriaxial Mars 2015 IAU', 3396190.00, null, 9001, null, 3373190.00, 10.,
  null, null, 3379210., 10.,
- null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015');
+ 'This ellipsoid is considered quadriaxial even if subplanetary and along orbit equatorial axes are equal.',
+ 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015');
 insert into ssbd_ellipsoid values ('2015:sun-4-1:spherical', 'sun-4-1', 'Spherical Phobos 2015 IAU', 11080.00, 40., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015');
@@ -1511,19 +1513,19 @@ insert into ssbd_ellipsoid values ('2015:2025143:default', 'sun-2025143', 'Itoka
 -- <identifiant de corps>:<identifiant du système pour le corps>
 --
 -- exemple : 'sun-1-99:crust' identifie le système de méridiens origines attachés à la croûte de Mercure
-insert into ssbd_primemeridiansystem values ('sun-1-99', 'crust', 'Mercury crust system', 0., 0., 1035, null, null);
-insert into ssbd_primemeridiansystem values ('sun-2-99', 'crust', 'Venus crust system', 0., 0., 1035, null, null);
-insert into ssbd_primemeridiansystem values ('sun-4-99', 'crust', 'Mars crust system', 0., 0., 1035, null, null);
-insert into ssbd_primemeridiansystem values ('sun-5-99', '1', 'System I Jupiter', 0., 0., 1035, 'Refers to the mean atmospheric equatorial rotation.', null);
-insert into ssbd_primemeridiansystem values ('sun-5-99', '2', 'System II Jupiter', 0., 0., 1035, 'Refers to the mean atmospheric rotation north of the south component of the north equatorial belt, and south of the north component of the south equatorial belt.', null);
-insert into ssbd_primemeridiansystem values ('sun-5-99', '3', 'System III Jupiter', 0., 0., 1035, 'Refers to the magnetic field rotation.', null);
-insert into ssbd_primemeridiansystem values ('sun-6-99', '1', 'System I Saturn', 0., 0., 1035, 'Refers to the mean atmospheric equatorial rotation.', null);
-insert into ssbd_primemeridiansystem values ('sun-6-99', '2', 'System II Saturn', 0., 0., 1035, 'Refers to the mean atmospheric rotation north of the south component of the north equatorial belt, and south of the north component of the south equatorial belt.', null);
-insert into ssbd_primemeridiansystem values ('sun-6-99', '3', 'System III Saturn', 0., 0., 1035, 'Refers to the magnetic field rotation.', null);
-insert into ssbd_primemeridiansystem values ('sun-7-99', '1', 'System I Uranus', 0., 0., 1035, 'Refers to the mean atmospheric equatorial rotation.', null);
-insert into ssbd_primemeridiansystem values ('sun-7-99', '2', 'System II Uranus', 0., 0., 1035, 'Refers to the mean atmospheric rotation north of the south component of the north equatorial belt, and south of the north component of the south equatorial belt.', null);
-insert into ssbd_primemeridiansystem values ('sun-7-99', '3', 'System III Uranus', 0., 0., 1035, 'Refers to the magnetic field rotation.', null);
-insert into ssbd_primemeridiansystem values ('sun-8-99', '2', 'System II Neptune', 0., 0., 1035, 'Refers to the rotation of optically observed features in the Neptunian atmosphere.', null);
+insert into ssbd_primemeridiansystem values ('sun-1-99', 'crust', 'Mercury crust system', null, 0., 1035, null, null);
+insert into ssbd_primemeridiansystem values ('sun-2-99', 'crust', 'Venus crust system', null, 0., 1035, null, null);
+insert into ssbd_primemeridiansystem values ('sun-4-99', 'crust', 'Mars crust system', null, 0., 1035, null, null);
+insert into ssbd_primemeridiansystem values ('sun-5-99', '1', 'System I Jupiter', null, 0., 1035, 'Refers to the mean atmospheric equatorial rotation.', null);
+insert into ssbd_primemeridiansystem values ('sun-5-99', '2', 'System II Jupiter', null, 0., 1035, 'Refers to the mean atmospheric rotation north of the south component of the north equatorial belt, and south of the north component of the south equatorial belt.', null);
+insert into ssbd_primemeridiansystem values ('sun-5-99', '3', 'System III Jupiter', null, 0., 1035, 'Refers to the magnetic field rotation.', null);
+insert into ssbd_primemeridiansystem values ('sun-6-99', '1', 'System I Saturn', null, 0., 1035, 'Refers to the mean atmospheric equatorial rotation.', null);
+insert into ssbd_primemeridiansystem values ('sun-6-99', '2', 'System II Saturn', null, 0., 1035, 'Refers to the mean atmospheric rotation north of the south component of the north equatorial belt, and south of the north component of the south equatorial belt.', null);
+insert into ssbd_primemeridiansystem values ('sun-6-99', '3', 'System III Saturn', null, 0., 1035, 'Refers to the magnetic field rotation.', null);
+insert into ssbd_primemeridiansystem values ('sun-7-99', '1', 'System I Uranus', null, 0., 1035, 'Refers to the mean atmospheric equatorial rotation.', null);
+insert into ssbd_primemeridiansystem values ('sun-7-99', '2', 'System II Uranus', null, 0., 1035, 'Refers to the mean atmospheric rotation north of the south component of the north equatorial belt, and south of the north component of the south equatorial belt.', null);
+insert into ssbd_primemeridiansystem values ('sun-7-99', '3', 'System III Uranus', null, 0., 1035, 'Refers to the magnetic field rotation.', null);
+insert into ssbd_primemeridiansystem values ('sun-8-99', '2', 'System II Neptune', null, 0., 1035, 'Refers to the rotation of optically observed features in the Neptunian atmosphere.', null);
 
 -- on construit un identifiant de méridien origine de la manière suivante :
 -- <identifiant de sytème de méridien origine>:<identifiant de méridien origine dans le système>
