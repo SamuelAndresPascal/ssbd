@@ -12,15 +12,10 @@ begin;
 --
 -- purpose: Information of the phenomenon on which a reference system is defined.
 --
--- phenomenon_code: For the moment, identifier derived from naif codes, but it seems they are not the official names
--- used by the IAU.
+-- phenomenon_code: for the moment, identifier derived from naif codes, but it seems they are not the official names
+-- used by the IAU
 --
--- phenomenon_name: Usual phenomenon name.
---
--- rotation: From rotational elements given in https://astropedia.astrogeology.usgs.gov/download/Docs/WGCCRE/WGCCRE2015reprint.pdf
--- althrough rotation is not intrinsic to the phenomenon but relative to a celestial frame, the information is based on
--- the ICRF and is included into the phenomenon table for now. Values must be "direct" or "indirect", relatively to a
--- direct coordinate system.
+-- phenomenon_name: usual phenomenon name
 --
 -- see: https://naif.jpl.nasa.gov/pub/naif/toolkit_docs/FORTRAN/req/naif_ids.html
 -- see: https://planetarynames.wr.usgs.gov/Page/Planets
@@ -28,11 +23,9 @@ begin;
 create table ssbd_phenomenon (
     phenomenon_code                                    varchar(254),
     phenomenon_name                                    varchar(80) not null,
-    rotation                                           varchar(24),
     remarks                                            varchar(254),
     information_source                                 varchar(254),
-    constraint pk_phenomenon primary key ( phenomenon_code ),
-    constraint vl_phenomenon_rotation check ( rotation in ('direct', 'indirect'))
+    constraint pk_phenomenon primary key ( phenomenon_code )
 );
 
 comment on table ssbd_phenomenon is 'The table of the solar system bodies.';
@@ -45,8 +38,8 @@ comment on table ssbd_phenomenon is 'The table of the solar system bodies.';
 -- the main solar system bodies like planets or satellites, but may be usefull for other bodies classified by shape and
 -- size.
 --
--- phenomenon_code: This column is indicative and does not focus on a phenomenon an ellipsoid would be exclusively used
--- for, but possibly the phenomenon for which it has been defined first.
+-- phenomenon_code: this column is indicative and does not focus on a phenomenon an ellipsoid would be exclusively used
+-- for, but possibly the phenomenon for which it has been defined first
 --
 -- semi_major_axis: (subplanetary) equatorial radius
 --
@@ -96,8 +89,10 @@ comment on column ssbd_ellipsoid.phenomenon_code is 'This column is optional and
 
 -- prime meridian system (concept code : PMS)
 --
--- purpose: Information on the physical phenomenon that provides the reference by which related prime meridians are
--- defined (planet crust, atmospherical or magnetic phenomenon...).
+-- purpose: information on the physical phenomenon that provides the reference by which related prime meridians are
+-- defined (planet crust, atmospherical or magnetic phenomenon...)
+--
+-- rotation: rotation relative to the International Celestial Reference Frame
 --
 -- note: It would be interesting to reference the absolute primeridian of a given system, but it would significates two
 -- opposite foreign key constraints. May be for a next update...
@@ -105,6 +100,9 @@ create table ssbd_primemeridiansystem (
     phenomenon_code                                    varchar(254) not null,
     prime_meridian_system_code                         varchar(254) not null,
     prime_meridian_system_name                         varchar(80) not null,
+    rotation                                           double precision not null,
+    rotation_error                                     double precision not null,
+    uom_code                                           integer not null,
     remarks                                            varchar(254),
     information_source                                 varchar(254),
     -- data_source                                        varchar(40) not null,

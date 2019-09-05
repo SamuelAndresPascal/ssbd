@@ -28,7 +28,6 @@ Commentaires sur les relations et les champs remarquables.
 create table ssbd_phenomenon (
     phenomenon_code                                    varchar(254),
     phenomenon_name                                    varchar(80) not null,
-    rotation                                           varchar(24),
     remarks                                            varchar(254),
     information_source                                 varchar(254),
     constraint pk_phenomenon primary key ( phenomenon_code ),
@@ -37,8 +36,6 @@ create table ssbd_phenomenon (
 ```
 
 `phenomenon_code` : Un code d'identification des planètes et satellites construit à partir des [codes NAIF](https://naif.jpl.nasa.gov/pub/naif/toolkit_docs/FORTRAN/req/naif_ids.html) mais de manière à permettre d'associer un nombre illimité de satellites à chaque système de masses des principaux corps du système solaire. Ce choix est susceptible d'évolution.
-
-`rotation` : Sens de rotation du corps référencé dans l'ICRF (_International Celestial Reference Frame_).
 
 ### Ellipsoid - forme des planètes et satellites
 
@@ -109,6 +106,9 @@ create table ssbd_primemeridiansystem (
     phenomenon_code                                    varchar(254) not null,
     prime_meridian_system_code                         varchar(254) not null,
     prime_meridian_system_name                         varchar(80) not null,
+    rotation                                           double precision,
+    rotation_error                                     double precision,
+    uom_code                                           integer,
     remarks                                            varchar(254),
     information_source                                 varchar(254),
     -- data_source                                        varchar(40) not null,
@@ -119,9 +119,11 @@ create table ssbd_primemeridiansystem (
 );
 ```
 
+`phenomenon_code` : Le code d'identification du corps sur lequel est défini le système de méridien. Ce code est obligatoire et définit par extension le corps sur lequel est défini un méridien premier ainsi que, par voie de conséquence, les datums et les systèmes de référence qui l'utilisent.
+
 `prime_meridian_system_code` : Un code d'identification des systèmes de méridiens premiers de la base SSBD pour un corps donné.
 
-`phenomenon_code` : Le code d'identification du corps sur lequel est défini le système de méridien. Ce code est obligatoire et définit par extension le corps sur lequel est défini un méridien premier ainsi que, par voie de conséquence, les datums et les systèmes de référence qui l'utilisent.
+`rotation` : Rotation du système de méridiens référencé dans l'ICRF (_International Celestial Reference Frame_).
 
 ### Primemeridan - méridiens premiers, méridiens de référence, origines des longitudes
 
