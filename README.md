@@ -31,7 +31,6 @@ create table ssbd_phenomenon (
     remarks                                            varchar(254),
     information_source                                 varchar(254),
     constraint pk_phenomenon primary key ( phenomenon_code ),
-    constraint vl_phenomenon_rotation check ( rotation in ('direct', 'indirect'))
 );
 ```
 
@@ -405,41 +404,43 @@ authority := <alphanumeric>+
 ### Grammaire du schéma d'identification des entités de la base SSBD
 
 ```
-string_character := <alphanumeric> | <hyphen> | <underscore>
 
-entity_code := <phenomenon_code> | <ellipsoid_code> | <prime_meridian_system_code>
+<entity_code> := <phenomenon_code> | <ellipsoid_code> | <prime_meridian_system_code>
  | <prime_meridian_code> | <datum_code> | <coordinate_system_code>
  | <coordinate_system_axis_code> | <coordinate_reference_system_code>
 
-phenomenon_code := PHENOMENON:<phenomenon_suffix>
+<phenomenon_code> := PHENOMENON:<phenomenon_suffix>
 
-phenomenon_suffix := <system_code><hyphen><alphanumeric>+(<hyphen><alphanumeric>+)*
+<phenomenon_suffix> := <system_code><hyphen><alphanumeric>+(<hyphen><alphanumeric>+)*
 
-system_code := (<alphenumeric> | <underscore>)+
+<system_code> := (<alphenumeric> | <underscore>)+
 
-ellipsoid_code := ELLIPSOID:<local_id>
+<ellipsoid_code> := ELLIPSOID:<local_id>
 
-prime_meridian_system_code := PMS:<phenomenon_suffix>:<prime_meridian_system_suffix>
+<prime_meridian_system_code> := PMS:<phenomenon_suffix>:<prime_meridian_system_suffix>
 
-prime_meridian_system_suffix := <string_character>+
+<prime_meridian_system_suffix> := <string_character>+
 
-prime_meridian_code := PM:<phenomenon_suffix>:<prime_meridian_system_suffix>:<prime_meridian_suffix>
+<prime_meridian_code> := PM:<phenomenon_suffix>:<prime_meridian_system_suffix>:<prime_meridian_suffix>
 
-prime_meridian_suffix := <string_character>+
+<prime_meridian_suffix> := <string_character>+
 
-datum_code := DATUM:<phenomenon_suffix>:<local_datum_id>
+<datum_code> := DATUM:<phenomenon_suffix>:<local_datum_id>
 
-local_datum_id := <local_id>
+<local_datum_id> := <local_id>
 
-coordinate_system_code := CS:<local_id>
+<coordinate_system_code> := CS:<local_id>
 
 # la partie <local_id> d'un code d'axe de système de coordonnées doit correspondre au <local_id> du système de coordonnées
 # la partie <numeric> d'un code d'axe de système de coordonnées doit correspondre à l'index de cet axe dans le système
-coordinate_system_axis_code := CSA:<local_id>:<numeric>
+<coordinate_system_axis_code> := CSA:<local_id>:<numeric>
 
-coordinate_reference_system_code := CRS:<local_id>
+<coordinate_reference_system_code> := CRS:<local_id>
 
 <local_id> := <string_character>+(<colon><string_character>+)*
+
+<string_character> := <alphanumeric> | <hyphen> | <underscore>
+
 ```
 
 ### Exemples
