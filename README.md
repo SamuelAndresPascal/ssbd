@@ -147,10 +147,10 @@ create table ssbd_primemeridian (
     prime_meridian_code                                varchar(254) not null,
     prime_meridian_name                                varchar(80) not null,
     relative_longitude                                 double precision not null,
-    relative_longitude_orientation                     character varying(24) not null,
+    relative_longitude_orientation                     varchar(24),
     reference_meridian_longitude                       double precision not null,
     prime_meridian_longitude                           double precision not null,
-    longitude_origin_orientation                       character varying(24) not null,
+    longitude_orientation                              varchar(24) not null,
     uom_code                                           integer not null,
     remarks                                            varchar(254),
     information_source                                 varchar(254),
@@ -158,7 +158,9 @@ create table ssbd_primemeridian (
     -- revision_date                                      date not null,
     -- change_id                                          varchar(255),
     -- deprecated                                         smallint not null,
-    constraint pk_primemeridian primary key ( phenomenon_code, system_code, prime_meridian_code )
+    constraint pk_primemeridian primary key ( phenomenon_code, system_code, prime_meridian_code ),
+    constraint ck_primemeridian_relative_longitude_orientation check (relative_longitude_orientation in ('direct', 'indirect', 'prograde', 'retrograde')),
+    constraint ck_primemeridian_longitude_orientation check (longitude_orientation in ('direct', 'indirect', 'prograde', 'retrograde'))
 );
 ```
 
@@ -166,13 +168,13 @@ create table ssbd_primemeridian (
 
 `relative_longitude` : Décalage de longitude entre le méridien premier courant et le méridien premier absolu du système de méridien premiers. Il s'agit de la différence de l'angle entre le méridien premier courant et le méridien premier absolu du système.
 
-`relative_longitude_orientation` : Convention de l'orientation des longitudes positives à appliquer pour la mesure de l'angle de longitude relative du méridien premier. L'orientation peut être relative à la rotation du corps ('prograde', 'retrograde') ou utiliser le référentiel dans lequel le corps est repéré ('direct', 'indirect'). 
+`relative_longitude_orientation` : Convention de l'orientation des longitudes positives à appliquer pour la mesure de l'angle de longitude relative du méridien premier. L'orientation peut être relative à la rotation du corps ('prograde', 'retrograde') ou utiliser le référentiel auquel le système est attaché (ICRF) ('direct', 'indirect'). 
 
 `reference_meridian_longitude` : Longitude du méridien de référence mesurée à partir de l'origine des longitudes.
 
 `prime_meridian_longitude` : Longitude du méridien premier mesurée à partir de l'origine des longitudes.
 
-`longitude_origin_orientation` : Convention de l'orientation des longitudes positives à appliquer pour les mesures des angles le longitude du méridien de référence et de longitude du méridien premier à partir de l'origine des longitudes. L'orientation peut être relative à la rotation du corps ('prograde', 'retrograde') ou utiliser le référentiel dans lequel le corps est repéré ('direct', 'indirect'). 
+`longitude_origin_orientation` : Convention de l'orientation des longitudes positives à appliquer pour les mesures des angles le longitude du méridien de référence et de longitude du méridien premier à partir de l'origine des longitudes. L'orientation peut être relative à la rotation du corps ('prograde', 'retrograde') ou utiliser le référentiel auquel le système est attaché (ICRF) ('direct', 'indirect'). 
 
 `uom_code` : Code EPSG de l'unité utilisée pour les mesures des angles de définition du méridien premier.
 
@@ -537,3 +539,105 @@ Enfin, le code d'un phénomène étant relatif au système racine considéré, i
 | CRS planétocentrique défini sur Mercure en 2000 par l'UAI | 2000:sun-1-99:planetocentric | CRS:2000:sun-1-99:planetocentric |
 | CRS planétographique défini sur Mercure en 2000 par l'UAI | 2000:sun-1-99:planetographic | CRS:2000:sun-1-99:planetographic |
 
+## Propositions d'évolutions syntaxiques
+
+
+### WKT (version Simple Features)
+
+```
+<prime meridian> = PRIMEM["<name>",<relative longitude>{,<relative longitude orientation>}{,<prime meridian system>}
+{,<reference meridian longitude>{,<prime meridian longitude>}{,<longitude orientation>}}]
+
+# must be assumed to be equal to 0.0 if not present
+<relative longitude> = <longitude>
+
+# must be present if and only if relative longitude is not equal to 0.0 ; must not otherwise
+<relative longitude orientation> = "direct" | "indirect" | "prograde" | "retrograde"
+
+# must be assumed to be equal to 0.0 if not present
+<reference meridian longitude> = <number>
+
+# must be assumed to be equal to 0.0 if not present
+<prime meridian longitude> = <number>
+
+# must be present if and only if one of reference meridian longitude or prime meridian longitude is not equal to 0.0 ;
+# must not otherwise
+<longitude orientation> = "direct" | "indirect" | "prograde" | "retrograde"
+
+<prime meridian system> = PRIMEMS["<name>"{,<phenomenon>}{,<rotation>}]
+
+# must be expressed in rad/s, negative for an indirect rotation and positive otherwise
+<rotation> = <number>
+
+<phenomenon> = PHENOMENON["<name>"]
+```
+
+#### Exemples
+
+```
+PRIMEM["Hun Kal Mercury Meridian",0.0,
+PRIMEMS["Mercury crust system",
+PHENOMENON["Mercury"],0.004264857],20.0,20.0]
+
+ELLIPSOID["Mercury 2000 IAU",2439700.0]
+
+ELLIPSOID["Triaxial Ganymede 2000 IAU",2632400.0,2632290.0,2632350.0]
+
+ELLIPSOID["Ellipsoidal Mars 2009 IAU",3396190.0,169.8944472236118]
+
+ELLIPSOID["Quadriaxial Mars 2000 IAU",3396190.0,3373190.0,0.0,3379210.0]
+```
+
+### WKT (version Coordinate Transformation Services)
+
+#### Modification de la grammaire
+
+```
+<prime meridian> = PRIMEM["<name>",<relative longitude>{,<relative longitude orientation>}{,<prime meridian system>}
+{,<reference meridian longitude>{,<prime meridian longitude>}{,<longitude orientation>}}{,<authority>}]
+
+# must be assumed to be equal to 0.0 if not present
+<relative longitude> = <longitude>
+
+# must be present if and only if relative longitude is not equal to 0.0 ; must not otherwise
+<relative longitude orientation> = "direct" | "indirect" | "prograde" | "retrograde"
+
+# must be assumed to be equal to 0.0 if not present
+<reference meridian longitude> = <number>
+
+# must be assumed to be equal to 0.0 if not present
+<prime meridian longitude> = <number>
+
+# must be present if and only if one of reference meridian longitude or prime meridian longitude is not equal to 0.0 ;
+# must not otherwise
+<longitude orientation> = "direct" | "indirect" | "prograde" | "retrograde"
+
+<prime meridian system> = PRIMEMS["<name>"{,<phenomenon>}{,<rotation>}{,<authority>}]
+
+# must be expressed in rad/s, negative for an indirect rotation and positive otherwise
+<rotation> = <number>
+
+<phenomenon> = PHENOMENON["<name>"{,<authority>}]
+```
+
+#### Exemples
+
+```
+PRIMEM["Hun Kal Mercury Meridian",0.0,
+PRIMEMS["Mercury crust system",
+PHENOMENON["Mercury",AUTHORITY["SSBD","sun-1-99"]],0.004264857,
+AUTHORITY["SSBD","sun-1-99:crust"]],20.0,20.0,
+AUTHORITY["SSBD","sun-1-99:crust:hun_kal"]]
+
+ELLIPSOID["Mercury 2000 IAU",2439700.0,
+AUTHORITY["SSBD","2000:sun-1-99:default"]]
+
+ELLIPSOID["Triaxial Ganymede 2000 IAU",2632400.0,2632290.0,2632350.0,
+AUTHORITY["SSBD","2000:sun-5-3:triaxial"]]
+
+ELLIPSOID["Ellipsoidal Mars 2009 IAU",3396190.0,169.8944472236118,
+AUTHORITY["SSBD","2009:sun-4-99:ellipsoidal"]]
+
+ELLIPSOID["Quadriaxial Mars 2000 IAU",3396190.0,3373190.0,0.0,3379210.0,
+AUTHORITY["SSBD","2000:sun-4-99:default"]]
+```

@@ -199,8 +199,9 @@ comment on column ssbd_primemeridiansystem.phenomenon_code is 'This column is ma
 -- system.
 --
 -- relative_longitude_orientation: The orientation of positive longitude for the relative longitude measurement. The
--- orientation may be based on the planet rotation (prograde, retrograde) or based on the celestial reference frame
--- referenced by the body of the prime meridian system.
+-- orientation may be based on the prime meridian system rotation (prograde, retrograde) or based on the celestial
+-- reference frame of the prime meridian system (direct, indirect). NULL if and only if the meridian is the absolute
+-- prime meridian of the prime meridian system.
 --
 -- reference_meridian_longitude: Longitude of the reference meridian (from the longitude origin). It is the longitude
 -- where the physical reference passes through.
@@ -210,8 +211,8 @@ comment on column ssbd_primemeridiansystem.phenomenon_code is 'This column is ma
 -- system.
 --
 -- longitude_origin_orientation: The orientation of positive longitude for reference meridian and prime meridian
--- longitude measurements. The orientation may be based on the planet rotation (prograde, retrograde, west, east) or
--- based on the celestial reference frame attached to the body of the prime meridian system.
+-- longitude measurements. The orientation may be based on the planet rotation (prograde, retrograde) or
+-- based on the celestial reference frame of the prime meridian system (direct, indirect).
 --
 -- system_code: The code of the prime meridian system.
 create table ssbd_primemeridian (
@@ -220,10 +221,10 @@ create table ssbd_primemeridian (
     prime_meridian_code                                varchar(254) not null,
     prime_meridian_name                                varchar(80) not null,
     relative_longitude                                 double precision not null,
-    relative_longitude_orientation                     varchar(24) not null,
+    relative_longitude_orientation                     varchar(24),
     reference_meridian_longitude                       double precision not null,
     prime_meridian_longitude                           double precision not null,
-    longitude_origin_orientation                       varchar(24) not null,
+    longitude_orientation                              varchar(24) not null,
     uom_code                                           integer not null,
     remarks                                            varchar(254),
     information_source                                 varchar(254),
@@ -231,7 +232,9 @@ create table ssbd_primemeridian (
     -- revision_date                                      date not null,
     -- change_id                                          varchar(255),
     -- deprecated                                         smallint not null,
-    constraint pk_primemeridian primary key ( phenomenon_code, system_code, prime_meridian_code )
+    constraint pk_primemeridian primary key ( phenomenon_code, system_code, prime_meridian_code ),
+    constraint ck_primemeridian_relative_longitude_orientation check (relative_longitude_orientation in ('direct', 'indirect', 'prograde', 'retrograde')),
+    constraint ck_primemeridian_longitude_orientation check (longitude_orientation in ('direct', 'indirect', 'prograde', 'retrograde'))
 );
 
 alter table ssbd_primemeridian add constraint fk_system_code foreign key ( phenomenon_code, system_code ) references ssbd_primemeridiansystem ( phenomenon_code, prime_meridian_system_code ) ;

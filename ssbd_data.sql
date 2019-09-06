@@ -1513,7 +1513,7 @@ insert into ssbd_ellipsoid values ('2015:2025143:default', 'sun-2025143', 'Itoka
 -- <identifiant de corps>:<identifiant du système pour le corps>
 --
 -- exemple : 'sun-1-99:crust' identifie le système de méridiens origines attachés à la croûte de Mercure
-insert into ssbd_primemeridiansystem values ('sun-1-99', 'crust', 'Mercury crust system', null, 0., 1035, null, null);
+insert into ssbd_primemeridiansystem values ('sun-1-99', 'crust', 'Mercury crust system', 0.004264857, 0.000000364, 1035, null, null);
 insert into ssbd_primemeridiansystem values ('sun-2-99', 'crust', 'Venus crust system', null, 0., 1035, null, null);
 insert into ssbd_primemeridiansystem values ('sun-4-99', 'crust', 'Mars crust system', null, 0., 1035, null, null);
 insert into ssbd_primemeridiansystem values ('sun-5-99', '1', 'System I Jupiter', null, 0., 1035, 'Refers to the mean atmospheric equatorial rotation.', null);
