@@ -570,6 +570,21 @@ Enfin, le code d'un phénomène étant relatif au système racine considéré, i
 <rotation> = <number>
 
 <phenomenon> = PHENOMENON["<name>"]
+
+<spheroid> = SPHEROID | ELLIPSOID ["<name>"{,<semi major axis>{,<second parameter>{,<third parameter>{,<fourth parameter>}}}}]
+
+# inverse flattening if and only if there is no along orbit equatorial radius and no south pole radius ;
+# polar radius if there is along orbit equatorial radius and no south pole radius ;
+# north pole radius if there is a south pole radius
+# can be omitted in the case of a sphere
+<second parameter> = <number>
+
+# must be present if and only if along orbit equatorial radius is not equal to semi major axis
+# OR if south pole radius is not equal to north pole radius
+<third parameter> = <number>
+
+# must be present if and only if the south pole radius is not equal to north pole radius
+<fourth parameter> = <number>
 ```
 
 #### Exemples
@@ -581,11 +596,11 @@ PHENOMENON["Mercury"],0.004264857],20.0,20.0]
 
 ELLIPSOID["Mercury 2000 IAU",2439700.0]
 
-ELLIPSOID["Triaxial Ganymede 2000 IAU",2632400.0,2632290.0,2632350.0]
+ELLIPSOID["Triaxial Ganymede 2000 IAU",2632400.0,2632350.0,2632290.0]
 
 ELLIPSOID["Ellipsoidal Mars 2009 IAU",3396190.0,169.8944472236118]
 
-ELLIPSOID["Quadriaxial Mars 2000 IAU",3396190.0,3373190.0,0.0,3379210.0]
+ELLIPSOID["Quadriaxial Mars 2000 IAU",3396190.0,3373190.0,3396190.0,3379210.0]
 ```
 
 ### WKT (version Coordinate Transformation Services)
@@ -618,6 +633,21 @@ ELLIPSOID["Quadriaxial Mars 2000 IAU",3396190.0,3373190.0,0.0,3379210.0]
 <rotation> = <number>
 
 <phenomenon> = PHENOMENON["<name>"{,<authority>}]
+
+<spheroid> = SPHEROID | ELLIPSOID ["<name>"{,<semi major axis>{,<second parameter>{,<third parameter>{,<fourth parameter>}}}}]
+
+# inverse flattening if and only if there is no along orbit equatorial radius and no south pole radius ;
+# polar radius if there is along orbit equatorial radius and no south pole radius ;
+# north pole radius if there is a south pole radius
+# can be omitted in the case of a sphere
+<second parameter> = <number>
+
+# must be present if and only if along orbit equatorial radius is not equal to semi major axis
+# OR if south pole radius is not equal to north pole radius
+<third parameter> = <number>
+
+# must be present if and only if the south pole radius is not equal to north pole radius
+<fourth parameter> = <number>
 ```
 
 #### Exemples
@@ -632,12 +662,12 @@ AUTHORITY["SSBD","sun-1-99:crust:hun_kal"]]
 ELLIPSOID["Mercury 2000 IAU",2439700.0,
 AUTHORITY["SSBD","2000:sun-1-99:default"]]
 
-ELLIPSOID["Triaxial Ganymede 2000 IAU",2632400.0,2632290.0,2632350.0,
+ELLIPSOID["Triaxial Ganymede 2000 IAU",2632400.0,2632350.0,2632290.0,
 AUTHORITY["SSBD","2000:sun-5-3:triaxial"]]
 
 ELLIPSOID["Ellipsoidal Mars 2009 IAU",3396190.0,169.8944472236118,
 AUTHORITY["SSBD","2009:sun-4-99:ellipsoidal"]]
 
-ELLIPSOID["Quadriaxial Mars 2000 IAU",3396190.0,3373190.0,0.0,3379210.0,
+ELLIPSOID["Quadriaxial Mars 2000 IAU",3396190.0,3373190.0,3396190.0,3379210.0,
 AUTHORITY["SSBD","2000:sun-4-99:default"]]
 ```
