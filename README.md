@@ -634,7 +634,7 @@ ELLIPSOID["Quadriaxial Mars 2000 IAU",3396190.0,3373190.0,3396190.0,3379210.0]
 
 <phenomenon> = PHENOMENON["<name>"{,<authority>}]
 
-<spheroid> = SPHEROID | ELLIPSOID ["<name>"{,<semi major axis>{,<second parameter>{,<third parameter>{,<fourth parameter>}}}}]
+<spheroid> = SPHEROID | ELLIPSOID ["<name>"{,<semi major axis>{,<second parameter>{,<third parameter>{,<fourth parameter>}}}}{,<authority>}]
 
 # inverse flattening if and only if there is no along orbit equatorial radius and no south pole radius ;
 # polar radius if there is along orbit equatorial radius and no south pole radius ;
