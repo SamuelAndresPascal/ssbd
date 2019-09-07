@@ -613,6 +613,30 @@ ELLIPSOID["Triaxial Ganymede 2000 IAU",2632400.0,2632350.0,2632290.0]
 ELLIPSOID["Ellipsoidal Mars 2009 IAU",3396190.0,169.8944472236118]
 
 ELLIPSOID["Quadriaxial Mars 2000 IAU",3396190.0,3373190.0,3396190.0,3379210.0]
+
+
+# planetocentric CRS are ambiguously represented as GEOGCS
+
+GEOGCS["Mercury 2000 planetocentric 3D",
+DATUM["Mercury 2000",
+ELLIPSOID["Mercury 2000 IAU",2439700.0]],
+PRIMEM["Hun Kal Mercury Meridian",0.0,"prograde",
+PRIMEMS["Mercury crust system",
+PHENOMENON["Mercury"],0.004264857],20.0,20.0,"prograde"],
+UNIT["degree (supplier to define representation)",0.017453292519943278],
+UNIT["degree (supplier to define representation)",0.017453292519943278],
+UNIT["metre",1.0]]
+
+
+GEOGCS["Mercury 2000 planetographic 3D",
+DATUM["Mercury 2000",
+ELLIPSOID["Mercury 2000 IAU",2439700.0]],
+PRIMEM["Hun Kal Mercury Meridian",0.0,"prograde",
+PRIMEMS["Mercury crust system",
+PHENOMENON["Mercury"],0.004264857],20.0,20.0,"prograde"],
+UNIT["degree (supplier to define representation)",0.017453292519943278],
+UNIT["degree (supplier to define representation)",0.017453292519943278],
+UNIT["metre",1.0]]
 ```
 
 ### WKT (version Coordinate Transformation Services)
@@ -685,4 +709,36 @@ AUTHORITY["SSBD","2009:sun-4-99:ellipsoidal"]]
 
 ELLIPSOID["Quadriaxial Mars 2000 IAU",3396190.0,3373190.0,3396190.0,3379210.0,
 AUTHORITY["SSBD","2000:sun-4-99:default"]]
+
+
+# planetocentric CRS are ambiguously represented as GEOGCS
+
+GEOGCS["Mercury 2000 planetocentric 3D",
+DATUM["Mercury 2000",
+ELLIPSOID["Mercury 2000 IAU",2439700.0,AUTHORITY["SSBD","2000:sun-1-99:default"]],
+AUTHORITY["SSBD","sun-1-99:2000"]],
+PRIMEM["Hun Kal Mercury Meridian",0.0,"prograde",
+PRIMEMS["Mercury crust system",
+PHENOMENON["Mercury",AUTHORITY["SSBD","sun-1-99"]],0.004264857,
+AUTHORITY["SSBD","sun-1-99:crust"]],20.0,20.0,"prograde",
+AUTHORITY["SSBD","sun-1-99:crust:hun_kal"]],
+UNIT["degree (supplier to define representation)",0.017453292519943278,AUTHORITY["EPSG","9122"]],
+UNIT["degree (supplier to define representation)",0.017453292519943278,AUTHORITY["EPSG","9122"]],
+UNIT["metre",1.0,AUTHORITY["EPSG","9001"]],
+AUTHORITY["SSBD","2000:sun-1-99:planetocentric"]]
+
+
+GEOGCS["Mercury 2000 planetographic 3D",
+DATUM["Mercury 2000",
+ELLIPSOID["Mercury 2000 IAU",2439700.0,AUTHORITY["SSBD","2000:sun-1-99:default"]],
+AUTHORITY["SSBD","sun-1-99:2000"]],
+PRIMEM["Hun Kal Mercury Meridian",0.0,"prograde",
+PRIMEMS["Mercury crust system",
+PHENOMENON["Mercury",AUTHORITY["SSBD","sun-1-99"]],0.004264857,
+AUTHORITY["SSBD","sun-1-99:crust"]],20.0,20.0,"prograde",
+AUTHORITY["SSBD","sun-1-99:crust:hun_kal"]],
+UNIT["degree (supplier to define representation)",0.017453292519943278,AUTHORITY["EPSG","9122"]],
+UNIT["degree (supplier to define representation)",0.017453292519943278,AUTHORITY["EPSG","9122"]],
+UNIT["metre",1.0,AUTHORITY["EPSG","9001"]],
+AUTHORITY["SSBD","2000:sun-1-99:planetographic"]]
 ```
