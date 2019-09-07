@@ -298,38 +298,38 @@ insert into ssbd_ellipsoid values ('2000:sun-5-15:triaxial', 'sun-5-15', 'Triaxi
 insert into ssbd_ellipsoid values ('2000:sun-5-5:spherical', 'sun-5-5', 'Spherical Amalthea 2000 IAU', 83500., 3000., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
-insert into ssbd_ellipsoid values ('2000:sun-5-5:triaxial', 'sun-5-5', 'Triaxial Amalthea 2000 IAU', 125000., null, 9001, null, 73000., null,
- 64000., null, null, null,
+insert into ssbd_ellipsoid values ('2000:sun-5-5:triaxial', 'sun-5-5', 'Triaxial Amalthea 2000 IAU', 125000., null, 9001, null, 64000., null,
+ 73000., null, null, null,
  null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
 insert into ssbd_ellipsoid values ('2000:sun-5-14:spherical', 'sun-5-14', 'Spherical Thebe 2000 IAU', 49300., 4000., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
-insert into ssbd_ellipsoid values ('2000:sun-5-14:triaxial', 'sun-5-14', 'Triaxial Thebe 2000 IAU', 58000., null, 9001, null, 49000., null,
- 42000., null, null, null,
+insert into ssbd_ellipsoid values ('2000:sun-5-14:triaxial', 'sun-5-14', 'Triaxial Thebe 2000 IAU', 58000., null, 9001, null, 42000., null,
+ 49000., null, null, null,
  null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
 insert into ssbd_ellipsoid values ('2000:sun-5-1:spherical', 'sun-5-1', 'Spherical Io 2000 IAU', 1821460., null, 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
-insert into ssbd_ellipsoid values ('2000:sun-5-1:triaxial', 'sun-5-1', 'Triaxial Io 2000 IAU', 1829400., null, 9001, null, 1819300., null,
- 1815700., null, null, null,
+insert into ssbd_ellipsoid values ('2000:sun-5-1:triaxial', 'sun-5-1', 'Triaxial Io 2000 IAU', 1829400., null, 9001, null, 1815700., null,
+ 1819300., null, null, null,
  null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
 insert into ssbd_ellipsoid values ('2000:sun-5-2:spherical', 'sun-5-2', 'Spherical Europa 2000 IAU', 1562090., null, 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
-insert into ssbd_ellipsoid values ('2000:sun-5-2:triaxial', 'sun-5-2', 'Triaxial Europa 2000 IAU', 1564130., null, 9001, null, 1561230., null,
- 1560930., null, null, null,
+insert into ssbd_ellipsoid values ('2000:sun-5-2:triaxial', 'sun-5-2', 'Triaxial Europa 2000 IAU', 1564130., null, 9001, null, 1560930., null,
+ 1561230., null, null, null,
  null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
 insert into ssbd_ellipsoid values ('2000:sun-5-3:spherical', 'sun-5-3', 'Spherical Ganymede 2000 IAU', 2632345., null, 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
-insert into ssbd_ellipsoid values ('2000:sun-5-3:triaxial', 'sun-5-3', 'Triaxial Ganymede 2000 IAU', 2632400., null, 9001, null, 2632290., null,
- 2632350., null, null, null,
+insert into ssbd_ellipsoid values ('2000:sun-5-3:triaxial', 'sun-5-3', 'Triaxial Ganymede 2000 IAU', 2632400., null, 9001, null, 2632350., null,
+ 2632290., null, null, null,
  null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
 insert into ssbd_ellipsoid values ('2000:sun-5-4:spherical', 'sun-5-4', 'Spherical Callisto 2000 IAU', 2409300., null, 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
-insert into ssbd_ellipsoid values ('2000:sun-5-4:triaxial', 'sun-5-4', 'Triaxial Callisto 2000 IAU', 2409400., null, 9001, null, 2409200., null,
- 2409300., null, null, null,
+insert into ssbd_ellipsoid values ('2000:sun-5-4:triaxial', 'sun-5-4', 'Triaxial Callisto 2000 IAU', 2409400., null, 9001, null, 2409300., null,
+ 2409200., null, null, null,
  null, 'Report of the IAU/IAG working group on cartographic coordinates and rotational elements of the planets and satellites: 2000');
 insert into ssbd_ellipsoid values ('2000:sun-5-13:default', 'sun-5-13', 'Leda 2000 IAU', 5000., null, 9001, null, null, null,
  null, null, null, null,
@@ -658,7 +658,7 @@ insert into ssbd_ellipsoid values ('2009:sun-5-4:default', 'sun-5-4', 'Callisto 
 insert into ssbd_ellipsoid values ('2009:sun-5-5:spherical', 'sun-5-5', 'Spherical Amalthea 2009 IAU', 83500.00, 3000., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009');
-insert into ssbd_ellipsoid values ('2009:sun-5-5:ellipsoidal', 'sun-5-5', 'Ellipsoidal Amalthea 2009 IAU', 125000.00, null, 9001, null, 64000.00, null,
+insert into ssbd_ellipsoid values ('2009:sun-5-5:triaxial', 'sun-5-5', 'Ellipsoidal Amalthea 2009 IAU', 125000.00, null, 9001, null, 64000.00, null,
  73000.00, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009');
 insert into ssbd_ellipsoid values ('2009:sun-5-6:default', 'sun-5-6', 'Himalia 2009 IAU', 85000.00, 10000., 9001, null, null, null,
@@ -694,13 +694,13 @@ insert into ssbd_ellipsoid values ('2009:sun-5-14:triaxial', 'sun-5-14', 'Triaxi
 insert into ssbd_ellipsoid values ('2009:sun-5-15:spherical', 'sun-5-15', 'Spherical Adrastea 2009 IAU', 8200.00, 4000., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009');
-insert into ssbd_ellipsoid values ('2009:sun-5-15:ellipsoidal', 'sun-5-15', 'Ellipsoidal Adrastea 2009 IAU', 10000.00, null, 9001, null, 7000.00, null,
+insert into ssbd_ellipsoid values ('2009:sun-5-15:triaxial', 'sun-5-15', 'Ellipsoidal Adrastea 2009 IAU', 10000.00, null, 9001, null, 7000.00, null,
  8000.00, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009');
 insert into ssbd_ellipsoid values ('2009:sun-5-16:spherical', 'sun-5-16', 'Spherical Metis 2009 IAU', 21500.00, 4000., 9001, null, null, null,
  null, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009');
-insert into ssbd_ellipsoid values ('2009:sun-5-16:ellipsoidal', 'sun-5-16', 'Ellipsoidal Metis 2009 IAU', 30000.00, null, 9001, null, 17000.00, null,
+insert into ssbd_ellipsoid values ('2009:sun-5-16:triaxial', 'sun-5-16', 'Ellipsoidal Metis 2009 IAU', 30000.00, null, 9001, null, 17000.00, null,
  20000.00, null, null, null,
  null, 'Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009');
 insert into ssbd_ellipsoid values ('2009:sun-6-99:spherical', 'sun-6-99', 'Spherical Saturn 2009 IAU', 58232000.00, 6000., 9001, null, null, null,
