@@ -7,8 +7,8 @@
 * [Utilisation](#utilisation)
 * [Proposition de système d'identification et identification des entités et des concepts dans la base SSBD](#proposition-de-système-didentification-et-identification-des-entités-et-des-concepts-dans-la-base-ssbd)
 * [Propositions d'évolutions syntaxiques](#propositions-dévolutions-syntaxiques)
- * [WKT (version Simple Features)](wkt-version-simple-features)
- * [WKT (version Coordinate Transformation Services)](wkt-version-coordinate-transformation-services)
+    * [WKT (version Simple Features)](#wkt-version-simple-features)
+    * [WKT (version Coordinate Transformation Services)](#wkt-version-coordinate-transformation-services)
 
 SSBD est un projet de base de données expérimental en cours d'élaboration qui se donne pour objectif d'utiliser à des fins de référencement en planétologie l'expérience capitalisée dans le domaine du référencement géographique. Cette expérience est principalement constituée par les standards abstraits, les formats et les réalisations techniques des organismes du domaine (OGC, ISO, IOGP, Esri etc.) tenant lieu de standard de fait.
 
