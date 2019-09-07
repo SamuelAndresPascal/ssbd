@@ -551,7 +551,8 @@ Enfin, le code d'un phénomène étant relatif au système racine considéré, i
 # must be assumed to be equal to 0.0 if not present
 <relative longitude> = <longitude>
 
-# must be present if and only if relative longitude is not equal to 0.0 ; must not otherwise
+# must be present if and only if relative longitude is not equal to 0.0 ;
+# must not otherwise
 <relative longitude orientation> = "direct" | "indirect" | "prograde" | "retrograde"
 
 # must be assumed to be equal to 0.0 if not present
@@ -560,7 +561,8 @@ Enfin, le code d'un phénomène étant relatif au système racine considéré, i
 # must be assumed to be equal to 0.0 if not present
 <prime meridian longitude> = <number>
 
-# must be present if and only if one of reference meridian longitude or prime meridian longitude is not equal to 0.0 ;
+# can be present if and only if one of reference meridian longitude or prime meridian longitude is not equal to 0.0 ;
+# assumed to be equal to "direct" if not present in these cases
 # must not otherwise
 <longitude orientation> = "direct" | "indirect" | "prograde" | "retrograde"
 
@@ -571,7 +573,8 @@ Enfin, le code d'un phénomène étant relatif au système racine considéré, i
 
 <phenomenon> = PHENOMENON["<name>"]
 
-<spheroid> = SPHEROID | ELLIPSOID ["<name>"{,<semi major axis>{,<second parameter>{,<third parameter>{,<fourth parameter>}}}}]
+<spheroid> = SPHEROID | ELLIPSOID ["<name>"{,<semi major axis>{,<second parameter>
+{,<third parameter>{,<fourth parameter>}}}}]
 
 # inverse flattening if and only if there is no along orbit equatorial radius and no south pole radius ;
 # polar radius if there is along orbit equatorial radius and no south pole radius ;
@@ -590,9 +593,9 @@ Enfin, le code d'un phénomène étant relatif au système racine considéré, i
 #### Exemples
 
 ```
-PRIMEM["Hun Kal Mercury Meridian",0.0,
+PRIMEM["Hun Kal Mercury Meridian",0.0,"prograde",
 PRIMEMS["Mercury crust system",
-PHENOMENON["Mercury"],0.004264857],20.0,20.0]
+PHENOMENON["Mercury"],0.004264857],20.0,20.0,"prograde"]
 
 ELLIPSOID["Mercury 2000 IAU",2439700.0]
 
@@ -614,7 +617,8 @@ ELLIPSOID["Quadriaxial Mars 2000 IAU",3396190.0,3373190.0,3396190.0,3379210.0]
 # must be assumed to be equal to 0.0 if not present
 <relative longitude> = <longitude>
 
-# must be present if and only if relative longitude is not equal to 0.0 ; must not otherwise
+# must be present if and only if relative longitude is not equal to 0.0 ;
+# must not otherwise
 <relative longitude orientation> = "direct" | "indirect" | "prograde" | "retrograde"
 
 # must be assumed to be equal to 0.0 if not present
@@ -623,7 +627,8 @@ ELLIPSOID["Quadriaxial Mars 2000 IAU",3396190.0,3373190.0,3396190.0,3379210.0]
 # must be assumed to be equal to 0.0 if not present
 <prime meridian longitude> = <number>
 
-# must be present if and only if one of reference meridian longitude or prime meridian longitude is not equal to 0.0 ;
+# can be present if and only if one of reference meridian longitude or prime meridian longitude is not equal to 0.0 ;
+# assumed to be equal to "direct" if not present in these cases
 # must not otherwise
 <longitude orientation> = "direct" | "indirect" | "prograde" | "retrograde"
 
@@ -634,7 +639,8 @@ ELLIPSOID["Quadriaxial Mars 2000 IAU",3396190.0,3373190.0,3396190.0,3379210.0]
 
 <phenomenon> = PHENOMENON["<name>"{,<authority>}]
 
-<spheroid> = SPHEROID | ELLIPSOID ["<name>"{,<semi major axis>{,<second parameter>{,<third parameter>{,<fourth parameter>}}}}{,<authority>}]
+<spheroid> = SPHEROID | ELLIPSOID ["<name>"{,<semi major axis>{,<second parameter>
+{,<third parameter>{,<fourth parameter>}}}}{,<authority>}]
 
 # inverse flattening if and only if there is no along orbit equatorial radius and no south pole radius ;
 # polar radius if there is along orbit equatorial radius and no south pole radius ;
@@ -653,10 +659,10 @@ ELLIPSOID["Quadriaxial Mars 2000 IAU",3396190.0,3373190.0,3396190.0,3379210.0]
 #### Exemples
 
 ```
-PRIMEM["Hun Kal Mercury Meridian",0.0,
+PRIMEM["Hun Kal Mercury Meridian",0.0,"prograde",
 PRIMEMS["Mercury crust system",
 PHENOMENON["Mercury",AUTHORITY["SSBD","sun-1-99"]],0.004264857,
-AUTHORITY["SSBD","sun-1-99:crust"]],20.0,20.0,
+AUTHORITY["SSBD","sun-1-99:crust"]],20.0,20.0,"prograde",
 AUTHORITY["SSBD","sun-1-99:crust:hun_kal"]]
 
 ELLIPSOID["Mercury 2000 IAU",2439700.0,
