@@ -1,5 +1,15 @@
 # _Solar System Body Database_ - français
 
+* [Définitions](#définitions)
+* [Présentation du schéma](#présentation-du-schéma)
+* [Présentation des données](#présentation-des-données)
+* [Statut des fichiers](#statut-des-fichiers)
+* [Utilisation](#utilisation)
+* [Proposition de système d'identification et identification des entités et des concepts dans la base SSBD](#proposition-de-système-didentification-et-identification-des-entités-et-des-concepts-dans-la-base-ssbd)
+* [Propositions d'évolutions syntaxiques](#propositions-dévolutions-syntaxiques)
+ * [WKT (version Simple Features)](wkt-version-simple-features)
+ * [WKT (version Coordinate Transformation Services)](wkt-version-coordinate-transformation-services)
+
 SSBD est un projet de base de données expérimental en cours d'élaboration qui se donne pour objectif d'utiliser à des fins de référencement en planétologie l'expérience capitalisée dans le domaine du référencement géographique. Cette expérience est principalement constituée par les standards abstraits, les formats et les réalisations techniques des organismes du domaine (OGC, ISO, IOGP, Esri etc.) tenant lieu de standard de fait.
 
 Dans un premier temps SSBD s'appuie sur le schéma de la base de données EPSG comme source d'inspiration de manière à proposer une extension adaptée à l'information planétologique. Ceci a deux conséquences :
@@ -399,9 +409,9 @@ Le choix n'est pas encore arrêté pour l'instant de continuer à référencer p
 ### Grammaire du schéma général d'identification
 
 ```
-identifier := <authority>:<entity_code>
+<identifier> := <authority>:<entity_code>
 
-authority := <alphanumeric>+
+<authority> := <alphanumeric>+
 ```
 ### Grammaire du schéma d'identification des entités de la base SSBD
 
@@ -540,7 +550,6 @@ Enfin, le code d'un phénomène étant relatif au système racine considéré, i
 | CRS planétographique défini sur Mercure en 2000 par l'UAI | 2000:sun-1-99:planetographic | CRS:2000:sun-1-99:planetographic |
 
 ## Propositions d'évolutions syntaxiques
-
 
 ### WKT (version Simple Features)
 
