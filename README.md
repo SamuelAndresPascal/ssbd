@@ -624,7 +624,6 @@ PRIMEM["Hun Kal Mercury Meridian",0.0,"prograde",
 PRIMEMS["Mercury crust system",
 PHENOMENON["Mercury"],0.004264857],20.0,20.0,"prograde"],
 UNIT["degree (supplier to define representation)",0.017453292519943278],
-UNIT["degree (supplier to define representation)",0.017453292519943278],
 UNIT["metre",1.0]]
 
 
@@ -634,7 +633,6 @@ ELLIPSOID["Mercury 2000 IAU",2439700.0]],
 PRIMEM["Hun Kal Mercury Meridian",0.0,"prograde",
 PRIMEMS["Mercury crust system",
 PHENOMENON["Mercury"],0.004264857],20.0,20.0,"prograde"],
-UNIT["degree (supplier to define representation)",0.017453292519943278],
 UNIT["degree (supplier to define representation)",0.017453292519943278],
 UNIT["metre",1.0]]
 ```
