@@ -685,6 +685,14 @@ UNIT["metre",1.0]]
 
 # must be present if and only if the south pole radius is not equal to north pole radius
 <fourth parameter> = <number>
+
+<geographic cs> = GEOGCS["<name>",<datum>,<prime meridian>,<geographic cs axes>{,<authority>}]
+
+<geographic cs axes> = <geographic 2d axes> | <geographic 3d axes>
+
+<geographic 2d axes> = <angular unit>{,<twin axes>}
+
+<geographic 3d axes> = <angular unit>,<linear unit>{,<twin axes>,<axis>}
 ```
 
 #### Exemples
@@ -721,7 +729,6 @@ PHENOMENON["Mercury",AUTHORITY["SSBD","sun-1-99"]],0.004264857,
 AUTHORITY["SSBD","sun-1-99:crust"]],20.0,20.0,"prograde",
 AUTHORITY["SSBD","sun-1-99:crust:hun_kal"]],
 UNIT["degree (supplier to define representation)",0.017453292519943278,AUTHORITY["EPSG","9122"]],
-UNIT["degree (supplier to define representation)",0.017453292519943278,AUTHORITY["EPSG","9122"]],
 UNIT["metre",1.0,AUTHORITY["EPSG","9001"]],
 AUTHORITY["SSBD","2000:sun-1-99:planetocentric"]]
 
@@ -735,7 +742,6 @@ PRIMEMS["Mercury crust system",
 PHENOMENON["Mercury",AUTHORITY["SSBD","sun-1-99"]],0.004264857,
 AUTHORITY["SSBD","sun-1-99:crust"]],20.0,20.0,"prograde",
 AUTHORITY["SSBD","sun-1-99:crust:hun_kal"]],
-UNIT["degree (supplier to define representation)",0.017453292519943278,AUTHORITY["EPSG","9122"]],
 UNIT["degree (supplier to define representation)",0.017453292519943278,AUTHORITY["EPSG","9122"]],
 UNIT["metre",1.0,AUTHORITY["EPSG","9001"]],
 AUTHORITY["SSBD","2000:sun-1-99:planetographic"]]
