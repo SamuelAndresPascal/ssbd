@@ -693,6 +693,10 @@ UNIT["metre",1.0]]
 <geographic 2d axes> = <angular unit>{,<twin axes>}
 
 <geographic 3d axes> = <angular unit>,<linear unit>{,<twin axes>,<axis>}
+
+# sideral east points the direction where the sky rises
+# sideral west points the direction where the sky sets
+<axis> = AXIS["<name>", NORTH | SOUTH | EAST | WEST | UP | DOWN | OTHER | SIDERAL_EAST | SIDERAL_WEST]
 ```
 
 #### Exemples
@@ -730,6 +734,9 @@ AUTHORITY["SSBD","sun-1-99:crust"]],20.0,20.0,"prograde",
 AUTHORITY["SSBD","sun-1-99:crust:hun_kal"]],
 UNIT["degree (supplier to define representation)",0.017453292519943278,AUTHORITY["EPSG","9122"]],
 UNIT["metre",1.0,AUTHORITY["EPSG","9001"]],
+AXIS["Spherical latitude",NORTH],
+AXIS["Spherical longitude",SIDERAL_WEST],
+AXIS["Geocentric radius",UP],
 AUTHORITY["SSBD","2000:sun-1-99:planetocentric"]]
 
 
@@ -744,5 +751,8 @@ AUTHORITY["SSBD","sun-1-99:crust"]],20.0,20.0,"prograde",
 AUTHORITY["SSBD","sun-1-99:crust:hun_kal"]],
 UNIT["degree (supplier to define representation)",0.017453292519943278,AUTHORITY["EPSG","9122"]],
 UNIT["metre",1.0,AUTHORITY["EPSG","9001"]],
+AXIS["Geodetic latitude",NORTH],
+AXIS["Geodetic longitude",SIDERAL_WEST],
+AXIS["Ellipsoidal height",UP],
 AUTHORITY["SSBD","2000:sun-1-99:planetographic"]]
 ```
