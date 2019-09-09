@@ -1563,10 +1563,10 @@ insert into ssbd_coordinatesystem values ('ellipsoidal:3d:direct',
 
 
 insert into ssbd_coordinateaxis values ('spherical:3d:direct', 1, 9926, 'north', 'Lat', 9122);
-insert into ssbd_coordinateaxis values ('spherical:3d:direct', 2, 9927, 'sideral west', 'Long', 9122);
+insert into ssbd_coordinateaxis values ('spherical:3d:direct', 2, 9927, 'sideral-west', 'Long', 9122);
 insert into ssbd_coordinateaxis values ('spherical:3d:direct', 3, 9928, 'up', 'R', 9001);
 insert into ssbd_coordinateaxis values ('ellipsoidal:3d:direct', 1, 9901, 'north', 'Lat', 9122);
-insert into ssbd_coordinateaxis values ('ellipsoidal:3d:direct', 2, 9902, 'sideral west', 'Lon', 9122);
+insert into ssbd_coordinateaxis values ('ellipsoidal:3d:direct', 2, 9902, 'sideral-west', 'Lon', 9122);
 insert into ssbd_coordinateaxis values ('ellipsoidal:3d:direct', 3, 9903, 'up', 'h', 9001);
 
 
