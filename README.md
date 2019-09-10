@@ -9,6 +9,7 @@
 * [Propositions d'évolutions syntaxiques](#propositions-dévolutions-syntaxiques)
     * [WKT (version Simple Features)](#wkt-version-simple-features)
     * [WKT (version Coordinate Transformation Services)](#wkt-version-coordinate-transformation-services)
+    * [WKT2 (version 1.0)](#wkt2-version-10)
 
 SSBD est un projet de base de données expérimental en cours d'élaboration qui se donne pour objectif d'utiliser à des fins de référencement en planétologie l'expérience capitalisée dans le domaine du référencement géographique. Cette expérience est principalement constituée par les standards abstraits, les formats et les réalisations techniques des organismes du domaine (OGC, ISO, IOGP, Esri etc.) tenant lieu de standard de fait.
 
@@ -553,6 +554,8 @@ Enfin, le code d'un phénomène étant relatif au système racine considéré, i
 
 ### WKT (version Simple Features)
 
+Se reporter au document de référence pour la notation et les éléments non définis dans la modification.
+
 ```
 <prime meridian> = PRIMEM["<name>",<relative longitude>{,<relative longitude orientation>}{,<prime meridian system>}
 {,<reference meridian longitude>{,<prime meridian longitude>}{,<longitude orientation>}}]
@@ -582,8 +585,8 @@ Enfin, le code d'un phénomène étant relatif au système racine considéré, i
 
 <phenomenon> = PHENOMENON["<name>"]
 
-<spheroid> = SPHEROID | ELLIPSOID ["<name>"{,<semi major axis>{,<second parameter>
-{,<third parameter>{,<fourth parameter>}}}}]
+<spheroid> = SPHEROID | ELLIPSOID ["<name>",<semi major axis>{,<second parameter>
+{,<third parameter>{,<fourth parameter>}}}]
 
 # inverse flattening if and only if there is no along orbit equatorial radius and no south pole radius ;
 # polar radius if there is along orbit equatorial radius and no south pole radius ;
@@ -641,6 +644,8 @@ UNIT["metre",1.0]]
 
 #### Modification de la grammaire
 
+Se reporter au document de référence pour la notation et les éléments non définis dans la modification.
+
 ```
 <prime meridian> = PRIMEM["<name>",<relative longitude>{,<relative longitude orientation>}{,<prime meridian system>}
 {,<reference meridian longitude>{,<prime meridian longitude>}{,<longitude orientation>}}{,<authority>}]
@@ -670,8 +675,8 @@ UNIT["metre",1.0]]
 
 <phenomenon> = PHENOMENON["<name>"{,<authority>}]
 
-<spheroid> = SPHEROID | ELLIPSOID ["<name>"{,<semi major axis>{,<second parameter>
-{,<third parameter>{,<fourth parameter>}}}}{,<authority>}]
+<spheroid> = SPHEROID | ELLIPSOID ["<name>",<semi major axis>{,<second parameter>
+{,<third parameter>{,<fourth parameter>}}}{,<authority>}]
 
 # inverse flattening if and only if there is no along orbit equatorial radius and no south pole radius ;
 # polar radius if there is along orbit equatorial radius and no south pole radius ;
@@ -755,4 +760,134 @@ AXIS["Geodetic latitude",NORTH],
 AXIS["Geodetic longitude",SIDERAL_WEST],
 AXIS["Ellipsoidal height",UP],
 AUTHORITY["SSBD","2000:sun-1-99:planetographic"]]
+```
+
+
+
+### WKT2 (version 1.0)
+
+#### Modification de la grammaire
+
+Se reporter au document de référence pour la notation et les éléments non définis dans la modification.
+
+```
+<prime meridian> ::= <prime meridian keyword><left delimiter><prime meridian name><wkt separator>
+<irm longitude>[<wkt separator><relative longitude orientation>][<wkt separator><prime meridian system>]
+[<wkt separator><reference meridian longitude>[<wkt separator><prime meridian longitude>]
+[<wkt separator><longitude orientation>]][<wkt separator><angle unit>]
+[{<wkt separator><identifier>}]...<right delimiter>
+
+# must be present if and only if relative longitude is not equal to 0.0 ;
+# must not otherwise
+<relative longitude orientation> ::= "direct" | "indirect" | "prograde" | "retrograde"
+
+# must be assumed to be equal to 0.0 if not present
+<reference meridian longitude> ::= <signed numeric literal>
+
+# must be assumed to be equal to 0.0 if not present
+<prime meridian longitude> ::= <signed numeric literal>
+
+# can be present if and only if one of reference meridian longitude or prime meridian longitude is not equal to 0.0 ;
+# assumed to be equal to "direct" if not present in these cases
+# must not otherwise
+<longitude orientation> ::= "direct" | "indirect" | "prograde" | "retrograde"
+
+<prime meridian system> ::= <prime meridian keyword><left delimiter><prime meridian system name>
+[<wkt separator><phenomenon>][<wkt separator><rotation>][{<wkt separator><identifier>}]...<right delimiter>
+
+<prime meridian keyword> ::= PRIMEMS
+
+<prime meridian system name> ::= <quoted Latin text>
+
+# must be expressed in rad/s, negative for an indirect rotation and positive otherwise
+<rotation> ::= <signed numeric literal>
+
+<phenomenon> ::= <phenomenon keyword><left delimiter><phenomenon name>[{<wkt separator><identifier>}]...<right delimiter>
+
+<phenomenon keyword> ::= PHENOMENON
+
+<phenomenon name> ::= <quoted Latin text>
+
+<ellipsoid> ::= <ellipsoid keyword><left delimiter><ellipsoid name><wkt separator><semi-major axis>
+[<wkt separator><second parameter>[<wkt separator><third parameter>[<wkt separator><fourth parameter>]]]]
+[{<wkt separator><identifier>}]...<right delimiter>
+
+# inverse flattening if and only if there is no along orbit equatorial radius and no south pole radius ;
+# polar radius if there is along orbit equatorial radius and no south pole radius ;
+# north pole radius if there is a south pole radius
+# can be omitted in the case of a sphere
+<second parameter> ::= <signed numeric literal>
+
+# must be present if and only if along orbit equatorial radius is not equal to semi major axis
+# OR if south pole radius is not equal to north pole radius
+<third parameter> ::= <signed numeric literal>
+
+# must be present if and only if the south pole radius is not equal to north pole radius
+<fourth parameter> ::= <signed numeric literal>
+
+<axis> ::= <axis keyword><left delimiter><axis nameAbbrev><wkt separator><axis direction pl>
+[<wkt separator><axis order>][<wkt separator><axis unit>][{<wkt separator><identifier>}]...<right delimiter>
+
+# sideral east points the direction where the sky rises
+# sideral west points the direction where the sky sets
+<axis direction pl> ::= <axis direction> | sideralWest | sideralEast
+```
+
+#### Exemples
+
+```
+PRIMEM["Hun Kal Mercury Meridian",0.0,"prograde",
+PRIMEMS["Mercury crust system",
+PHENOMENON["Mercury",ID["SSBD","sun-1-99"]],0.004264857,ID["SSBD","sun-1-99:crust"]],
+20.0,20.0,"prograde",UNIT["degree",0.017453292519943278,ID["EPSG","9102"]],ID["SSBD","sun-1-99:crust:hun_kal"]]
+
+ELLIPSOID["Mercury 2000 IAU",2439700.0,
+ID["SSBD","2000:sun-1-99:default"]]
+
+ELLIPSOID["Triaxial Ganymede 2000 IAU",2632400.0,2632350.0,2632290.0,
+ID["SSBD","2000:sun-5-3:triaxial"]]
+
+ELLIPSOID["Ellipsoidal Mars 2009 IAU",3396190.0,169.8944472236118,
+ID["SSBD","2009:sun-4-99:ellipsoidal"]]
+
+ELLIPSOID["Quadriaxial Mars 2000 IAU",3396190.0,3373190.0,3396190.0,3379210.0,
+ID["SSBD","2000:sun-4-99:default"]]
+
+DATUM["Mercury 2000",ELLIPSOID["Mercury 2000 IAU",2439700.0,
+ID["SSBD","2000:sun-1-99:default"]],
+ID["SSBD","sun-1-99:2000"]],
+PRIMEM["Hun Kal Mercury Meridian",0.0,"prograde",
+PRIMEMS["Mercury crust system",
+PHENOMENON["Mercury",ID["SSBD","sun-1-99"]],0.004264857,ID["SSBD","sun-1-99:crust"]],
+20.0,20.0,"prograde",UNIT["degree",0.017453292519943278,ID["EPSG","9102"]],ID["SSBD","sun-1-99:crust:hun_kal"]]
+
+
+GEODCRS["Mercury 2000 planetocentric 3D",
+DATUM["Mercury 2000",
+ELLIPSOID["Mercury 2000 IAU",2439700.0,ID["SSBD","2000:sun-1-99:default"]],
+ID["SSBD","sun-1-99:2000"]],
+PRIMEM["Hun Kal Mercury Meridian",0.0,"prograde",
+PRIMEMS["Mercury crust system",
+PHENOMENON["Mercury",ID["SSBD","sun-1-99"]],0.004264857,ID["SSBD","sun-1-99:crust"]],
+20.0,20.0,"prograde",UNIT["degree",0.017453292519943278,ID["EPSG","9102"]],ID["SSBD","sun-1-99:crust:hun_kal"]],
+CS[spherical,3,ID["SSBD","spherical:3d:direct"]],
+AXIS["Spherical latitude (Lat)",north,ORDER[1],UNIT["degree (supplier to define representation)",0.017453292519943278,ID["EPSG","9122"]],ID["SSBD","spherical:3d:direct:1"]],
+AXIS["Spherical longitude (Long)",sideralWest,ORDER[2],UNIT["degree (supplier to define representation)",0.017453292519943278,ID["EPSG","9122"]],ID["SSBD","spherical:3d:direct:2"]],
+AXIS["Geocentric radius (R)",up,ORDER[3],UNIT["metre",1.0,ID["EPSG","9001"]],ID["SSBD","spherical:3d:direct:3"]],
+ID["SSBD","2000:sun-1-99:planetocentric"]]
+
+
+GEODCRS["Mercury 2000 planetographic 3D",
+DATUM["Mercury 2000",
+ELLIPSOID["Mercury 2000 IAU",2439700.0,ID["SSBD","2000:sun-1-99:default"]],
+ID["SSBD","sun-1-99:2000"]],
+PRIMEM["Hun Kal Mercury Meridian",0.0,"prograde",
+PRIMEMS["Mercury crust system",PHENOMENON["Mercury",ID["SSBD","sun-1-99"]],0.004264857,ID["SSBD","sun-1-99:crust"]],
+20.0,20.0,"prograde",UNIT["degree",0.017453292519943278,ID["EPSG","9102"]],ID["SSBD","sun-1-99:crust:hun_kal"]],
+CS[ellipsoidal,3,ID["SSBD","ellipsoidal:3d:direct"]],
+AXIS["Geodetic latitude (Lat)",north,ORDER[1],UNIT["degree (supplier to define representation)",0.017453292519943278,ID["EPSG","9122"]],ID["SSBD","ellipsoidal:3d:direct:1"]],
+AXIS["Geodetic longitude (Lon)",sideralWest,ORDER[2],UNIT["degree (supplier to define representation)",0.017453292519943278,ID["EPSG","9122"]],ID["SSBD","ellipsoidal:3d:direct:2"]],
+AXIS["Ellipsoidal height (h)",up,ORDER[3],UNIT["metre",1.0,ID["EPSG","9001"]],ID["SSBD","ellipsoidal:3d:direct:3"]],
+ID["SSBD","2000:sun-1-99:planetographic"]]
+
 ```
