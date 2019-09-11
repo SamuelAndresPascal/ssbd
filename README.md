@@ -109,7 +109,7 @@ _Note 3 : si l'on considère le quintuplet (semi_major_axis, inv_flattening, sem
 
 Sur Terre, les méridiens de référence (voir la définition contextualisée plus bas) sont repérés par des phénomènes observables sur la croûte terrestre (repères de Greenwich, de Paris etc.), bien que ces marques soient artificielles. Sur d'autres planètes telluriques, les marques servant de repère sont naturelles mais affectent également la surface solide ; il peut s'agir par exemple de cratères.
 
-En revanche, il n'existe pas de surface solide observable sur les planètes gazeuses. Les repères servant à définir les méridiens de référence sont donc observés en utilisant d'autres phénomènes physiques (couverture nuageuse, champ magnétique). Pour une même planète, plusieurs catégories de phénomènes sont susceptibles des moyens concurrents de définir des méridiens de référence. Ce sont ces catégories qui définissent les systèmes de méridiens premiers.
+En revanche, il n'existe pas de surface solide observable sur les planètes gazeuses. Les repères servant à définir les méridiens de référence sont donc observés en utilisant d'autres supports physiques (couverture nuageuse, champ magnétique). Pour une même planète, plusieurs catégories de supports sont susceptibles de définir des méridiens de référence concurrents, en mouvement les uns par rapport aux autres. Ce sont ces catégories qui définissent les systèmes de méridiens premiers.
 
 ```sql
 create table ssbd_primemeridiansystem (
