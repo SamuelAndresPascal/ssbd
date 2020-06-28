@@ -1573,9 +1573,9 @@ insert into ssbd_coordinateaxis values ('ellipsoidal:3d:direct', 3, 9903, 'up', 
 
 
 insert into ssbd_coordinatereferencesystem values ('2000:sun-1-99:planetocentric', 'Mercury 2000 planetocentric 3D',
- 'planetocentric 3D', 'spherical:3d:direct', 'sun-1-99:2000', null, null, null, null, null, null,'IAU','2015-01-01','2020:1',1,0);
+ 'planetocentric 3D', 'spherical:3d:direct', 'sun-1-99:2000', null, null, null, null, 'planetology', null, null,'IAU','2015-01-01','2020:1',1,0);
 insert into ssbd_coordinatereferencesystem values ('2000:sun-1-99:planetographic', 'Mercury 2000 planetographic 3D',
- 'planetographic 3D', 'ellipsoidal:3d:direct', 'sun-1-99:2000', null, null, null, null, null, null,'IAU','2015-01-01','2020:1',1,0);
+ 'planetographic 3D', 'ellipsoidal:3d:direct', 'sun-1-99:2000', null, null, null, null, 'planetology', null, null,'IAU','2015-01-01','2020:1',1,0);
 
 
 insert into ssbd_coordinatereferencesystemrange values ('2000:sun-1-99:planetocentric', 2, 'spherical:3d:direct', 2, null, null);

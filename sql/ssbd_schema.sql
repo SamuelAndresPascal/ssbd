@@ -338,7 +338,7 @@ create table ssbd_coordinatereferencesystem (
     projection_conv_code                               integer,
     cmpd_horizcrs_code                                 integer,
     cmpd_vertcrs_code                                  integer,
-    -- crs_scope                                          varchar(254) not null,
+    crs_scope                                          varchar(254) not null,
     remarks                                            varchar(254),
     information_source                                 varchar(254),
     data_source                                        varchar(40) not null,
