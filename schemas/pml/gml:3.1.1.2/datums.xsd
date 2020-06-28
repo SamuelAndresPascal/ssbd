@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://www.cosmoloj.com/pml/3.1.1" xmlns:pml="http://www.cosmoloj.com/pml/3.1.1" xmlns:gml="http://www.opengis.net/gml"
+        xmlns="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" version="gml:3.1.1.2:snapshot" xml:lang="en">
+	<!-- ======================================================
+       includes and imports
+	====================================================== -->
+	<include schemaLocation="pml.xsd"/>
+	<import namespace="http://www.opengis.net/gml" schemaLocation="http://schemas.opengis.net/gml/3.1.1/base/gml.xsd"/>
+	<!-- ======================================================
+       elements and types
+	====================================================== -->
+	<element name="Phenomenon" type="pml:PhenomenonType" substitutionGroup="gml:Definition"/>
+	<!-- =================================================== -->
+	<complexType name="PhenomenonBaseType">
+		<complexContent>
+			<restriction base="gml:DefinitionType">
+				<sequence>
+					<element ref="gml:metaDataProperty" minOccurs="0" maxOccurs="unbounded"/>
+					<element ref="pml:phenomenonName"/>
+				</sequence>
+				<attribute ref="gml:id" use="required"/>
+			</restriction>
+		</complexContent>
+	</complexType>
+	<!-- =================================================== -->
+	<element name="phenomenonName" type="gml:CodeType" substitutionGroup="gml:name"/>
+	<!-- =================================================== -->
+	<complexType name="PhenomenonType">
+		<complexContent>
+			<extension base="pml:PhenomenonBaseType">
+				<sequence>
+					<element ref="pml:phenomenonID" minOccurs="0" maxOccurs="unbounded"/>
+					<element ref="gml:remarks" minOccurs="0"/>
+					<element ref="gml:scope" minOccurs="0"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<!-- =================================================== -->
+	<element name="phenomenonID" type="gml:IdentifierType"/>
+	<!-- =================================================== -->
+	<complexType name="PhenomenonRefType">
+		<sequence minOccurs="0">
+			<element ref="pml:Phenomenon"/>
+		</sequence>
+		<attributeGroup ref="gml:AssociationAttributeGroup"/>
+	</complexType>
+	<!-- =================================================== -->
+	<element name="phenomenon" type="pml:PhenomenonRefType"/>
+	<!-- =================================================== -->
+	<!-- =================================================== -->
+	<element name="PrimeMeridianSystem" type="pml:PrimeMeridianSystemType" substitutionGroup="gml:Definition"/>
+	<!-- =================================================== -->
+	<complexType name="PrimeMeridianSystemBaseType">
+		<complexContent>
+			<restriction base="gml:DefinitionType">
+				<sequence>
+					<element ref="gml:metaDataProperty" minOccurs="0" maxOccurs="unbounded"/>
+					<element ref="pml:primeMeridianSystemName"/>
+				</sequence>
+				<attribute ref="gml:id" use="required"/>
+			</restriction>
+		</complexContent>
+	</complexType>
+	<!-- =================================================== -->
+	<element name="primeMeridianSystemName" type="gml:CodeType" substitutionGroup="gml:name"/>
+	<!-- =================================================== -->
+	<complexType name="PrimeMeridianSystemType">
+		<complexContent>
+			<extension base="pml:PrimeMeridianSystemBaseType">
+				<sequence>
+					<element ref="pml:primeMeridianSystemID" minOccurs="0" maxOccurs="unbounded"/>
+					<element ref="gml:remarks" minOccurs="0"/>
+					<element ref="gml:scope" minOccurs="0"/>
+                                        <element ref="pml:phenomenon" minOccurs="0"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<!-- =================================================== -->
+	<element name="primeMeridianSystemID" type="gml:IdentifierType"/>
+	<!-- =================================================== -->
+	<complexType name="PrimeMeridianSystemRefType">
+		<sequence minOccurs="0">
+			<element ref="pml:PrimeMeridianSystem"/>
+		</sequence>
+		<attributeGroup ref="gml:AssociationAttributeGroup"/>
+	</complexType>
+	<!-- =================================================== -->
+	<element name="usesPrimeMeridianSystem" type="pml:PrimeMeridianSystemRefType"/>
+	<!-- =================================================== -->
+	<!-- =================================================== -->
+	<element name="PrimeMeridian" type="pml:PrimeMeridianType" substitutionGroup="gml:PrimeMeridian"/>
+	<!-- =================================================== -->
+	<complexType name="PrimeMeridianBaseType" abstract="true">
+		<complexContent>
+			<restriction base="gml:PrimeMeridianType">
+				<sequence>
+					<element ref="gml:metaDataProperty" minOccurs="0" maxOccurs="unbounded"/>
+					<element ref="gml:meridianName"/>
+					<element ref="gml:meridianID" minOccurs="0" maxOccurs="unbounded">
+						<annotation>
+							<documentation>Set of alternative identifications of this prime meridian. The first meridianID, if any, is normally the primary identification code, and any others are aliases. </documentation>
+						</annotation>
+					</element>
+					<element ref="gml:remarks" minOccurs="0">
+						<annotation>
+							<documentation>Comments on or information about this prime meridian, including source information. </documentation>
+						</annotation>
+					</element>
+					<element ref="pml:relativeLongitude"/>
+				</sequence>
+				<attribute ref="gml:id" use="required"/>
+			</restriction>
+		</complexContent>
+	</complexType>
+	<!-- =================================================== -->
+	<complexType name="PrimeMeridianType">
+		<complexContent>
+			<extension base="pml:PrimeMeridianBaseType">
+				<sequence>
+					<element ref="pml:referenceMeridianLongitude" minOccurs="0"/>
+					<element ref="pml:primeMeridianLongitude" minOccurs="0"/>
+                                        <element ref="pml:usesPrimeMeridianSystem"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<!-- =================================================== -->
+	<element name="relativeLongitude" type="gml:AngleChoiceType" substitutionGroup="gml:greenwichLongitude"/>
+	<element name="referenceMeridianLongitude" type="gml:AngleChoiceType"/>
+	<element name="primeMeridianLongitude" type="gml:AngleChoiceType"/>
+	<!-- =================================================== -->
+	<element name="Surface" type="pml:SurfaceType" substitutionGroup="gml:Ellipsoid"/>
+	<!-- =================================================== -->
+	<complexType name="SurfaceType">
+		<complexContent>
+			<extension base="gml:EllipsoidType">
+				<sequence>
+					<element ref="pml:thirdDefiningParameter"/>
+					<element ref="pml:fourthDefiningParameter"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<!-- =================================================== -->
+	<element name="thirdDefiningParameter" type="gml:MeasureType"/>
+	<!-- =================================================== -->
+	<element name="fourthDefiningParameter" type="gml:MeasureType"/>
+</schema>

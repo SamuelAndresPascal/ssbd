@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://www.cosmoloj.com/pml/3.1.1" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:gml="http://www.opengis.net/gml"
+        xmlns:xlink="http://www.w3.org/1999/xlink" elementFormDefault="qualified" attributeFormDefault="unqualified" version="gml:3.1.1.2:snapshot">
+	<!-- ====================================================================== -->
+	<include schemaLocation="datums.xsd"/>
+	<!-- ====================================================================== -->
+</schema>
