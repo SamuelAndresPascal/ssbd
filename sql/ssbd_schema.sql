@@ -7,6 +7,19 @@
 
 begin;
 
+create table ssbd_change (
+    change_code                                        varchar(255),
+    report_date                                        date not null,
+    date_closed                                        date,
+    reporter                                           varchar(254) not null,
+    request                                            varchar(254) not null,
+    tables_affected                                    varchar(254),
+    codes_affected                                     varchar(254),
+    change_comment                                     varchar(254),
+    action                                             varchar(4000),
+    constraint pk_change primary key ( change_code )
+);
+
 
 -- phenomenon (concept code : PHENOMENON)
 --
@@ -75,14 +88,15 @@ create table ssbd_ellipsoid (
     -- ellipsoid_shape                                    smallint not null,
     remarks                                            varchar(254),
     information_source                                 varchar(254),
-    -- data_source                                        varchar(40) not null,
-    -- revision_date                                      date not null,
-    -- change_id                                          varchar(255),
-    -- deprecated                                         smallint not null,
+    data_source                                        varchar(40) not null,
+    revision_date                                      date not null,
+    change_code                                        varchar(255),
+    deprecated                                         smallint not null,
     constraint pk_ellipsoid primary key ( ellipsoid_code )
 );
 
 alter table ssbd_ellipsoid add constraint fk_phenomenon_code foreign key ( phenomenon_code ) references ssbd_phenomenon ( phenomenon_code ) ;
+alter table ssbd_ellipsoid add constraint fk_change_code foreign key ( change_code ) references ssbd_change ( change_code ) ;
 
 comment on column ssbd_ellipsoid.phenomenon_code is 'This column is optional and indicative about the phenomenon for which the ellipsoid has been defined. It may be null and even if it is not, it does not mean the ellipsoid is exclusively defined for the related phenomenon.';
 
@@ -105,14 +119,15 @@ create table ssbd_primemeridiansystem (
     uom_code                                           integer,
     remarks                                            varchar(254),
     information_source                                 varchar(254),
-    -- data_source                                        varchar(40) not null,
-    -- revision_date                                      date not null,
-    -- change_id                                          varchar(255),
-    -- deprecated                                         smallint not null,
+    data_source                                        varchar(40) not null,
+    revision_date                                      date not null,
+    change_code                                        varchar(255),
+    deprecated                                         smallint not null,
     constraint pk_primemeridiansystem primary key ( phenomenon_code, prime_meridian_system_code )
 );
 
 alter table ssbd_primemeridiansystem add constraint fk_phenomenon_code foreign key ( phenomenon_code ) references ssbd_phenomenon ( phenomenon_code ) ;
+alter table ssbd_primemeridiansystem add constraint fk_change_code foreign key ( change_code ) references ssbd_change ( change_code ) ;
 
 comment on column ssbd_primemeridiansystem.phenomenon_code is 'This column is mandatory and defines the phenomenon on which meridians and datums are defined.';
 
@@ -228,16 +243,17 @@ create table ssbd_primemeridian (
     uom_code                                           integer not null,
     remarks                                            varchar(254),
     information_source                                 varchar(254),
-    -- data_source                                        varchar(40) not null,
-    -- revision_date                                      date not null,
-    -- change_id                                          varchar(255),
-    -- deprecated                                         smallint not null,
+    data_source                                        varchar(40) not null,
+    revision_date                                      date not null,
+    change_code                                        varchar(255),
+    deprecated                                         smallint not null,
     constraint pk_primemeridian primary key ( phenomenon_code, system_code, prime_meridian_code ),
     constraint ck_primemeridian_relative_longitude_orientation check (relative_longitude_orientation in ('direct', 'indirect', 'prograde', 'retrograde')),
     constraint ck_primemeridian_longitude_orientation check (longitude_orientation in ('direct', 'indirect', 'prograde', 'retrograde'))
 );
 
 alter table ssbd_primemeridian add constraint fk_system_code foreign key ( phenomenon_code, system_code ) references ssbd_primemeridiansystem ( phenomenon_code, prime_meridian_system_code ) ;
+alter table ssbd_primemeridian add constraint fk_change_code foreign key ( change_code ) references ssbd_change ( change_code ) ;
 
 comment on column ssbd_primemeridian.relative_longitude is 'Angle from the absolute prime meridian of the meridian system to the current prime meridian.';
 comment on column ssbd_primemeridian.reference_meridian_longitude is 'Longitude of the reference meridian from the origin of longitudes.';
@@ -260,16 +276,17 @@ create table ssbd_datum (
     datum_scope                                        varchar(254) not null,
     remarks                                            varchar(254),
     information_source                                 varchar(254),
-    -- data_source                                        varchar(40) not null,
-    -- revision_date                                      date not null,
-    -- change_id                                          varchar(255),
-    -- deprecated                                         smallint not null,
+    data_source                                        varchar(40) not null,
+    revision_date                                      date not null,
+    change_code                                        varchar(255),
+    deprecated                                         smallint not null,
     constraint pk_datum primary key ( datum_code )
 );
 
 alter table ssbd_datum add constraint fk_ellipsoid_code foreign key ( ellipsoid_code ) references ssbd_ellipsoid ( ellipsoid_code ) ;
 alter table ssbd_datum add constraint fk_prime_meridian_code foreign key ( phenomenon_code, prime_meridian_system_code, prime_meridian_code )
  references ssbd_primemeridian ( phenomenon_code, system_code, prime_meridian_code ) ;
+alter table ssbd_datum add constraint fk_change_code foreign key ( change_code ) references ssbd_change ( change_code ) ;
 
 
 -- coordinate system (concept code : CS)
@@ -281,12 +298,14 @@ create table ssbd_coordinatesystem (
     dimension                                           smallint not null,
     remarks                                             varchar(254),
     information_source                                  varchar(254),
-    -- data_source varchar(50) not null,
-    -- revision_date date not null,
-    -- change_id varchar(255),
-    -- deprecated smallint not null,
+    data_source                                         varchar(50) not null,
+    revision_date                                       date not null,
+    change_code                                         varchar(255),
+    deprecated                                          smallint not null,
     constraint pk_coordinatesystem primary key ( coord_sys_code )
 );
+
+alter table ssbd_coordinatesystem add constraint fk_change_code foreign key ( change_code ) references ssbd_change ( change_code ) ;
 
 -- coordinateaxis (concept code : CSA)
 --
@@ -322,16 +341,17 @@ create table ssbd_coordinatereferencesystem (
     -- crs_scope                                          varchar(254) not null,
     remarks                                            varchar(254),
     information_source                                 varchar(254),
-    -- data_source                                        varchar(40) not null,
-    -- revision_date                                      date not null,
-    -- change_id                                          varchar(255),
-    -- show_crs                                           smallint not null,
-    -- deprecated                                         smallint not null,
+    data_source                                        varchar(40) not null,
+    revision_date                                      date not null,
+    change_code                                        varchar(255),
+    show_crs                                           smallint not null,
+    deprecated                                         smallint not null,
     constraint pk_coordinatereferencesystem primary key ( coord_ref_sys_code )
 );
 
 alter table ssbd_coordinatereferencesystem add constraint fk_coord_sys_code foreign key ( coord_sys_code ) references ssbd_coordinatesystem ( coord_sys_code ) ;
 alter table ssbd_coordinatereferencesystem add constraint fk_datum_code foreign key ( datum_code ) references ssbd_datum ( datum_code ) ;
+alter table ssbd_coordinatereferencesystem add constraint fk_change_code foreign key ( change_code ) references ssbd_change ( change_code ) ;
 
 
 -- range

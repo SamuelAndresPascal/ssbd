@@ -15,6 +15,7 @@ drop table ssbd_range;
 drop table ssbd_primemeridiansystem;
 drop table ssbd_ellipsoid;
 drop table ssbd_phenomenon;
+drop table ssbd_change;
 
 -- drop epsg dumped tables referenced from ssbd tables
 drop table epsg_coordinateaxisname;

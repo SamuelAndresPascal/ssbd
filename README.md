@@ -33,6 +33,23 @@ Dans un premier temps SSBD s'appuie sur le schéma de la base de données EPSG c
 
 Commentaires sur les relations et les champs remarquables.
 
+### Mises à jour des données
+
+```sql
+create table ssbd_change (
+    change_code                                        varchar(255),
+    report_date                                        date not null,
+    date_closed                                        date,
+    reporter                                           varchar(254) not null,
+    request                                            varchar(254) not null,
+    tables_affected                                    varchar(254),
+    codes_affected                                     varchar(254),
+    change_comment                                     varchar(254),
+    action                                             varchar(4000),
+    constraint pk_change primary key ( change_code )
+);
+```
+
 ### Phenomenon - phénomènes remarquables, planètes et satellites du système solaire
 
 ```sql
@@ -67,10 +84,10 @@ create table ssbd_ellipsoid (
     -- ellipsoid_shape                                    smallint not null,
     remarks                                            varchar(254),
     information_source                                 varchar(254),
-    -- data_source                                        varchar(40) not null,
-    -- revision_date                                      date not null,
-    -- change_id                                          varchar(255),
-    -- deprecated                                         smallint not null,
+    data_source                                        varchar(40) not null,
+    revision_date                                      date not null,
+    change_code                                        varchar(255),
+    deprecated                                         smallint not null,
     constraint pk_ellipsoid primary key ( ellipsoid_code )
 );
 ```
@@ -121,10 +138,10 @@ create table ssbd_primemeridiansystem (
     uom_code                                           integer,
     remarks                                            varchar(254),
     information_source                                 varchar(254),
-    -- data_source                                        varchar(40) not null,
-    -- revision_date                                      date not null,
-    -- change_id                                          varchar(255),
-    -- deprecated                                         smallint not null,
+    data_source                                        varchar(40) not null,
+    revision_date                                      date not null,
+    change_code                                        varchar(255),
+    deprecated                                         smallint not null,
     constraint pk_primemeridiansystem primary key ( phenomenon_code, prime_meridian_system_code )
 );
 ```
@@ -165,10 +182,10 @@ create table ssbd_primemeridian (
     uom_code                                           integer not null,
     remarks                                            varchar(254),
     information_source                                 varchar(254),
-    -- data_source                                        varchar(40) not null,
-    -- revision_date                                      date not null,
-    -- change_id                                          varchar(255),
-    -- deprecated                                         smallint not null,
+    data_source                                        varchar(40) not null,
+    revision_date                                      date not null,
+    change_code                                        varchar(255),
+    deprecated                                         smallint not null,
     constraint pk_primemeridian primary key ( phenomenon_code, system_code, prime_meridian_code ),
     constraint ck_primemeridian_relative_longitude_orientation check (relative_longitude_orientation in ('direct', 'indirect', 'prograde', 'retrograde')),
     constraint ck_primemeridian_longitude_orientation check (longitude_orientation in ('direct', 'indirect', 'prograde', 'retrograde'))
@@ -209,10 +226,10 @@ create table ssbd_datum (
     datum_scope                                        varchar(254) not null,
     remarks                                            varchar(254),
     information_source                                 varchar(254),
-    -- data_source                                        varchar(40) not null,
-    -- revision_date                                      date not null,
-    -- change_id                                          varchar(255),
-    -- deprecated                                         smallint not null,
+    data_source                                        varchar(40) not null,
+    revision_date                                      date not null,
+    change_code                                        varchar(255),
+    deprecated                                         smallint not null,
     constraint pk_datum primary key ( datum_code )
 );
 ```
@@ -227,10 +244,10 @@ create table ssbd_coordinatesystem (
     dimension                                           smallint not null,
     remarks                                             varchar(254),
     information_source                                  varchar(254),
-    -- data_source                                         character varying(50) not null,
-    -- revision_date                                       date not null,
-    -- change_id                                           character varying(255),
-    -- deprecated                                          smallint not null,
+    data_source                                         varchar(50) not null,
+    revision_date                                       date not null,
+    change_code                                         varchar(255),
+    deprecated                                          smallint not null,
     constraint pk_coordinatesystem primary key ( coord_sys_code )
 );
 ```
@@ -271,11 +288,11 @@ create table ssbd_coordinatereferencesystem (
     -- crs_scope                                          varchar(254) not null,
     remarks                                            varchar(254),
     information_source                                 varchar(254),
-    -- data_source                                        varchar(40) not null,
-    -- revision_date                                      date not null,
-    -- change_id                                          varchar(255),
-    -- show_crs                                           smallint not null,
-    -- deprecated                                         smallint not null,
+    data_source                                        varchar(40) not null,
+    revision_date                                      date not null,
+    change_code                                        varchar(255),
+    show_crs                                           smallint not null,
+    deprecated                                         smallint not null,
     constraint pk_coordinatereferencesystem primary key ( coord_ref_sys_code )
 );
 ```
