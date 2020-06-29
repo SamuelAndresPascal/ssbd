@@ -15,7 +15,7 @@ SSBD est un projet de base de données expérimental en cours d'élaboration qui
 
 Dans un premier temps SSBD s'appuie sur le schéma de la base de données EPSG comme source d'inspiration de manière à proposer une extension adaptée à l'information planétologique. Ceci a deux conséquences :
 
-1. le référencement direct de certaines données de la base EPSG par leur code (voir [la section concernant les données EPSG référencées](#base-epsg));
+1. le référencement de certaines données de la base EPSG par leur code (voir [la section concernant les données EPSG référencées](#base-epsg));
 
 2. la paternité conceptuelle du schéma de la base EPSG sur celui de la base SSBD en cours d'élaboration.
 
@@ -73,7 +73,7 @@ create table ssbd_ellipsoid (
     ellipsoid_name                                     varchar(80) not null,
     semi_major_axis                                    double precision not null,
     semi_major_axis_error                              double precision,
-    uom_code                                           integer not null,
+    uom_code                                           varchar(80) not null,
     inv_flattening                                     double precision,
     semi_minor_axis                                    double precision,
     second_parameter_error                             double precision,
@@ -135,7 +135,7 @@ create table ssbd_primemeridiansystem (
     prime_meridian_system_name                         varchar(80) not null,
     rotation                                           double precision,
     rotation_error                                     double precision,
-    uom_code                                           integer,
+    uom_code                                           varchar(80),
     remarks                                            varchar(254),
     information_source                                 varchar(254),
     data_source                                        varchar(40) not null,
@@ -179,7 +179,7 @@ create table ssbd_primemeridian (
     reference_meridian_longitude                       double precision not null,
     prime_meridian_longitude                           double precision not null,
     longitude_orientation                              varchar(24) not null,
-    uom_code                                           integer not null,
+    uom_code                                           varchar(80) not null,
     remarks                                            varchar(254),
     information_source                                 varchar(254),
     data_source                                        varchar(40) not null,
@@ -209,7 +209,7 @@ create table ssbd_primemeridian (
 
 ### Datum
 
-Sur le plan structurel, le schéma des datums de la base SSBD se résume à une simplification du schéma des datums de la base EPSG. La zone d'utilisation et un certain nombre de métadonnées n'en font pas partie pour le moment. L'époque de réalisation est présente mais n'est pas renseignée par l'échantillon de données actuel. Enfin, les ellipsoïdes et les méridiens premiers associés par les datums SSBD sont eux-mêmes définis par la base SSBD et ne font pas référence à des entités définies par la base EPSG.
+Sur le plan structurel, le schéma des datums de la base SSBD se résume à une simplification du schéma des datums de la base EPSG. La zone d'utilisation n'en fait pas partie pour le moment. L'époque de réalisation est présente mais n'est pas renseignée par l'échantillon de données actuel. Enfin, les ellipsoïdes et les méridiens premiers associés par les datums SSBD sont eux-mêmes définis par la base SSBD et ne font pas référence à des entités définies par la base EPSG.
 
 ```sql
 create table ssbd_datum (
@@ -258,10 +258,10 @@ create table ssbd_coordinatesystem (
 create table ssbd_coordinateaxis (
     coord_sys_code                                      varchar(254) not null,
     coord_axis_order                                    smallint not null,
-    coord_axis_name_code                                integer not null,
+    coord_axis_name_code                                varchar(80) not null,
     coord_axis_orientation                              varchar(24) not null,
     coord_axis_abbreviation                             varchar(24) not null,
-    uom_code                                            integer not null,
+    uom_code                                            varchar(80) not null,
     constraint pk_coordinateaxis primary key ( coord_sys_code, coord_axis_order )
 );
 ```
@@ -269,7 +269,7 @@ create table ssbd_coordinateaxis (
 
 ### Coordinatereferencesystem - systèmes de coordonnées de référence
 
-Sur le plan structurel, le schéma des systèmes de coordonnées de référence de la base SSBD se résume à une simplification du schéma des systèmes de coordonnées de référence de la base EPSG. La zone d'utilisation et un certain nombre de métadonnées n'en font pas partie pour le moment.
+Sur le plan structurel, le schéma des systèmes de coordonnées de référence de la base SSBD se résume à une simplification du schéma des systèmes de coordonnées de référence de la base EPSG. La zone d'utilisation n'en fait pas partie pour le moment.
 
 Quoique la relation fasse mention d'un champ destiné à représenter les opérations de projection, les opérations de manière générale ne sont pas représentées pour le moment dans la base SSBD.
 
@@ -297,7 +297,7 @@ create table ssbd_coordinatereferencesystem (
 );
 ```
 
-`coord_sys_code` : Code EPSG du système de coordonnées utilisé.
+`coord_sys_code` : Code du système de coordonnées utilisé.
 
 ### Range - contraintes sur les axes
 
@@ -338,31 +338,27 @@ create table ssbd_coordinatereferencesystemrange (
 
 `range_code` : Code de la contrainte appliquée.
 
-`coord_axis_code` : Code EPSG de l'axe concerné par la contrainte.
+`coord_axis_code` : Code de l'axe concerné par la contrainte.
 
 ## Présentation des données
 
-Les données de la base EPSG sont embryonnaires et n'ont pour premier but que de vérifier la cohérence du schéma par des exemples concrets. Les seules données quelque peu étoffées sont celles concernant les ellipsoïdes, implémentées en script SQL à partir des données du dépôt [USGS-Astrogeology](https://github.com/USGS-Astrogeology/GDAL_scripts/tree/master/OGC_IAU2000_WKT_v2) revues et complétées à partir des publications de référence des groupes de travail de l'UAI de 2000, 2009 et 2015 sur les coordonnées cartographiques et les paramètres de rotation des corps du système solaire.
+Les données de la base SSBD sont embryonnaires et n'ont pour premier but que de vérifier la cohérence du schéma par des exemples concrets. Les données propres à la base SSBD sont peu à peu implémentées en script SQL à partir des données du dépôt [USGS-Astrogeology](https://github.com/USGS-Astrogeology/GDAL_scripts/tree/master/OGC_IAU2000_WKT_v2) revues et complétées à partir des publications de référence des groupes de travail de l'UAI de 2000, 2009 et 2015 sur les coordonnées cartographiques et les paramètres de rotation des corps du système solaire.
 
 ## Statut des fichiers
 
-1. `ssbd_schema.sql` contient le schéma de la base SSBD et les contraintes d'intégrité associées, à l'exclusion des relations optionnelles issues de l'extrait de données EPSG et des contraintes d'intégrité les référençant depuis les données SSBD.
+1. `ssbd_schema.sql` contient le schéma de la base SSBD et les contraintes d'intégrité associées.
 
 2. `ssbd_data.sql` contient les données de la base SSBD au sens strict. Ces données peuvent référencer des données EPSG via leur code d'identification mais ne contiennent aucune autre donnée exogène en tant que telle.
 
-3. `epsg_extract.sql` contient l'extrait de schéma EPSG directement ou indirectement référencé par les données de la base SSBD, ainsi que les données EPSG contenues dans ce schéma, dans leur version 9.5.5. Ces données sont proposées à titre indicatif dans le dépôt logiciel. Elles ne font pas strictement partie de la base SSBD. Elles sont susceptibles d'être remplacées par d'autres références au cours de la maturation de la base SSBD.
+3. `drop.sql` est un fichier utilitaire contenant des instructions de suppression du schéma SSBD. Son utilisation nécessite de prendre au préalable le soin de vérifier qu'il ne représente pas un risque de corruption de la base de données à laquelle il est appliqué.
 
-4. `ssbd_epsg.sql` contient les contraintes d'intégrité sur les données SSBD référençant des données EPSG. Ces contraintes sont également proposées à titre indicatif dans le dépôt logiciel. Elles ne font pas strictement partie de la base SSBD.
-
-5. `drop.sql` est un fichier utilitaire contenant des instructions de suppression du schéma SSBD et des relations EPSG qu'il est susceptible de référencer. Son utilisation nécessite de prendre au préalable le soin de vérifier qu'il ne représente pas un risque de corruption de la base de données à laquelle il est appliqué.
-
-6. `planetary_name.sql` est une implémentation SQL de la nomenclature officielle des noms de planètes et de satellites de l'Union Astronomique Internationale. Ce script optionnel et indicatif ne fait pas partie au sens strict de la base SSBD, mais il est susceptible d'y être intégré au fil de son évolution.
+4. `planetary_name.sql` est une implémentation SQL de la nomenclature officielle des noms de planètes et de satellites de l'Union Astronomique Internationale. Ce script optionnel et indicatif ne fait pas partie au sens strict de la base SSBD, mais il est susceptible d'y être intégré au fil de son évolution.
 
 ## Utilisation
 
 Les manipulations suivantes supposent la création préalable d'une base de données PostgreSQL destinée à recevoir le schéma et les données SSBD.
 
-### Données SSBD (et extrait optionnel des données EPSG référencées)
+### Données SSBD
 
 1. Exécuter le script de création du schéma SSBD, par exemple en étant connecté via un client `psql`:
 
@@ -373,16 +369,6 @@ Les manipulations suivantes supposent la création préalable d'une base de donn
     
     ```
     \i ssbd_data.sql
-    ```
-3. (optionnel) Si l'on souhaite disposer des données EPSG référencées depuis les données SSBD, exécuter le script de création de l'extrait de schéma et de données de la base EPSG, par exemple en étant connecté via un client `psql`:
-
-    ```
-    \i epsg_extract.sql
-    ```
-4. (optionnel) Si l'on souhaite disposer des contraintes d'intégrité sur les références aux données EPSG depuis les données SSBD, exécuter le script de création des clefs étrangères sur les relations du schéma de SSBD vers les relations issues de la base EPSG, par exemple en étant connecté via un client `psql`:
-
-    ```
-    \i ssbd_epsg.sql
     ```
 
 ### Nomenclature officielle de l'UAI des noms de planètes et satellites
@@ -395,30 +381,18 @@ Si l'on souhaite disposer de la relation des noms des corps tels que définis pa
 
 ### Suppression des données de la base SSBD
 
-Pour supprimer les données de la base SSBD, exécuter le script de suppression des relations contenant les données SSBD et les données EPSG éventuellement référencées, par exemple en étant connecté via un client `psql`:
+Pour supprimer les données de la base SSBD, exécuter le script de suppression des relations contenant les données SSBD, par exemple en étant connecté via un client `psql`:
 
 ```
 \i drop.sql
 ```
 **Attention : ce script inclut la suppression des données ET du schéma de la base SSBD.**
 
-**Attention : ce script inclut la suppression des données ET du schéma des données optionnelles issues de la base EPSG référencées par les données SSBD.** Cela est susceptible de provoquer des pertes de données EPSG si le schéma et les données SSBD ont été importées à l'intérieur d'une base EPSG complète.
-
 **Attention : ce script n'inclut pas la suppression de la relation optionnelle de la nomenclature de l'UAI des noms de planètes et satellites.**
 
 ### Base EPSG
 
-#### Périmètre de l'utilisation
-
-Un script contenant les relations de la base EPSG référencées par la base SSBD est disponible sur ce dépôt logiciel. Ce script est issu d'une base de données réalisée à partir d'un export du [registre EPSG](http://www.epsg-registry.org/) v9.5.5 dans un dialecte SQL adapté aux bases *PostgreSQL*.
-
-De tels exports du registre EPSG, quoique réalisés via le site officiel, ne constituent pas la référence officielle des données de la base EPSG. De plus, des ajustements syntaxiques, typographiques ou encore des commentaires ont pu être réalisés. Par voie de conséquence, l'extrait de ces données contenu dans le script proposé par le projet SSBD **ne constitue pas une distribution officielle des données EPSG**. Pour plus d'informations, se reporter au [site officiel de l'IOGP](http://www.epsg.org) et aux [conditions d'utilisation, de distribution et de modification de la base EPSG](http://www.epsg.org/TermsOfUse.aspx). Pour obtenir un jeu de données directement produit à partir du registre EPSG officiel, se reporter au [site du registre](http://www.epsg-registry.org/).
-
-Enfin, les données provenant du registre EPSG sont proposées à simple titre indicatif. Elles **ne constituent pas la valeur ajoutée** de la base SSBD mais offrent à l'utilisateur qui souhaite utiliser conjointement la base SSBD à la base EPSG, un jeu de données EPSG minimal potientiellement référencé par des données SSBD, ainsi que les contraintes d'intégrité associées.
-
-#### Conséquences et perspectives d'évolution
-
-Au moins à titre temporaire, la base SSBD référence par leur code les unités et les nomes d'axes définis par la base EPSG de manière à réutiliser au mieux les concepts définis dans le cadre de l'information géographique ne nécessitant pas de modification structurelle.
+Au moins à titre temporaire, la base SSBD référence par leur code les unités et les noms d'axes définis par la base EPSG de manière à réutiliser au mieux les concepts définis dans le cadre de l'information géographique ne nécessitant pas de modification structurelle.
 
 Le choix n'est pas encore arrêté pour l'instant de continuer à référencer par la suite les données EPSG et il n'est pas dit qu'il ne soit pas à terme avantageux de définir des noms d'axes et des unités propres à la base SSBD ou de s'appuyer sur d'autres références.
 

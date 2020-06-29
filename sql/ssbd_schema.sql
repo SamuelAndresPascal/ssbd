@@ -77,7 +77,7 @@ create table ssbd_ellipsoid (
     ellipsoid_name                                     varchar(80) not null,
     semi_major_axis                                    double precision not null,
     semi_major_axis_error                              double precision,
-    uom_code                                           integer not null,
+    uom_code                                           varchar(80) not null,
     inv_flattening                                     double precision,
     semi_minor_axis                                    double precision,
     second_parameter_error                             double precision,
@@ -116,7 +116,7 @@ create table ssbd_primemeridiansystem (
     prime_meridian_system_name                         varchar(80) not null,
     rotation                                           double precision,
     rotation_error                                     double precision,
-    uom_code                                           integer,
+    uom_code                                           varchar(80),
     remarks                                            varchar(254),
     information_source                                 varchar(254),
     data_source                                        varchar(40) not null,
@@ -240,7 +240,7 @@ create table ssbd_primemeridian (
     reference_meridian_longitude                       double precision not null,
     prime_meridian_longitude                           double precision not null,
     longitude_orientation                              varchar(24) not null,
-    uom_code                                           integer not null,
+    uom_code                                           varchar(80) not null,
     remarks                                            varchar(254),
     information_source                                 varchar(254),
     data_source                                        varchar(40) not null,
@@ -312,10 +312,10 @@ alter table ssbd_coordinatesystem add constraint fk_change_code foreign key ( ch
 create table ssbd_coordinateaxis (
     coord_sys_code                                      varchar(254) not null,
     coord_axis_order                                    smallint not null,
-    coord_axis_name_code                                integer not null,
+    coord_axis_name_code                                varchar(80) not null,
     coord_axis_orientation                              varchar(24) not null,
     coord_axis_abbreviation                             varchar(24) not null,
-    uom_code                                            integer not null,
+    uom_code                                            varchar(80) not null,
     constraint pk_coordinateaxis primary key ( coord_sys_code, coord_axis_order )
 );
 
