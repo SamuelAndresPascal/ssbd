@@ -98,16 +98,8 @@
 				<sequence>
 					<element ref="gml:metaDataProperty" minOccurs="0" maxOccurs="unbounded"/>
 					<element ref="gml:meridianName"/>
-					<element ref="gml:meridianID" minOccurs="0" maxOccurs="unbounded">
-						<annotation>
-							<documentation>Set of alternative identifications of this prime meridian. The first meridianID, if any, is normally the primary identification code, and any others are aliases. </documentation>
-						</annotation>
-					</element>
-					<element ref="gml:remarks" minOccurs="0">
-						<annotation>
-							<documentation>Comments on or information about this prime meridian, including source information. </documentation>
-						</annotation>
-					</element>
+					<element ref="gml:meridianID" minOccurs="0" maxOccurs="unbounded"/>
+					<element ref="gml:remarks" minOccurs="0"/>
 					<element ref="pml:relativeLongitude"/>
 				</sequence>
 				<attribute ref="gml:id" use="required"/>

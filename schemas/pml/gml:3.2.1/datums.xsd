@@ -33,8 +33,6 @@
 	<!-- =================================================== -->
 	<element name="PrimeMeridianSystem" type="pml:PrimeMeridianSystemType" substitutionGroup="gml:Definition"/>
 	<!-- =================================================== -->
-	<element name="primeMeridianSystemName" type="gml:CodeType" substitutionGroup="gml:name"/>
-	<!-- =================================================== -->
 	<complexType name="PrimeMeridianSystemType">
 		<complexContent>
 			<extension base="gml:IdentifiedObjectType">
