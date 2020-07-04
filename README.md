@@ -313,7 +313,9 @@ Une première relation recense donc les contraintes d'intervalle indépendamment
 create table ssbd_range (
     range_code                                      integer not null,
     min_value                                       double precision not null,
+    min_inclusive                                   boolean not null,
     max_value                                       double precision not null,
+    max_inclusive                                   boolean not null,
     remarks                                         varchar(254),
     information_source                              varchar(254),
     constraint pk_range primary key ( range_code )

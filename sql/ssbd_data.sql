@@ -1515,60 +1515,113 @@ insert into ssbd_ellipsoid values ('2015:2025143:default', 'sun-2025143', 'Itoka
 -- <identifiant de corps>:<identifiant du système pour le corps>
 --
 -- exemple : 'sun-1-99:crust' identifie le système de méridiens origines attachés à la croûte de Mercure
-insert into ssbd_primemeridiansystem values ('sun-1-99', 'crust', 'Mercury crust system', 0.004264857, 0.000000364, 'EPSG::1035', null, null,'IAU','2015-01-01','2020:1',0);
-insert into ssbd_primemeridiansystem values ('sun-2-99', 'crust', 'Venus crust system', null, 0., 'EPSG::1035', null, null,'IAU','2015-01-01','2020:1',0);
-insert into ssbd_primemeridiansystem values ('sun-4-99', 'crust', 'Mars crust system', null, 0., 'EPSG::1035', null, null,'IAU','2015-01-01','2020:1',0);
-insert into ssbd_primemeridiansystem values ('sun-5-99', '1', 'System I Jupiter', null, 0., 'EPSG::1035', 'Refers to the mean atmospheric equatorial rotation.', null,'IAU','2015-01-01','2020:1',0);
-insert into ssbd_primemeridiansystem values ('sun-5-99', '2', 'System II Jupiter', null, 0., 'EPSG::1035', 'Refers to the mean atmospheric rotation north of the south component of the north equatorial belt, and south of the north component of the south equatorial belt.', null,'IAU','2015-01-01','2020:1',0);
-insert into ssbd_primemeridiansystem values ('sun-5-99', '3', 'System III Jupiter', null, 0., 'EPSG::1035', 'Refers to the magnetic field rotation.', null,'IAU','2015-01-01','2020:1',0);
-insert into ssbd_primemeridiansystem values ('sun-6-99', '1', 'System I Saturn', null, 0., 'EPSG::1035', 'Refers to the mean atmospheric equatorial rotation.', null,'IAU','2015-01-01','2020:1',0);
-insert into ssbd_primemeridiansystem values ('sun-6-99', '2', 'System II Saturn', null, 0., 'EPSG::1035', 'Refers to the mean atmospheric rotation north of the south component of the north equatorial belt, and south of the north component of the south equatorial belt.', null,'IAU','2015-01-01','2020:1',0);
-insert into ssbd_primemeridiansystem values ('sun-6-99', '3', 'System III Saturn', null, 0., 'EPSG::1035', 'Refers to the magnetic field rotation.', null,'IAU','2015-01-01','2020:1',0);
-insert into ssbd_primemeridiansystem values ('sun-7-99', '1', 'System I Uranus', null, 0., 'EPSG::1035', 'Refers to the mean atmospheric equatorial rotation.', null,'IAU','2015-01-01','2020:1',0);
-insert into ssbd_primemeridiansystem values ('sun-7-99', '2', 'System II Uranus', null, 0., 'EPSG::1035', 'Refers to the mean atmospheric rotation north of the south component of the north equatorial belt, and south of the north component of the south equatorial belt.', null,'IAU','2015-01-01','2020:1',0);
-insert into ssbd_primemeridiansystem values ('sun-7-99', '3', 'System III Uranus', null, 0., 'EPSG::1035', 'Refers to the magnetic field rotation.', null,'IAU','2015-01-01','2020:1',0);
-insert into ssbd_primemeridiansystem values ('sun-8-99', '2', 'System II Neptune', null, 0., 'EPSG::1035', 'Refers to the rotation of optically observed features in the Neptunian atmosphere.', null,'IAU','2015-01-01','2020:1',0);
+insert into ssbd_primemeridiansystem values ('sun-1-99', 'crust', 'Mercury crust system', 0.004264857, 0.000000364,
+'EPSG::1035', null, 'set information source','IAU','2015-01-01','2020:1',0);
+insert into ssbd_primemeridiansystem values ('sun-2-99', 'crust', 'Venus crust system', null, 0.,
+'EPSG::1035', null, 'set information source','IAU','2015-01-01','2020:1',0);
+insert into ssbd_primemeridiansystem values ('sun-3-99', 'crust', 'Earth crust system', null, 0.,
+'EPSG::1035', null, 'set information source','set data source','2015-01-01','2020:1',0);
+insert into ssbd_primemeridiansystem values ('sun-4-99', 'crust', 'Mars crust system', null, 0.,
+'EPSG::1035', null, 'set information source','IAU','2015-01-01','2020:1',0);
+insert into ssbd_primemeridiansystem values ('sun-5-99', '1', 'System I Jupiter', null, 0.,
+'EPSG::1035', 'Refers to the mean atmospheric equatorial rotation.', 'set information source','IAU','2015-01-01','2020:1',0);
+insert into ssbd_primemeridiansystem values ('sun-5-99', '2', 'System II Jupiter', null, 0.,
+'EPSG::1035', 'Refers to the mean atmospheric rotation north of the south component of the north equatorial belt, and south of the north component of the south equatorial belt.', 'set information source','IAU','2015-01-01','2020:1',0);
+insert into ssbd_primemeridiansystem values ('sun-5-99', '3', 'System III Jupiter', null, 0.,
+'EPSG::1035', 'Refers to the magnetic field rotation.', 'set information source','IAU','2015-01-01','2020:1',0);
+insert into ssbd_primemeridiansystem values ('sun-6-99', '1', 'System I Saturn', null, 0.,
+'EPSG::1035', 'Refers to the mean atmospheric equatorial rotation.', 'set information source','IAU','2015-01-01','2020:1',0);
+insert into ssbd_primemeridiansystem values ('sun-6-99', '2', 'System II Saturn', null, 0.,
+'EPSG::1035', 'Refers to the mean atmospheric rotation north of the south component of the north equatorial belt, and south of the north component of the south equatorial belt.', 'set information source','IAU','2015-01-01','2020:1',0);
+insert into ssbd_primemeridiansystem values ('sun-6-99', '3', 'System III Saturn', null, 0.,
+'EPSG::1035', 'Refers to the magnetic field rotation.', 'set information source','IAU','2015-01-01','2020:1',0);
+insert into ssbd_primemeridiansystem values ('sun-7-99', '1', 'System I Uranus', null, 0.,
+'EPSG::1035', 'Refers to the mean atmospheric equatorial rotation.', 'set information source','IAU','2015-01-01','2020:1',0);
+insert into ssbd_primemeridiansystem values ('sun-7-99', '2', 'System II Uranus', null, 0.,
+'EPSG::1035', 'Refers to the mean atmospheric rotation north of the south component of the north equatorial belt, and south of the north component of the south equatorial belt.', 'set information source','IAU','2015-01-01','2020:1',0);
+insert into ssbd_primemeridiansystem values ('sun-7-99', '3', 'System III Uranus', null, 0.,
+'EPSG::1035', 'Refers to the magnetic field rotation.', 'set information source','IAU','2015-01-01','2020:1',0);
+insert into ssbd_primemeridiansystem values ('sun-8-99', '2', 'System II Neptune', null, 0.,
+'EPSG::1035', 'Refers to the rotation of optically observed features in the Neptunian atmosphere.', 'set information source','IAU','2015-01-01','2020:1',0);
 
 -- on construit un identifiant de méridien origine de la manière suivante :
 -- <identifiant de sytème de méridien origine>:<identifiant de méridien origine dans le système>
 --
 -- exemple 'sun-1-99:crust:hun_kal' identifie le méridien origine 'Hun Kal' du système de méridiens origines attachés à
 -- la croûte de Mercure
-insert into ssbd_primemeridian values ('sun-1-99', 'crust', 'hun_kal', 'Hun Kal Mercury Meridian', 0., 'prograde', 20., 20., 'prograde', 'EPSG::9102', null, null,'IAU','2015-01-01','2020:1',0);
-insert into ssbd_primemeridian values ('sun-2-99', 'crust', 'ariadne', 'Ariadne Venus Meridian', 0., 'prograde', .0, .0, 'prograde', 'EPSG::9102', null, null,'IAU','2015-01-01','2020:1',0);
-insert into ssbd_primemeridian values ('sun-4-99', 'crust', 'airy-0', 'Airy-0 Mars Meridian', 0., 'prograde', .0, .0, 'prograde', 'EPSG::9102', null, null,'IAU','2015-01-01','2020:1',0);
-insert into ssbd_primemeridian values ('sun-5-99', '1', 'pm', 'System I Jupiter Meridian', 0., 'prograde', .0, .0, 'prograde', 'EPSG::9102', null, null,'IAU','2015-01-01','2020:1',0);
-insert into ssbd_primemeridian values ('sun-5-99', '2', 'pm', 'System II Jupiter Meridian', 0., 'prograde', .0, .0, 'prograde', 'EPSG::9102', null, null,'IAU','2015-01-01','2020:1',0);
-insert into ssbd_primemeridian values ('sun-5-99', '3', 'pm', 'System III Jupiter Meridian', 0., 'prograde', .0, .0, 'prograde', 'EPSG::9102', null, null,'IAU','2015-01-01','2020:1',0);
-insert into ssbd_primemeridian values ('sun-6-99', '1', 'pm', 'System I Saturn Meridian', 0., 'prograde', .0, .0, 'prograde', 'EPSG::9102', null, null,'IAU','2015-01-01','2020:1',0);
-insert into ssbd_primemeridian values ('sun-6-99', '2', 'pm', 'System II Saturn Meridian', 0., 'prograde', .0, .0, 'prograde', 'EPSG::9102', null, null,'IAU','2015-01-01','2020:1',0);
-insert into ssbd_primemeridian values ('sun-6-99', '3', 'pm', 'System III Saturn Meridian', 0., 'prograde', .0, .0, 'prograde', 'EPSG::9102', null, null,'IAU','2015-01-01','2020:1',0);
-insert into ssbd_primemeridian values ('sun-7-99', '1', 'pm', 'System I Uranus Meridian', 0., 'prograde', .0, .0, 'prograde', 'EPSG::9102', null, null,'IAU','2015-01-01','2020:1',0);
-insert into ssbd_primemeridian values ('sun-7-99', '2', 'pm', 'System II Uranus Meridian', 0., 'prograde', .0, .0, 'prograde', 'EPSG::9102', null, null,'IAU','2015-01-01','2020:1',0);
-insert into ssbd_primemeridian values ('sun-7-99', '3', 'pm', 'System III Uranus Meridian', 0., 'prograde', .0, .0, 'prograde', 'EPSG::9102', null, null,'IAU','2015-01-01','2020:1',0);
-insert into ssbd_primemeridian values ('sun-8-99', '2', 'pm', 'System II Neptune Meridian', 0., 'prograde', .0, .0, 'prograde', 'EPSG::9102', null, null,'IAU','2015-01-01','2020:1',0);
+insert into ssbd_primemeridian values ('sun-1-99', 'crust', 'hun_kal', 'Hun Kal Mercury Meridian', 0., 'prograde', 20., 20., 'prograde',
+'EPSG::9102', null, 'set information source','IAU','2015-01-01','2020:1',0);
+insert into ssbd_primemeridian values ('sun-2-99', 'crust', 'ariadne', 'Ariadne Venus Meridian', 0., 'prograde', .0, .0, 'prograde',
+'EPSG::9102', null, 'set information source','IAU','2015-01-01','2020:1',0);
+insert into ssbd_primemeridian values ('sun-3-99', 'crust', 'greenwich', 'Greenwich Earth Meridian', 0., 'prograde', .0, .0, 'prograde',
+'EPSG::9102', null, 'set information source','IAU','2015-01-01','2020:1',0);
+insert into ssbd_primemeridian values ('sun-4-99', 'crust', 'airy-0', 'Airy-0 Mars Meridian', 0., 'prograde', .0, .0, 'prograde',
+'EPSG::9102', null, 'set information source','IAU','2015-01-01','2020:1',0);
+insert into ssbd_primemeridian values ('sun-5-99', '1', 'pm', 'System I Jupiter Meridian', 0., 'prograde', .0, .0, 'prograde',
+'EPSG::9102', null, 'set information source','IAU','2015-01-01','2020:1',0);
+insert into ssbd_primemeridian values ('sun-5-99', '2', 'pm', 'System II Jupiter Meridian', 0., 'prograde', .0, .0, 'prograde',
+'EPSG::9102', null, 'set information source','IAU','2015-01-01','2020:1',0);
+insert into ssbd_primemeridian values ('sun-5-99', '3', 'pm', 'System III Jupiter Meridian', 0., 'prograde', .0, .0, 'prograde',
+'EPSG::9102', null, 'set information source','IAU','2015-01-01','2020:1',0);
+insert into ssbd_primemeridian values ('sun-6-99', '1', 'pm', 'System I Saturn Meridian', 0., 'prograde', .0, .0, 'prograde',
+'EPSG::9102', null, 'set information source','IAU','2015-01-01','2020:1',0);
+insert into ssbd_primemeridian values ('sun-6-99', '2', 'pm', 'System II Saturn Meridian', 0., 'prograde', .0, .0, 'prograde',
+'EPSG::9102', null, 'set information source','IAU','2015-01-01','2020:1',0);
+insert into ssbd_primemeridian values ('sun-6-99', '3', 'pm', 'System III Saturn Meridian', 0., 'prograde', .0, .0, 'prograde',
+'EPSG::9102', null, 'set information source','IAU','2015-01-01','2020:1',0);
+insert into ssbd_primemeridian values ('sun-7-99', '1', 'pm', 'System I Uranus Meridian', 0., 'prograde', .0, .0, 'prograde',
+'EPSG::9102', null, 'set information source','IAU','2015-01-01','2020:1',0);
+insert into ssbd_primemeridian values ('sun-7-99', '2', 'pm', 'System II Uranus Meridian', 0., 'prograde', .0, .0, 'prograde',
+'EPSG::9102', null, 'set information source','IAU','2015-01-01','2020:1',0);
+insert into ssbd_primemeridian values ('sun-7-99', '3', 'pm', 'System III Uranus Meridian', 0., 'prograde', .0, .0, 'prograde',
+'EPSG::9102', null, 'set information source','IAU','2015-01-01','2020:1',0);
+insert into ssbd_primemeridian values ('sun-8-99', '2', 'pm', 'System II Neptune Meridian', 0., 'prograde', .0, .0, 'prograde',
+'EPSG::9102', null, 'set information source','IAU','2015-01-01','2020:1',0);
 
 
-insert into ssbd_range values (1, -180., 180., 'Typically used for earth longitudes.', null);
-insert into ssbd_range values (2, 0., 360., 'Typically used for planetary longitudes.', null);
+insert into ssbd_datum values ('sun-1-99:2000', 'Mercury 2000', 'geodetic', null, null, '2000:sun-1-99:default', 'sun-1-99', 'crust', 'hun_kal',
+'Planetology.', null, 'set information source','IAU','2000-01-01','2020:1',0);
 
-
-insert into ssbd_datum values ('sun-1-99:2000', 'Mercury 2000', 'geodetic', null, null, '2000:sun-1-99:default', 'sun-1-99', 'crust', 'hun_kal', 'Planetology.', null, null,'IAU','2000-01-01','2020:1',0);
+insert into ssbd_datum values ('sun-1-99:2000:default', 'Mercury 2000', 'geodetic', null, null, '2000:sun-1-99:default', 'sun-1-99', 'crust', 'hun_kal', 'Planetology.', null, 'set information source', 'IAU', '2000-01-01', '2020:1', 0);
+insert into ssbd_datum values ('sun-2-99:2000:default', 'Venus 2000', 'geodetic', null, null, '2000:sun-2-99:default', 'sun-2-99', 'crust', 'ariadne', 'Planetology.', null, 'set information source', 'IAU', '2000-01-01', '2020:1', 0);
+insert into ssbd_datum values ('sun-3-99:2000:spherical', 'Spherical Earth 2000', 'geodetic', null, null, '2000:sun-3-99:spherical', 'sun-3-99', 'crust', 'greenwich', 'Planetology.', null, 'set information source', 'IAU', '2000-01-01', '2020:1', 0);
+insert into ssbd_datum values ('sun-3-99:2000:ellipsoidal', 'Ellipsoidal Earth 2000', 'geodetic', null, null, '2000:sun-3-99:ellipsoidal', 'sun-3-99', 'crust', 'greenwich', 'Planetology.', null, 'set information source', 'IAU', '2000-01-01', '2020:1', 0);
+insert into ssbd_datum values ('sun-4-99:2000:spherical', 'Spherical Mars 2000', 'geodetic', null, null, '2000:sun-4-99:spherical', 'sun-4-99', 'crust', 'airy-0', 'Planetology.', null, 'set information source', 'IAU', '2000-01-01', '2020:1', 0);
+insert into ssbd_datum values ('sun-4-99:2000:ellipsoidal', 'Ellipsoidal Mars 2000', 'geodetic', null, null, '2000:sun-4-99:ellipsoidal', 'sun-4-99', 'crust', 'airy-0', 'Planetology.', null, 'set information source', 'IAU', '2000-01-01', '2020:1', 0);
+insert into ssbd_datum values ('sun-4-99:2000:default', 'Quadriaxial Mars 2000', 'geodetic', null, null, '2000:sun-4-99:default', 'sun-4-99', 'crust', 'airy-0', 'Planetology.', null, 'set information source', 'IAU', '2000-01-01', '2020:1', 0);
+insert into ssbd_datum values ('sun-5-99:2000:spherical', 'Spherical Jupiter 2000', 'geodetic', null, null, '2000:sun-5-99:spherical', 'sun-5-99', null, null, 'Planetology.', null, 'set information source', 'IAU', '2000-01-01', '2020:1', 0);
+insert into ssbd_datum values ('sun-5-99:2000:ellipsoidal', 'Ellipsoidal Jupiter 2000', 'geodetic', null, null, '2000:sun-5-99:ellipsoidal', 'sun-5-99', null, null, 'Planetology.', null, 'set information source', 'IAU', '2000-01-01', '2020:1', 0);
+insert into ssbd_datum values ('sun-6-99:2000:spherical', 'Spherical Saturn 2000', 'geodetic', null, null, '2000:sun-6-99:spherical', 'sun-6-99', null, null, 'Planetology.', null, 'set information source', 'IAU', '2000-01-01', '2020:1', 0);
+insert into ssbd_datum values ('sun-6-99:2000:ellipsoidal', 'Ellipsoidal Saturn 2000', 'geodetic', null, null, '2000:sun-6-99:ellipsoidal', 'sun-6-99', null, null, 'Planetology.', null, 'set information source', 'IAU', '2000-01-01', '2020:1', 0);
+insert into ssbd_datum values ('sun-7-99:2000:spherical', 'Spherical Uranus 2000', 'geodetic', null, null, '2000:sun-7-99:spherical', 'sun-7-99', null, null, 'Planetology.', null, 'set information source', 'IAU', '2000-01-01', '2020:1', 0);
+insert into ssbd_datum values ('sun-7-99:2000:ellipsoidal', 'Ellipsoidal Uranus 2000', 'geodetic', null, null, '2000:sun-7-99:ellipsoidal', 'sun-7-99', null, null, 'Planetology.', null, 'set information source', 'IAU', '2000-01-01', '2020:1', 0);
+insert into ssbd_datum values ('sun-8-99:2000:spherical', 'Spherical Neptune 2000', 'geodetic', null, null, '2000:sun-8-99:spherical', 'sun-8-99', null, null, 'Planetology.', null, 'set information source', 'IAU', '2000-01-01', '2020:1', 0);
+insert into ssbd_datum values ('sun-8-99:2000:ellipsoidal', 'Ellipsoidal Neptune 2000', 'geodetic', null, null, '2000:sun-8-99:ellipsoidal', 'sun-8-99', null, null, 'Planetology.', null, 'set information source', 'IAU', '2000-01-01', '2020:1', 0);
+insert into ssbd_datum values ('sun-9-99:2000:spherical', 'Spherical Pluto 2000', 'geodetic', null, null, '2000:sun-9-99:spherical', 'sun-9-99', null, null, 'Planetology.', null, 'set information source', 'IAU', '2000-01-01', '2020:1', 0);
 
 
 insert into ssbd_coordinatesystem values ('spherical:3d:direct',
- 'Spherical 3D CS. Axes: latitude, longitude, radius. Orientations: north, sideral west, up. UoM: degrees, degrees, metres.',
+ 'Spherical 3D CS. Axes: latitude, longitude, radius. Orientations: north, west, up. UoM: degrees, degrees, metres.',
  'spherical', 3, null, null,'IAU','2000-01-01','2020:1',0);
 insert into ssbd_coordinatesystem values ('ellipsoidal:3d:direct',
- 'Ellipsoidal 3D CS. Axes: latitude, longitude, ellipsoidal height. Orientations: north, sideral west, up. UoM: degree, degree, metre.',
+ 'Ellipsoidal 3D CS. Axes: latitude, longitude, ellipsoidal height. Orientations: north, west, up. UoM: degree, degree, metre.',
  'ellipsoidal', 3, null, null,'IAU','2000-01-01','2020:1',0);
 
 
+-- définitions des directions
+-- north : nord UAI par référence au nord terrestre
+-- south : côté opposé à north
+-- east : côté où le soleil se lève
+-- west : côté opposé à east
+-- rotational north : pôle tournant dans le sens direct
+-- rotational south : côté opposé à rotational north
+-- rotational east : côté où le ciel se lève
+-- rotational west : côté opposé à rotational east
 insert into ssbd_coordinateaxis values ('spherical:3d:direct', 1, 'EPSG::9926', 'north', 'Lat', 'EPSG::9122');
-insert into ssbd_coordinateaxis values ('spherical:3d:direct', 2, 'EPSG::9927', 'sideral-west', 'Long', 'EPSG::9122');
+insert into ssbd_coordinateaxis values ('spherical:3d:direct', 2, 'EPSG::9927', 'west', 'Long', 'EPSG::9122');
 insert into ssbd_coordinateaxis values ('spherical:3d:direct', 3, 'EPSG::9928', 'up', 'R', 'EPSG::9001');
 insert into ssbd_coordinateaxis values ('ellipsoidal:3d:direct', 1, 'EPSG::9901', 'north', 'Lat', 'EPSG::9122');
-insert into ssbd_coordinateaxis values ('ellipsoidal:3d:direct', 2, 'EPSG::9902', 'sideral-west', 'Lon', 'EPSG::9122');
+insert into ssbd_coordinateaxis values ('ellipsoidal:3d:direct', 2, 'EPSG::9902', 'west', 'Lon', 'EPSG::9122');
 insert into ssbd_coordinateaxis values ('ellipsoidal:3d:direct', 3, 'EPSG::9903', 'up', 'h', 'EPSG::9001');
 
 
@@ -1577,6 +1630,9 @@ insert into ssbd_coordinatereferencesystem values ('2000:sun-1-99:planetocentric
 insert into ssbd_coordinatereferencesystem values ('2000:sun-1-99:planetographic', 'Mercury 2000 planetographic 3D',
  'planetographic 3D', 'ellipsoidal:3d:direct', 'sun-1-99:2000', null, null, null, null, 'planetology', null, null,'IAU','2015-01-01','2020:1',1,0);
 
+
+insert into ssbd_range values (1, -180., 'f', 180., 't', 'Typically used for earth longitudes.', null);
+insert into ssbd_range values (2, 0., 't', 360., 'f', 'Typically used for planetary longitudes.', null);
 
 insert into ssbd_coordinatereferencesystemrange values ('2000:sun-1-99:planetocentric', 2, 'spherical:3d:direct', 2, null, null);
 insert into ssbd_coordinatereferencesystemrange values ('2000:sun-1-99:planetographic', 2, 'ellipsoidal:3d:direct', 2, null, null);
